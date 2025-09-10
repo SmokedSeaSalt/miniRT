@@ -1,0 +1,20 @@
+#!/bin/sh
+
+# Get the current branch name
+branch=$(git rev-parse --abbrev-ref HEAD)
+
+# Only run on branch "main"
+if [ "$branch" = "main" ]; then
+    echo "Running pre-commit checks on $branch..."
+
+    # Example: run CMocka tests
+    make run_test
+    if [ $? -ne 0 ]; then
+        echo "Tests failed. Commit aborted."
+        exit 1
+    fi
+else
+    echo "Skipping pre-commit checks on $branch"
+fi
+
+exit 0
