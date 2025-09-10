@@ -1,3 +1,4 @@
+.vscode
 lib/MLX42
 *.o
 build
