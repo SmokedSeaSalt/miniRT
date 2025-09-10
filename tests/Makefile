@@ -16,7 +16,7 @@ run_example: test_example
 	./test_example
 
 # Run all tests
-test: $(TESTS)
+run_test: $(TESTS)
 	@for t in $(TESTS); do \
 	    echo "Running $$t..."; \
 	    ./$$t || exit 1; \
