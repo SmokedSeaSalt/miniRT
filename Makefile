@@ -18,7 +18,7 @@ LIB_FOLDER = lib
 
 LIBFT_PATH = lib/libft
 LIBFT = $(LIBFT_PATH)/libft.a
-LIBFT_INC = -I $(LIBFT_PATH)/inc
+LIBFT_INC = -I $(LIBFT_PATH)/include
 
 LIBMLX_PATH = lib/MLX42
 LIBMLX = $(LIBMLX_PATH)/build/libmlx42.a
