@@ -29,27 +29,27 @@ static size_t	is_in_set(const char c, const char *set)
 static size_t	n_splits(const char *s, const char *set)
 {
 	size_t	i;
-	size_t	ret;
-	size_t	instr;
+	size_t	nstr;
+	size_t	in_str;
 
 	i = 0;
-	ret = 0;
-	instr = 0;
+	nstr = 0;
+	in_str = 0;
 	while(s[i] != '\0')
 	{
-		if ((is_in_set(s[i], set) == 0) && instr == 0)
+		if ((is_in_set(s[i], set) == 0) && in_str == 0)
 		{
 			nstr++;
-			instr = 1;
+			in_str = 1;
 		}
 		else if (is_in_set(s[i], set) == 1)
-			instr = 0;
+			in_str = 0;
 		i++;
 	}
 	return (nstr);
 }
 
-char **fill_str_array(const char *s, const char *set, char **ret)
+static char **fill_str_array(const char *s, const char *set, char **ret)
 {
 	size_t	i;
 	size_t	len;
@@ -68,9 +68,9 @@ char **fill_str_array(const char *s, const char *set, char **ret)
 		{
 			ret[nstr] = ft_substr(s, start_i, i - start_i);
 			if (ret[nstr] == NULL)
-				return (ft_free(ret, iret));
+				return (ft_free(ret, nstr));
 			nstr++;
-			instr = -1;
+			start_i = -1;
 		}
 		i++;
 	}
