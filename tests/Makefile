@@ -25,7 +25,7 @@ run_example: test_example
 	./test_example
 
 HELPER_FUNC = $(wildcard ../src/helpers/*.c)
-HELPER_INC = ../inc/helpers.h
+HELPER_INC = ../inc
 
 test_helpers: test_helpers.c $(HELPER_FUNC) $(HELPER_INC) libft
 	$(CC) $(CFLAGS) $< $(HELPER_FUNC) -I$(HELPER_INC) $(LIBFT) $(LIBFT_INC) -o $@ $(ARGS_MOCKA)
