@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 16:59:02 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/05/01 14:43:11 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/09/15 15:42:09 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_strdup(const char *s)
 	{
 		str_i++;
 	}
-	ret = malloc((str_i + 1) * sizeof(unsigned char));
+	ret = malloc((str_i + 1) * sizeof(char));
 	if (ret == NULL)
 		return (NULL);
 	str_i = 0;

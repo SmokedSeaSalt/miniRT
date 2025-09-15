@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 18:37:31 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/05/01 13:26:32 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/09/15 15:42:27 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (ret);
 	}
 	if (start + len <= ft_strlen(s))
-		ret = malloc((len + 1) * sizeof(unsigned char));
+		ret = malloc((len + 1) * sizeof(char));
 	else
 		ret = malloc((ft_strlen(s) - start + 1));
 	if (ret == NULL)
