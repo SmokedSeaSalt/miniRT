@@ -93,7 +93,8 @@ debug: fclean
 rmmlx42:
 	rm -rf $(LIBMLX_PATH)
 
-.PHONY: all clean fclean re mlx42 libft debug rmmlx42 test run_test setup_test analyze
+.PHONY: all clean fclean re mlx42 libft debug rmmlx42 test run_test setup_test \
+analyze clean_analisys
 
 
 ################################################################################
@@ -116,8 +117,16 @@ setup_test:
 #clang testing
 analyze:
 	@echo "Running static analysis with scan-build..."
-	scan-build-14 -o ./reports $(MAKE) clean all CC=clang
+	@for srcfile in $(SRC); do \
+		objfile=$(BUILD_DIR)/$${srcfile#$(SRC_DIR)/}; \
+		objfile=$${objfile%.c}.o; \
+		mkdir -p $$(dirname $$objfile); \
+		scan-build-14 -o ./reports clang $(CFLAGS) $(INC) $(LIBFT_INC) $(LIBMLX_INC) -c $$srcfile -o $$objfile; \
+	done
+	@printf "$(COLOUR_BLUE)If bugs were found, reports can be found in /reports\n$(COLOUR_END)"
 
+clean_analisys:
+	rm -rf reports
 
 ################################################################################
 #                                                                              #
