@@ -5,7 +5,8 @@
 ################################################################################
 
 NAME = miniRT
-CC = cc -Wall -Werror -Wextra -lm
+CC = cc
+CFLAGS = -Wall -Werror -Wextra #-lm
 CCDEBUG = -g
 
 ################################################################################
@@ -30,13 +31,18 @@ LIBMLX_INC = -I $(LIBMLX_PATH)/include
 #                                                                              #
 ################################################################################
 
-BUILD_FOLDER = build
+BUILD_DIR = build
+SRC_DIR = src
 
 # C files
-#TODO
+SRC = 	src/helpers/ft_atof.c \
+		src/helpers/ft_split_set.c
 
 # Header files
 INC = -I inc
+
+OBJ = $(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/%.o,$(SRC))
+
 
 ################################################################################
 #                                                                              #
@@ -50,7 +56,7 @@ all: mlx42 libft $(NAME)
 clean:
 	rm -rf $(LIBMLX_PATH)/build
 	@make clean -C $(LIBFT_PATH)
-	rm -rf $(BUILD_FOLDER)
+	rm -rf $(BUILD_DIR)
 
 fclean: clean
 	@make fclean -C $(LIBFT_PATH)
@@ -59,13 +65,15 @@ fclean: clean
 re: fclean all
 
 # Build
-$(NAME):
-#	@$(CC) $(OBJS) $(INC) $(LIBFT_INC) $(LIBMLX_INC) -o $@ && \
-	printf "$(COLOUR_BLUE)Compiling: $(notdir $<)\n$(COLOUR_END)"
+$(NAME): $(OBJ)
+	@printf "$(COLOUR_BLUE)test\n$(COLOUR_END)"
+#	@$(CC) $(CFLAGS) $(OBJS) $(INC) $(LIBFT_INC) $(LIBMLX_INC) -o $@ &&
 
-%.o: %.c | $(BUILD_FOLDER) #TODO
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c | $(BUILD_DIR)
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) $(INC) $(LIBFT_INC) $(LIBMLX_INC) -c $< -o $@
 
-$(BUILD_FOLDER):
+$(BUILD_DIR):
 	mkdir -p $@
 
 # Libraries
@@ -85,15 +93,16 @@ debug: fclean
 rmmlx42:
 	rm -rf $(LIBMLX_PATH)
 
-.PHONY: all clean fclean re mlx42 libft debug
+.PHONY: all clean fclean re mlx42 libft debug rmmlx42 test run_test setup_test analyze
 
 
 ################################################################################
 #                                                                              #
-# Unit testing                                                                 #
+# Testing                                                                 #
 #                                                                              #
 ################################################################################
 
+#unit testing
 test:
 
 run_test:
@@ -103,6 +112,12 @@ setup_test:
 	./tests/setup_tests.sh
 #	setup precommit hook
 	git config core.hooksPath tests/hooks
+
+#clang testing
+analyze:
+	@echo "Running static analysis with scan-build..."
+	scan-build-14 -o ./reports $(MAKE) clean all CC=clang
+
 
 ################################################################################
 #                                                                              #
