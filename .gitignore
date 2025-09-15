@@ -3,3 +3,4 @@ lib/MLX42
 *.o
 build
 *.a
+reports
