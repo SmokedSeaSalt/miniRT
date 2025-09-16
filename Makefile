@@ -99,7 +99,7 @@ analyze clean_analisys
 
 ################################################################################
 #                                                                              #
-# Testing                                                                 #
+# Testing                                                                      #
 #                                                                              #
 ################################################################################
 
@@ -108,6 +108,7 @@ test:
 
 run_test:
 	@make run_test -C tests
+	@make clean -C tests
 
 setup_test:
 	./tests/setup_tests.sh
@@ -124,6 +125,8 @@ analyze:
 		scan-build-14 -o ./reports clang $(CFLAGS) $(INC) $(LIBFT_INC) $(LIBMLX_INC) -c $$srcfile -o $$objfile; \
 	done
 	@printf "$(COLOUR_BLUE)If bugs were found, reports can be found in /reports\n$(COLOUR_END)"
+#	scan-build-14 -o ./reports make all clean
+
 
 clean_analisys:
 	rm -rf reports

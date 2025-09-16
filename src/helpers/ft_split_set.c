@@ -35,7 +35,7 @@ static size_t	n_splits(const char *s, const char *set)
 	i = 0;
 	nstr = 0;
 	in_str = 0;
-	while(s[i] != '\0')
+	while (s[i] != '\0')
 	{
 		if ((is_in_set(s[i], set) == 0) && in_str == 0)
 		{
@@ -49,7 +49,7 @@ static size_t	n_splits(const char *s, const char *set)
 	return (nstr);
 }
 
-static char **fill_str_array(const char *s, const char *set, char **ret)
+static char	**fill_str_array(const char *s, const char *set, char **ret)
 {
 	size_t	i;
 	size_t	len;
@@ -60,7 +60,7 @@ static char **fill_str_array(const char *s, const char *set, char **ret)
 	nstr = 0;
 	start_i = -1;
 	len = ft_strlen(s);
-	while(i <= len)
+	while (i <= len)
 	{
 		if ((is_in_set(s[i], set) == 0) && start_i < 0)
 			start_i = i;

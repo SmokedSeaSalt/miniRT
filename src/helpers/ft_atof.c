@@ -33,18 +33,26 @@ static int	set_minus_mult(const char *str, size_t *i)
 	return (1);
 }
 
+#include <stdio.h>
+
 //overflow calculation
-//DBL_MAX < start_value * 10 + (c - '0') * minus_mult;
+//DBL_MAX < start_value * 10 + (c - '0');
 //DBL_MAX - ((c - '0') * minus_mult)) / 10 < start_val;
+//DBL_MIN > start_value * 10 - (c - '0');
+//(DBL_MIN + (c - '0')) / 10 > start_value;
 static double	fill_ret_value(char c, double ret_value, int minus_mult)
 {
-	if (DBL_MAX - (c - '0') / 10 < ret_value \
-|| DBL_MIN + (c - '0') / 10 > ret_value)
+	if (((DBL_MAX - (c - '0')) / 10) < ret_value)
 	{
 		errno = ERANGE;
-		return (minus_mult * DBL_MAX);
+		return (DBL_MAX);
 	}
-	ret_value = ret_value * 10 + (c - '0') * minus_mult;
+	if ((( -1 * DBL_MAX + (c - '0')) / 10) > ret_value)
+	{
+		errno = ERANGE;
+		return (DBL_MIN);
+	}
+	ret_value = ret_value * 10 + ((c - '0') * minus_mult);
 	return (ret_value);
 }
 

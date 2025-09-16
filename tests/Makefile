@@ -8,7 +8,7 @@ LIBFT = $(LIBFT_PATH)/libft.a
 LIBFT_INC = -I $(LIBFT_PATH)/include
 
 
-TESTS = test_example test_helpers
+TESTS = test_helpers
 
 
 
@@ -17,12 +17,6 @@ all: $(TESTS)
 
 libft:
 	@make -C $(LIBFT_PATH)
-
-test_example: test_example.c
-	$(CC) $(CFLAGS) test_example.c -o $@ $(ARGS_MOCKA)
-
-run_example: test_example
-	./test_example
 
 HELPER_FUNC = $(wildcard ../src/helpers/*.c)
 HELPER_INC = ../inc
@@ -40,7 +34,6 @@ run_test: $(TESTS)
 	    ./$$t || exit 1; \
 	done
 	@echo "All tests passed ✅"
-	make clean
 
 clean:
 	rm -f $(TESTS)
