@@ -18,6 +18,7 @@
 //TODO
 //add checking for multiple where only one may exist
 //error handling
+//make unit tests
 
 int	fill_ambient_struct(t_ambient *ambient, char **line)
 {
