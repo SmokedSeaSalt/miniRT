@@ -1,6 +1,12 @@
-//could be changed to:
-//typedef struct __attribute__((aligned(16))) s_vector3
-//add extra padding float and now able to do SIMD
-typedef float	t_vector3 __attribute__((ext_vector_type(3)));
 
-t_vector3	normalize_vec3(t_vector3 vec3);
+/// @brief union for adaptable vector operations
+/// @param float v for +-*/ operations on vector	-> vec3_1.v - vec3_2.v
+/// @param struct for x y z access					-> vec3.x
+/// @param float array[4] for array like access 	-> vec3.array[1]
+typedef union {
+	float v __attribute__((vector_size(16)));
+	struct { float x, y, z, w; };
+	float array[4];
+} t_vec3;
+
+t_vec3	normalize_vec3(t_vec3 vec3);

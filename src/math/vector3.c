@@ -1,15 +1,24 @@
 #include "math_inc.h"
 #include <math.h>
 
-t_vector3	normalize_vec3(t_vector3 vec3)
+static inline t_vec3 vec3_new(float x, float y, float z) {
+	t_vec3 result;
+	result.x = x;
+	result.y = y;
+	result.z = z;
+	result.w = 0.0f;
+	return result;
+}
+
+t_vec3	normalize_vec3(t_vec3 vec3)
 {
 	float		length;
-	t_vector3	result;
+	t_vec3		result;
 
-	length = sqrtf(vec3[0] * vec3[0] + vec3[1] * vec3[1] + vec3[2] * vec3[2]);
+	length = sqrtf(vec3.x * vec3.x + vec3.y * vec3.y + vec3.z * vec3.z);
 	if (length != 0.0f)
-		result = vec3 / (t_vector3){length, length, length};
+		result.v = vec3.v / vec3_new(length, length, length).v;
 	else
-		result = (t_vector3){0.0, 0.0, 0.0};
+		result = vec3_new(0, 0, 0);
 	return (result);
 }
