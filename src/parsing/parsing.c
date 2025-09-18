@@ -6,12 +6,13 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:54 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/18 16:13:57 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/09/18 17:07:18 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "structs.h"
 #include "helpers.h"
+#include "parsing.h"
 #include "libft.h"
 
 //TODO
@@ -19,16 +20,6 @@
 //check orientation not all 0
 //add checking for multiple where only one may exist
 //error handling
-
-int	count_arguments(char **line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i] != NULL)
-		i++;
-	return (i);
-}
 
 int	fill_ambient_struct(t_ambient *ambient, char **line)
 {
@@ -40,9 +31,7 @@ int	fill_ambient_struct(t_ambient *ambient, char **line)
 	ambient->color.r = ft_atoi(line[2]);
 	ambient->color.g = ft_atoi(line[3]);
 	ambient->color.b = ft_atoi(line[4]);
-	if (ambient->color.r < 0 || ambient->color.r > 255 \
-|| ambient->color.g < 0 || ambient->color.g > 255 \
-|| ambient->color.b < 0 || ambient->color.b > 255)
+	if (color_out_of_range(ambient->color))
 		return (printf("Ambient: Color out of range"), 1);
 	return (0);
 }
@@ -57,6 +46,9 @@ int	fill_camera_struct(t_camera *camera, char **line)
 	camera->orientation.x = ft_atof(line[4]);
 	camera->orientation.y = ft_atof(line[5]);
 	camera->orientation.z = ft_atof(line[6]);
+	if (orientation_out_of_range(camera->orientation))
+		return (printf("Camera: Orientation out of range"), 1);
+	camera->orientation = normalize_vec3(camera->orientation);
 	camera->fov = ft_atoi(line[7]);
 	if (camera->fov < 0 || camera->fov > 180)
 		return (printf("Camera: FOV out of range"), 1);
@@ -76,9 +68,7 @@ int	fill_light_struct(t_light *light, char **line)
 	light->color.r = ft_atoi(line[5]);
 	light->color.g = ft_atoi(line[6]);
 	light->color.b = ft_atoi(line[7]);
-	if (ambient->color.r < 0 || ambient->color.r > 255 \
-|| ambient->color.g < 0 || ambient->color.g > 255 \
-|| ambient->color.b < 0 || ambient->color.b > 255)
+	if (color_out_of_range(light->color))
 		return (printf("Light: Color out of range"), 1);
 	return (0);
 }
@@ -94,9 +84,7 @@ int	fill_sphere_struct(t_sphere *sphere, char **line)
 	sphere->color.r = ft_atoi(line[5]);
 	sphere->color.g = ft_atoi(line[6]);
 	sphere->color.b = ft_atoi(line[7]);
-	if (ambient->color.r < 0 || ambient->color.r > 255 \
-|| ambient->color.g < 0 || ambient->color.g > 255 \
-|| ambient->color.b < 0 || ambient->color.b > 255)
+	if (color_out_of_range(sphere->color))
 		return (printf("Sphere: Color out of range"), 1);
 	return (0);
 }
@@ -111,12 +99,13 @@ int	fill_plane_struct(t_plane *plane, char **line)
 	plane->orientation.x = ft_atof(line[4]);
 	plane->orientation.y = ft_atof(line[5]);
 	plane->orientation.z = ft_atof(line[6]);
+	if (orientation_out_of_range(plane->orientation))
+		return (printf("Plane: Orientation out of range"), 1);
+	plane->orientation = normalize_vec3(plane->orientation);
 	plane->color.r = ft_atoi(line[7]);
 	plane->color.g = ft_atoi(line[8]);
 	plane->color.b = ft_atoi(line[9]);
-	if (ambient->color.r < 0 || ambient->color.r > 255 \
-|| ambient->color.g < 0 || ambient->color.g > 255 \
-|| ambient->color.b < 0 || ambient->color.b > 255)
+	if (color_out_of_range(plane->color))
 		return (printf("Plane: Color out of range"), 1);
 	return (0);
 }
@@ -131,14 +120,15 @@ int	fill_cylinder_struct(t_cylinder *cylinder, char **line)
 	cylinder->orientation.x = ft_atof(line[4]);
 	cylinder->orientation.y = ft_atof(line[5]);
 	cylinder->orientation.z = ft_atof(line[6]);
+	if (orientation_out_of_range(cylinder->orientation))
+		return (printf("Cylinder: Orientation out of range"), 1);
+	cylinder->orientation = normalize_vec3(cylinder->orientation);
 	cylinder->diameter = ft_atoi(line[7]);
 	cylinder->height = ft_atoi(line[8]);
 	cylinder->color.r = ft_atoi(line[9]);
 	cylinder->color.g = ft_atoi(line[10]);
 	cylinder->color.b = ft_atoi(line[11]);
-	if (ambient->color.r < 0 || ambient->color.r > 255 \
-|| ambient->color.g < 0 || ambient->color.g > 255 \
-|| ambient->color.b < 0 || ambient->color.b > 255)
+	if (color_out_of_range(plane->color))
 		return (printf("Cylinder: Color out of range"), 1);
 	return (0);
 }
