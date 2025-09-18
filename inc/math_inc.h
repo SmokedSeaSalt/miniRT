@@ -27,4 +27,5 @@ typedef union u_vec3
 	float					array[4];
 }	t_vec3;
 
+inline t_vec3	vec3_new(float x, float y, float z);
 t_vec3	normalize_vec3(t_vec3 vec3);

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "structs.h"
+#include "libft.h"
 
 int	count_arguments(char **line)
 {
@@ -38,4 +39,39 @@ int orientation_out_of_range(t_vec3 orientation)
 || orientation.z < -1.0f || orientation.z > 1.0f)
 		return (1);
 	return (0);
+}
+
+int orientation_all_zero(t_vec3 orientation)
+{
+	if (orientation.x == 0.0f && orientation.x == 0.0f && orientation.y == 0.0f)
+		return (1);
+	return (0);
+}
+
+t_color fill_color(char *r_str, char *g_str, char *b_str)
+{
+	t_color color;
+
+	color.r = ft_atoi(r_str);
+	color.g = ft_atoi(g_str);
+	color.b = ft_atoi(b_str);
+	return (color);
+}
+
+t_vec3 fill_vec3(char *x_str, char *y_str, char *z_str)
+{
+	t_vec3 vec3;
+
+	vec3 = vec3_new(ft_atoi(x_str), ft_atoi(y_str), ft_atoi(z_str));
+	return (vec3);
+}
+
+t_color fill_color(char *r_str, char *g_str, char *b_str)
+{
+	t_color color;
+
+	color.r = ft_atoi(r_str);
+	color.g = ft_atoi(g_str);
+	color.b = ft_atoi(b_str);
+	return (color);
 }

@@ -13,7 +13,7 @@
 #include "math_inc.h"
 #include <math.h>
 
-static inline t_vec3	vec3_new(float x, float y, float z)
+inline t_vec3	vec3_new(float x, float y, float z)
 {
 	t_vec3	result;
 
