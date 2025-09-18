@@ -1,13 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vector3.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/18 16:16:16 by mvan-rij          #+#    #+#             */
+/*   Updated: 2025/09/18 16:16:39 by mvan-rij         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "math_inc.h"
 #include <math.h>
 
-static inline t_vec3 vec3_new(float x, float y, float z) {
-	t_vec3 result;
+static inline t_vec3	vec3_new(float x, float y, float z)
+{
+	t_vec3	result;
+
 	result.x = x;
 	result.y = y;
 	result.z = z;
 	result.w = 0.0f;
-	return result;
+	return (result);
 }
 
 t_vec3	normalize_vec3(t_vec3 vec3)

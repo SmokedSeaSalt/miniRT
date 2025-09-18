@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atof.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/18 16:14:56 by mvan-rij          #+#    #+#             */
+/*   Updated: 2025/09/18 16:15:42 by mvan-rij         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 #include <float.h>
 #include <errno.h>
@@ -33,8 +45,6 @@ static int	set_minus_mult(const char *str, size_t *i)
 	return (1);
 }
 
-#include <stdio.h>
-
 //overflow calculation
 //DBL_MAX < start_value * 10 + (c - '0');
 //DBL_MAX - ((c - '0') * minus_mult)) / 10 < start_val;
@@ -47,7 +57,7 @@ static double	fill_ret_value(char c, double ret_value, int minus_mult)
 		errno = ERANGE;
 		return (DBL_MAX);
 	}
-	if ((( -1 * DBL_MAX + (c - '0')) / 10) > ret_value)
+	if (((-1 * DBL_MAX + (c - '0')) / 10) > ret_value)
 	{
 		errno = ERANGE;
 		return (DBL_MIN);
