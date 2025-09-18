@@ -36,7 +36,8 @@ SRC_DIR = src
 
 # C files
 SRC = 	src/helpers/ft_atof.c \
-		src/helpers/ft_split_set.c
+		src/helpers/ft_split_set.c \
+		src/math/vector3.c
 
 # Header files
 INC = -I inc
