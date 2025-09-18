@@ -82,56 +82,51 @@ static void split_set_multi_set(void **state) {
 /*                                                                            */
 /******************************************************************************/
 
-// Helper for comparing doubles with tolerance
-static void assert_double_equal_tol(double expected, double actual, double tol) {
-	assert_true(fabs(expected - actual) < tol);
-}
-
 // Basic integers
 static void atof_integer_values(void **state) {
 	(void) state;
-	assert_double_equal_tol(0.0, ft_atof("0"), 1e-9);
-	assert_double_equal_tol(123.0, ft_atof("123"), 1e-9);
-	assert_double_equal_tol(-456.0, ft_atof("-456"), 1e-9);
+	assert_double_equal(0.0, ft_atof("0"), 1e-9);
+	assert_double_equal(123.0, ft_atof("123"), 1e-9);
+	assert_double_equal(-456.0, ft_atof("-456"), 1e-9);
 }
 
 // Decimal numbers
 static void atof_decimal_values(void **state) {
 	(void) state;
-	assert_double_equal_tol(3.14, ft_atof("3.14"), 1e-9);
-	assert_double_equal_tol(-0.987, ft_atof("-0.987"), 1e-9);
-	assert_double_equal_tol(42.5, ft_atof("42.5"), 1e-9);
+	assert_double_equal(3.14, ft_atof("3.14"), 1e-9);
+	assert_double_equal(-0.987, ft_atof("-0.987"), 1e-9);
+	assert_double_equal(42.5, ft_atof("42.5"), 1e-9);
 }
 
 // Leading/trailing spaces
 static void atof_whitespace(void **state) {
 	(void) state;
-	assert_double_equal_tol(7.25, ft_atof("   7.25"), 1e-9);
-	assert_double_equal_tol(-12.5, ft_atof(" -12.5  "), 1e-9);
+	assert_double_equal(7.25, ft_atof("   7.25"), 1e-9);
+	assert_double_equal(-12.5, ft_atof(" -12.5  "), 1e-9);
 }
 
 // Invalid input handling
 static void atof_invalid_input(void **state) {
 	(void) state;
 	// Depending on how your atof handles errors: returns 0.0 or stops at first invalid char
-	assert_double_equal_tol(0.0, ft_atof("abc"), 1e-9);
-	assert_double_equal_tol(12.0, ft_atof("12abc"), 1e-9);
+	assert_double_equal(0.0, ft_atof("abc"), 1e-9);
+	assert_double_equal(12.0, ft_atof("12abc"), 1e-9);
 }
 
 // Edge cases
 static void atof_edge_cases(void **state) {
 	(void) state;
-	assert_double_equal_tol(0.5, ft_atof(".5"), 1e-9);
-	assert_double_equal_tol(-0.75, ft_atof("-.75"), 1e-9);
-	assert_double_equal_tol(123.0, ft_atof("123."), 1e-9);
+	assert_double_equal(0.5, ft_atof(".5"), 1e-9);
+	assert_double_equal(-0.75, ft_atof("-.75"), 1e-9);
+	assert_double_equal(123.0, ft_atof("123."), 1e-9);
 }
 
 // Explicitly check unsupported scientific notation
 static void atof_scientific_notation(void **state) {
 	(void) state;
 	// Since "1e3" is not supported, expect it to stop at 'e' and return just 1
-	assert_double_equal_tol(1.0, ft_atof("1e3"), 1e-9);
-	assert_double_equal_tol(-2.0, ft_atof("-2E5"), 1e-9);
+	assert_double_equal(1.0, ft_atof("1e3"), 1e-9);
+	assert_double_equal(-2.0, ft_atof("-2E5"), 1e-9);
 }
 
 int main(void) {
