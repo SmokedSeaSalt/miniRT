@@ -6,12 +6,13 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:10 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/19 10:08:17 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/09/19 13:04:05 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
+# include "structs.h"
 
 int	count_arguments(char **line);
 int	color_out_of_range(t_color color);
@@ -19,5 +20,12 @@ int	orientation_out_of_range(t_vec3 orientation);
 int	orientation_all_zero(t_vec3 orientation);
 t_color	fill_color(char *r_str, char *g_str, char *b_str);
 t_vec3	fill_vec3(char *x_str, char *y_str, char *z_str);
+
+int	new_ambient_struct(t_scene *scene, char **line);
+int	new_camera_struct(t_scene *scene, char **line);
+int	new_cylinder_struct(t_scene *scene, char **line);
+int	new_light_struct(t_scene *scene, char **line);
+int	new_plane_struct(t_scene *scene, char **line);
+int	new_sphere_struct(t_scene *scene, char **line);
 
 #endif

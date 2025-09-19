@@ -6,31 +6,18 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 11:59:04 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/19 12:44:46 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/09/19 13:11:24 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>		//to use free
 #include <stdio.h>		//to use printf
+#include "parsing.h"
 #include "helpers.h"
 #include "libft.h"
 #include "structs.h"
 
-int	new_camera_struct(t_scene *scene, char **line)
-{
-	t_camera	*camera;
-
-	if (camera != NULL)
-		return (printf("Camera: Does not support multiple elements"), 1);
-	camera = ft_calloc(1, sizeof(t_camera));
-	if (camera == NULL)
-		return (printf("Malloc fail"), 2);
-	if (fill_camera_struct(camera, line) != 0)
-		return (free(amient), 1);
-	scene->camera = camera;
-	return (0);
-}
-
-int	fill_camera_struct(t_camera *camera, char **line)
+static int	fill_camera_struct(t_camera *camera, char **line)
 {
 	if (count_arguments(line) != 8)
 		return (printf("Camera: Incorrect amount of arguments"), 1);
@@ -46,3 +33,19 @@ int	fill_camera_struct(t_camera *camera, char **line)
 		return (printf("Camera: FOV out of range"), 1);
 	return (0);
 }
+
+int	new_camera_struct(t_scene *scene, char **line)
+{
+	t_camera	*camera;
+
+	if (scene->camera != NULL)
+		return (printf("Camera: Does not support multiple elements"), 1);
+	camera = ft_calloc(1, sizeof(t_camera));
+	if (camera == NULL)
+		return (printf("Malloc fail"), 2);
+	if (fill_camera_struct(camera, line) != 0)
+		return (free(camera), 1);
+	scene->camera = camera;
+	return (0);
+}
+

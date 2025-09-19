@@ -6,10 +6,11 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:45:52 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/19 12:42:01 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/09/19 13:40:46 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "math_inc.h"
 #include "structs.h"
 #include "libft.h"
 

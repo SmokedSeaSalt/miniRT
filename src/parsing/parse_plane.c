@@ -6,31 +6,18 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 11:59:50 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/19 12:44:39 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/09/19 13:13:09 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>		//to use free
 #include <stdio.h>		//to use printf
+#include "parsing.h"
 #include "helpers.h"
 #include "libft.h"
 #include "structs.h"
 
-int	new_plane_struct(t_scene *scene, char **line)
-{
-	t_plane	*plane;
-
-	if (plane != NULL)
-		return (printf("Plane: Does not support multiple elements"), 1);
-	plane = ft_calloc(1, sizeof(t_plane));
-	if (plane == NULL)
-		return (printf("Malloc fail"), 2);
-	if (fill_plane_struct(plane, line) != 0)
-		return (free(amient), 1);
-	// scene->object = plane; todo add to back of obj list
-	return (0);
-}
-
-int	fill_plane_struct(t_plane *plane, char **line)
+static int	fill_plane_struct(t_plane *plane, char **line)
 {
 	if (count_arguments(line) != 10)
 		return (printf("Plane: Incorrect amount of arguments"), 1);
@@ -44,5 +31,18 @@ int	fill_plane_struct(t_plane *plane, char **line)
 	plane->color = fill_color(line[7], line[8], line[9]);
 	if (color_out_of_range(plane->color))
 		return (printf("Plane: Color out of range"), 1);
+	return (0);
+}
+
+int	new_plane_struct(t_scene *scene, char **line)
+{
+	t_plane	*plane;
+
+	plane = ft_calloc(1, sizeof(t_plane));
+	if (plane == NULL)
+		return (printf("Malloc fail"), 2);
+	if (fill_plane_struct(plane, line) != 0)
+		return (free(plane), 1);
+	// scene->object = plane; todo add to back of obj list
 	return (0);
 }

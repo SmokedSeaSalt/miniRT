@@ -6,10 +6,12 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:17 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/19 12:27:57 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/09/19 13:05:39 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef STRUCTS_H
+# define STRUCTS_H
 //generics
 #include "math_inc.h"
 
@@ -75,9 +77,9 @@ typedef enum e_obj_type
 //list of obj
 typedef struct s_object
 {
-	t_obj_type	type;
-	void		*data;
-	t_object	*next;
+	t_obj_type		type;
+	void			*data;
+	struct s_object	*next;
 } t_object;
 
 typedef struct s_scene
@@ -87,3 +89,5 @@ typedef struct s_scene
 	t_light		*light;
 	t_object	*objects;
 }	t_scene;
+
+#endif

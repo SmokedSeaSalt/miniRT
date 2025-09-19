@@ -37,7 +37,15 @@ SRC_DIR = src
 # C files
 SRC = 	src/helpers/ft_atof.c \
 		src/helpers/ft_split_set.c \
-		src/math/vector3.c
+		src/math/vector3.c \
+		src/parsing/parse_ambient.c \
+		src/parsing/parse_camera.c \
+		src/parsing/parse_cylinder.c \
+		src/parsing/parse_light.c \
+		src/parsing/parse_plane.c \
+		src/parsing/parse_sphere.c \
+		src/parsing/parsing_helpers.c \
+		src/parsing/parsing.c
 
 # Header files
 INC = -I inc

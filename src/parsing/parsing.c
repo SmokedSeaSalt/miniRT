@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:54 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/19 12:44:31 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/09/19 13:01:06 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include "libft.h"
 
 //TODO
-//add checking for multiple where only one may exist
 //error handling
 //make unit tests
 
@@ -24,7 +23,7 @@
 //malloc the struct, fill it
 //fill succesfull -> add to back object list
 //fill failed -> dont add to list (maybe even exit? or just ignore that obj)
-select_element(t_scene *scene, char **line)
+int	select_element(t_scene *scene, char **line)
 {
 	if (ft_strncmp(line[1], "A", ft_strlen(line[1])) == 0)
 		return(new_ambient_struct(scene, line));

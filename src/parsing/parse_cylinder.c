@@ -6,29 +6,18 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 12:00:29 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/19 12:44:43 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/09/19 13:11:26 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>		//to use free
 #include <stdio.h>		//to use printf
+#include "parsing.h"
 #include "helpers.h"
 #include "libft.h"
 #include "structs.h"
 
-int	new_cylinder_struct(t_scene *scene, char **line)
-{
-	t_cylinder	*cylinder;
-
-	cylinder = ft_calloc(1, sizeof(t_cylinder));
-	if (cylinder == NULL)
-		return (printf("Malloc fail"), 2);
-	if (fill_cylinder_struct(cylinder, line) != 0)
-		return (free(amient), 1);
-	// scene->object = cylinder; todo add to back of obj list
-	return (0);
-}
-
-int	fill_cylinder_struct(t_cylinder *cylinder, char **line)
+static int	fill_cylinder_struct(t_cylinder *cylinder, char **line)
 {
 	if (count_arguments(line) != 12)
 		return (printf("Cylinder: Incorrect amount of arguments"), 1);
@@ -44,5 +33,18 @@ int	fill_cylinder_struct(t_cylinder *cylinder, char **line)
 	cylinder->color = fill_color(line[9], line[10], line[11]);
 	if (color_out_of_range(cylinder->color))
 		return (printf("Cylinder: Color out of range"), 1);
+	return (0);
+}
+
+int	new_cylinder_struct(t_scene *scene, char **line)
+{
+	t_cylinder	*cylinder;
+
+	cylinder = ft_calloc(1, sizeof(t_cylinder));
+	if (cylinder == NULL)
+		return (printf("Malloc fail"), 2);
+	if (fill_cylinder_struct(cylinder, line) != 0)
+		return (free(cylinder), 1);
+	// scene->object = cylinder; todo add to back of obj list
 	return (0);
 }
