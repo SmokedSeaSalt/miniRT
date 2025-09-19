@@ -8,11 +8,8 @@ LIBFT = $(LIBFT_PATH)/libft.a
 LIBFT_INC = -I $(LIBFT_PATH)/include
 
 
-TESTS = test_helpers test_math
+TESTS = test_helpers test_math test_parsing
 
-
-
-#example
 all: $(TESTS)
 
 libft:
@@ -35,6 +32,15 @@ test_math: test_math.c $(MATH_FUNC) $(MATH_INC) libft
 
 run_math: test_math
 	./test_math
+
+PARSING_FUNC = $(wildcard ../src/parsing/*.c) $(HELPER_FUNC) $(MATH_FUNC)
+PARSING_INC = ../inc
+
+test_parsing: test_parsing.c $(PARSING_FUNC) $(PARSING_INC) libft
+	$(CC) $(CFLAGS) $< $(PARSING_FUNC) -I$(PARSING_INC) -lm $(LIBFT) $(LIBFT_INC) -o $@ $(ARGS_MOCKA)
+
+run_parsing: test_parsing
+	./test_parsing
 
 # Run all tests
 run_test: $(TESTS)
