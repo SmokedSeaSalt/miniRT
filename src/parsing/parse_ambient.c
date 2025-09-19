@@ -6,10 +6,11 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 11:58:48 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/19 12:40:08 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/09/19 12:44:48 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>		//to use printf
 #include "helpers.h"
 #include "libft.h"
 #include "structs.h"
