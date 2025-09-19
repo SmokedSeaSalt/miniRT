@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:45:52 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/18 17:18:45 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/09/19 12:42:01 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	count_arguments(char **line)
 	return (i);
 }
 
-int color_out_of_range(t_color color)
+int	color_out_of_range(t_color color)
 {
 	if (color.r < 0 || color.r > 255 \
 || color.g < 0 || color.g > 255 \
@@ -32,7 +32,7 @@ int color_out_of_range(t_color color)
 	return (0);
 }
 
-int orientation_out_of_range(t_vec3 orientation)
+int	orientation_out_of_range(t_vec3 orientation)
 {
 	if (orientation.x < -1.0f || orientation.x > 1.0f \
 || orientation.y < -1.0f || orientation.y > 1.0f \
@@ -41,16 +41,16 @@ int orientation_out_of_range(t_vec3 orientation)
 	return (0);
 }
 
-int orientation_all_zero(t_vec3 orientation)
+int	orientation_all_zero(t_vec3 orientation)
 {
 	if (orientation.x == 0.0f && orientation.x == 0.0f && orientation.y == 0.0f)
 		return (1);
 	return (0);
 }
 
-t_color fill_color(char *r_str, char *g_str, char *b_str)
+t_color	fill_color(char *r_str, char *g_str, char *b_str)
 {
-	t_color color;
+	t_color	color;
 
 	color.r = ft_atoi(r_str);
 	color.g = ft_atoi(g_str);
@@ -58,20 +58,10 @@ t_color fill_color(char *r_str, char *g_str, char *b_str)
 	return (color);
 }
 
-t_vec3 fill_vec3(char *x_str, char *y_str, char *z_str)
+t_vec3	fill_vec3(char *x_str, char *y_str, char *z_str)
 {
-	t_vec3 vec3;
+	t_vec3	vec3;
 
 	vec3 = vec3_new(ft_atoi(x_str), ft_atoi(y_str), ft_atoi(z_str));
 	return (vec3);
-}
-
-t_color fill_color(char *r_str, char *g_str, char *b_str)
-{
-	t_color color;
-
-	color.r = ft_atoi(r_str);
-	color.g = ft_atoi(g_str);
-	color.b = ft_atoi(b_str);
-	return (color);
 }

@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:17 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/18 16:20:26 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/09/19 12:27:57 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,3 +64,26 @@ typedef struct s_cylinder
 	float		height;
 	t_color		color;
 }	t_cylinder;
+
+typedef enum e_obj_type
+{
+	SPHERE,
+	PLANE,
+	CYLINDER
+} t_obj_type;
+
+//list of obj
+typedef struct s_object
+{
+	t_obj_type	type;
+	void		*data;
+	t_object	*next;
+} t_object;
+
+typedef struct s_scene
+{
+	t_ambient	*ambient;
+	t_camera	*camera;
+	t_light		*light;
+	t_object	*objects;
+}	t_scene;
