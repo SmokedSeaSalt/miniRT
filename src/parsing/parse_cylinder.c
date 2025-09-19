@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 12:00:29 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/19 13:11:26 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/09/19 14:16:09 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,18 @@ static int	fill_cylinder_struct(t_cylinder *cylinder, char **line)
 int	new_cylinder_struct(t_scene *scene, char **line)
 {
 	t_cylinder	*cylinder;
+	t_object	*object;
 
 	cylinder = ft_calloc(1, sizeof(t_cylinder));
 	if (cylinder == NULL)
 		return (printf("Malloc fail"), 2);
 	if (fill_cylinder_struct(cylinder, line) != 0)
 		return (free(cylinder), 1);
-	// scene->object = cylinder; todo add to back of obj list
+	object = ft_calloc(1, sizeof(t_object));
+	if (object == NULL)
+		return (free (cylinder), printf("Malloc fail"), 2);
+	object->type = CYLINDER;
+	object->data = cylinder;
+	add_object_to_back(&(scene->objects), object);
 	return (0);
 }

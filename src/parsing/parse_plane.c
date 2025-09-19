@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 11:59:50 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/19 13:13:09 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/09/19 14:16:12 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,19 @@ static int	fill_plane_struct(t_plane *plane, char **line)
 
 int	new_plane_struct(t_scene *scene, char **line)
 {
-	t_plane	*plane;
+	t_plane		*plane;
+	t_object	*object;
 
 	plane = ft_calloc(1, sizeof(t_plane));
 	if (plane == NULL)
 		return (printf("Malloc fail"), 2);
 	if (fill_plane_struct(plane, line) != 0)
 		return (free(plane), 1);
-	// scene->object = plane; todo add to back of obj list
+	object = ft_calloc(1, sizeof(t_object));
+	if (object == NULL)
+		return (free (plane), printf("Malloc fail"), 2);
+	object->type = PLANE;
+	object->data = plane;
+	add_object_to_back(&(scene->objects), object);
 	return (0);
 }

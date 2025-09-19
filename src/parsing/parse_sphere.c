@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 11:59:33 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/19 13:13:03 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/09/19 14:16:33 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,18 @@ static int	fill_sphere_struct(t_sphere *sphere, char **line)
 int	new_sphere_struct(t_scene *scene, char **line)
 {
 	t_sphere	*sphere;
+	t_object	*object;
 
 	sphere = ft_calloc(1, sizeof(t_sphere));
 	if (sphere == NULL)
 		return (printf("Malloc fail"), 2);
 	if (fill_sphere_struct(sphere, line) != 0)
 		return (free(sphere), 1);
-	// scene->object = sphere; todo add to back of obj list
+	object = ft_calloc(1, sizeof(t_object));
+	if (object == NULL)
+		return (free (sphere), printf("Malloc fail"), 2);
+	object->type = SPHERE;
+	object->data = sphere;
+	add_object_to_back(&(scene->objects), object);
 	return (0);
 }
