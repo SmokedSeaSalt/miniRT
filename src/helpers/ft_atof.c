@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:14:56 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/18 16:15:42 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/09/19 12:46:21 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 #include <float.h>
 #include <errno.h>
 
+// The atof() function returns a double value that is produced by interpreting
+// the input characters as a number. The return value is 0 if the function
+// cannot convert the input to a value of that type. In case of overflow, the
+// function sets errno to ERANGE and returns the value -HUGE_VAL or +HUGE_VAL.
 /*
 ascii string >>─┬─────────────┬─┬───┬─┬ digits ┬───┬─┬────────┬┬─>> float
                 └ whitespaces ┘ ├ + ┤ │        └ . ┘ └ digits ┘│
@@ -106,8 +110,3 @@ double	ft_atof(const char *str)
 	minus_mult = set_minus_mult(str, &i);
 	return (calc_ret_value(str, i, minus_mult));
 }
-
-// The atof() function returns a double value that is produced by interpreting
-// the input characters as a number. The return value is 0 if the function
-//cannot convert the input to a value of that type. In case of overflow, the
-//function sets errno to ERANGE and returns the value -HUGE_VAL or +HUGE_VAL.
