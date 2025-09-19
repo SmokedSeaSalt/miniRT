@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 12:00:29 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/19 14:16:09 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/09/19 15:06:50 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ static int	fill_cylinder_struct(t_cylinder *cylinder, char **line)
 	if (orientation_all_zero(cylinder->orientation))
 		return (printf("Cylinder: Orientation can not be all zero"), 1);
 	cylinder->orientation = normalize_vec3(cylinder->orientation);
-	cylinder->diameter = ft_atoi(line[7]);
-	cylinder->height = ft_atoi(line[8]);
+	cylinder->diameter = ft_atof(line[7]);
+	cylinder->height = ft_atof(line[8]);
 	cylinder->color = fill_color(line[9], line[10], line[11]);
 	if (color_out_of_range(cylinder->color))
 		return (printf("Cylinder: Color out of range"), 1);
