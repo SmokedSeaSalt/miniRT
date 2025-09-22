@@ -6,11 +6,13 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:54 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/22 11:49:16 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/09/22 16:58:17 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>		//to use printf
+#include <fcntl.h>		//to use open
+#include <sys/stat.h>	//to use open
 #include "structs.h"
 #include "parsing.h"
 #include "libft.h"
@@ -18,6 +20,7 @@
 //TODO
 //error handling
 //make unit tests
+//check if enough valid elements are present (minimum 1 object, cam, light, ambient)
 
 
 
@@ -39,7 +42,20 @@ int is_valid_extension(char* str)
 	return (0);
 }
 
+/// @brief opens the file with a given filename
+/// @param filename name of the file opened
+/// @return -1 on failure. fd on success.
+int open_file(char *filename)
+{
+	int fd;
 
+	if(is_valid_extension(filename) == 0)
+		return (printf("Parsing: Filetype not supported"), -1);
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		return (printf("Parsing: Opening file failed"), -1);
+	return (fd);
+}
 
 
 

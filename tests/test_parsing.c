@@ -181,11 +181,20 @@ static void test_extension_rt_in_middle(void **state) {
     assert_int_equal(is_valid_extension("file.rt.backup"), 0);
 }
 
-static void test_extension_invalid_longer_extension(void **state) {
+static void test_invalid_longer_extension(void **state) {
     (void)state;
     assert_int_equal(is_valid_extension("file.rtest"), 0);
 }
 
+static void test_invalid_longer_extension_rt_end(void **state) {
+    (void)state;
+    assert_int_equal(is_valid_extension("file.testrt"), 0);
+}
+
+static void test_only_extension(void **state) {
+    (void)state;
+    assert_int_equal(is_valid_extension(".rt"), 1);
+}
 
 // ---- Runner ----
 int main(void) {
@@ -202,7 +211,9 @@ int main(void) {
 		cmocka_unit_test(test_no_extension),
 		cmocka_unit_test(test_long_filename_with_rt),
 		cmocka_unit_test(test_extension_rt_in_middle),
-		cmocka_unit_test(test_extension_invalid_longer_extension),
+		cmocka_unit_test(test_invalid_longer_extension),
+		cmocka_unit_test(test_invalid_longer_extension_rt_end),
+		cmocka_unit_test(test_only_extension),
 	};
 	return cmocka_run_group_tests(parsing, NULL, NULL);
 }
