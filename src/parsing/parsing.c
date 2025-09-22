@@ -19,10 +19,22 @@
 //error handling
 //make unit tests
 
-//todo in new_x_struct.
-//malloc the struct, fill it
-//fill succesfull -> add to back object list
-//fill failed -> dont add to list (maybe even exit? or just ignore that obj)
+
+
+
+//check valid file name
+//open file
+//get next line
+
+int is_valid_filename(char* str)
+{
+	
+}
+
+
+
+
+
 int	select_element(t_scene *scene, char **line)
 {
 	if (ft_strncmp(line[1], "A", ft_strlen(line[1])) == 0)
