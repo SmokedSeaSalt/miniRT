@@ -149,6 +149,42 @@ static void test_new_cylinder_orientation_zero(void **state) {
 	assert_null(scene.objects);
 }
 
+/******************************************************************************/
+/*                                                                            */
+/* is_valid_extension                                                         */
+/*                                                                            */
+/******************************************************************************/
+
+// Test cases
+static void test_valid_extension(void **state) {
+    (void)state; // unused
+    assert_int_equal(is_valid_extension("file.rt"), 1);
+}
+
+static void test_invalid_extension(void **state) {
+    (void)state;
+    assert_int_equal(is_valid_extension("file.txt"), 0);
+}
+
+static void test_no_extension(void **state) {
+    (void)state;
+    assert_int_equal(is_valid_extension("file"), 0);
+}
+
+static void test_long_filename_with_rt(void **state) {
+    (void)state;
+    assert_int_equal(is_valid_extension("archive.tar.rt"), 1);
+}
+
+static void test_extension_rt_in_middle(void **state) {
+    (void)state;
+    assert_int_equal(is_valid_extension("file.rt.backup"), 0);
+}
+
+static void test_extension_invalid_longer_extension(void **state) {
+    (void)state;
+    assert_int_equal(is_valid_extension("file.rtest"), 0);
+}
 
 
 // ---- Runner ----
@@ -161,6 +197,12 @@ int main(void) {
 		cmocka_unit_test(test_new_cylinder_success),
 		cmocka_unit_test(test_new_cylinder_invalid_args),
 		cmocka_unit_test(test_new_cylinder_orientation_zero),
+		cmocka_unit_test(test_valid_extension),
+		cmocka_unit_test(test_invalid_extension),
+		cmocka_unit_test(test_no_extension),
+		cmocka_unit_test(test_long_filename_with_rt),
+		cmocka_unit_test(test_extension_rt_in_middle),
+		cmocka_unit_test(test_extension_invalid_longer_extension),
 	};
 	return cmocka_run_group_tests(parsing, NULL, NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:54 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/19 13:01:06 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/09/22 11:49:16 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,17 @@
 //open file
 //get next line
 
-int is_valid_filename(char* str)
+int is_valid_extension(char* str)
 {
-	
+	char *extension;
+
+	extension = ft_strrchr(str, '.');
+	if (extension == NULL)
+		return (0);
+	if (ft_strlen(extension) == ft_strlen(".rt") \
+&& ft_strncmp(extension, ".rt", 3) == 0)
+		return (1);
+	return (0);
 }
 
 
