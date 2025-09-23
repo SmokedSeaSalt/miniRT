@@ -6,13 +6,12 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:54 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/22 16:58:17 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/09/23 11:19:18 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>		//to use printf
-#include <fcntl.h>		//to use open
-#include <sys/stat.h>	//to use open
+#include <unistd.h>		//to use close
 #include "get_next_line.h"
 #include "helpers.h"
 #include "structs.h"
@@ -22,42 +21,6 @@
 //TODO
 //error handling
 //make unit tests
-//check if enough valid elements are present (minimum 1 object, cam, light, ambient)
-
-
-
-
-//check valid file name
-//open file
-//get next line
-
-int is_valid_extension(char* str)
-{
-	char *extension;
-
-	extension = ft_strrchr(str, '.');
-	if (extension == NULL)
-		return (0);
-	if (ft_strlen(extension) == ft_strlen(".rt") \
-&& ft_strncmp(extension, ".rt", 3) == 0)
-		return (1);
-	return (0);
-}
-
-/// @brief opens the file with a given filename
-/// @param filename name of the file opened
-/// @return -1 on failure. fd on success.
-int open_file(char *filename)
-{
-	int fd;
-
-	if(is_valid_extension(filename) == 0)
-		return (printf("Parsing: Filetype not supported\n"), -1);
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-		return (printf("Parsing: Opening file failed\n"), -1);
-	return (fd);
-}
 
 int parse_file(t_scene *scene, char *filename)
 {
@@ -76,6 +39,9 @@ int parse_file(t_scene *scene, char *filename)
 			process_line(scene, line);
 		free(line);
 	}
+	close(fd);
+	//check_valid_scene(scene);
+	//check if enough valid elements are present (minimum 1 object, cam, light, ambient)
 	return (0);
 }
 
@@ -106,6 +72,8 @@ int process_line(t_scene *scene, char *line)
 
 int	select_element(t_scene *scene, char **line)
 {
+	if (line[0] == NULL)
+		return (0);
 	if (ft_strncmp(line[0], "A", ft_strlen(line[0])) == 0)
 		return(new_ambient_struct(scene, line));
 	if (ft_strncmp(line[0], "C", ft_strlen(line[0])) == 0)

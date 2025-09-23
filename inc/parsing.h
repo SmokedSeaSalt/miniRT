@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:10 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/22 11:48:05 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/09/23 11:21:37 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 # include "structs.h"
 
 int is_valid_extension(char* str);
+int parse_file(t_scene *scene, char *filename);
+int open_file(char *filename);
+int process_line(t_scene *scene, char *line);
+int	select_element(t_scene *scene, char **line);
 
 int	count_arguments(char **line);
 int	color_out_of_range(t_color color);
