@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:15:43 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/05/20 10:47:24 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/09/23 11:12:41 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 #include <stdlib.h> //to use free
 #include <stdlib.h> //to use (s)size_t
 
-char	*free_all(t_list **head)
+char	*free_all(t_gnl_list **head)
 {
-	t_list	*current;
-	t_list	*next;
+	t_gnl_list	*current;
+	t_gnl_list	*next;
 
 	if (*head == NULL)
 		return (NULL);
@@ -37,9 +37,9 @@ char	*free_all(t_list **head)
 
 char	*get_next_line(int fd)
 {
-	static t_list	*head = NULL;
-	char			*buffer;
-	ssize_t			bytesread;
+	static t_gnl_list	*head = NULL;
+	char				*buffer;
+	ssize_t				bytesread;
 
 	if (BUFFER_SIZE <= 0 || fd < 0)
 		return (free_all (&head));
@@ -62,11 +62,11 @@ char	*get_next_line(int fd)
 	return (free(buffer), free_all(&head));
 }
 
-char	*return_line(t_list **head, int fd)
+char	*return_line(t_gnl_list **head, int fd)
 {
-	t_list	*fd_node;
-	char	*tmp;
-	char	*ret;
+	t_gnl_list	*fd_node;
+	char		*tmp;
+	char		*ret;
 
 	fd_node = get_fd_node(*head, fd);
 	if (fd_node->hasnl == 0)
@@ -91,7 +91,7 @@ char	*return_line(t_list **head, int fd)
 	return (ret);
 }
 
-void	delnode(t_list *node, t_list **head)
+void	delnode(t_gnl_list *node, t_gnl_list **head)
 {
 	if (node->prev == NULL)
 		*head = node->next;
@@ -104,12 +104,12 @@ void	delnode(t_list *node, t_list **head)
 	free(node);
 }
 
-int	fill_node(t_list *head, int fd, char *buffer)
+int	fill_node(t_gnl_list *head, int fd, char *buffer)
 {
-	char	*tmp;
-	t_list	*fd_node;
-	size_t	linelen;
-	ssize_t	i;
+	char		*tmp;
+	t_gnl_list	*fd_node;
+	size_t		linelen;
+	ssize_t		i;
 
 	fd_node = get_fd_node(head, fd);
 	linelen = charpos(fd_node->line, '\0');

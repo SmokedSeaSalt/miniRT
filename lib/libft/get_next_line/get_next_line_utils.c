@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:15:46 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/05/20 10:53:32 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/09/23 11:11:51 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ void	*gnl_calloc(size_t nmemb, size_t size)
 	return (ret);
 }
 
-t_list	*get_fd_node(t_list *head, int fd)
+t_gnl_list	*get_fd_node(t_gnl_list *head, int fd)
 {
-	t_list	*current;
+	t_gnl_list	*current;
 
 	current = head;
 	while (current != NULL)
@@ -103,11 +103,11 @@ char	*gnl_substr(char const *s, unsigned int start, size_t len)
 	return (ret);
 }
 
-int	create_node(t_list **head, char *buffer, int fd)
+int	create_node(t_gnl_list **head, char *buffer, int fd)
 {
-	t_list	*newlist;
+	t_gnl_list	*newlist;
 
-	newlist = gnl_calloc(1, sizeof(t_list));
+	newlist = gnl_calloc(1, sizeof(t_gnl_list));
 	if (newlist == NULL)
 		return (-1);
 	newlist->fd = fd;
