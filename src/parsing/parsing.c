@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:54 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/23 11:19:18 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/09/24 16:25:57 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ int process_line(t_scene *scene, char *line)
 	split_line = ft_split_set(line, " \t,");
 	if (split_line == NULL)
 		return(printf("Parsing: Malloc fail\n"), -1);
+	if (line[0] == NULL)
+		return (free(split_line), 0);
 	select_element(scene, split_line);
 	free_split(split_line);
 	return (0);
@@ -72,8 +74,6 @@ int process_line(t_scene *scene, char *line)
 
 int	select_element(t_scene *scene, char **line)
 {
-	if (line[0] == NULL)
-		return (0);
 	if (ft_strncmp(line[0], "A", ft_strlen(line[0])) == 0)
 		return(new_ambient_struct(scene, line));
 	if (ft_strncmp(line[0], "C", ft_strlen(line[0])) == 0)
