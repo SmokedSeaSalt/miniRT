@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 10:18:18 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/23 10:19:02 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/09/24 14:21:36 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,10 @@ int is_valid_extension(char* str)
 	return (0);
 }
 
-/// @brief opens the file with a given filename.
-/// @param filename name of the file opened.
-/// @return -1 on failure. fd on success.
+/// @brief opens the file with a .rt file extension.
+/// @param filename name of the file to open.
+/// @return -1 on failure.
+/// @return fd on success.
 int open_file(char *filename)
 {
 	int fd;
