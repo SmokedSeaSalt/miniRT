@@ -109,7 +109,7 @@ static void test_add_multiple(void **state) {
 static void test_new_cylinder_success(void **state) {
 	(void)state;
 	t_scene scene = {0};
-	char *args[] = {"c", "0","0","0", "0","1","0", "10.5", "20.2", "255","255","255", NULL};
+	char *args[] = {"c", "50.0","0","20.6", "0","1","0", "10.5", "20.2", "255","255","255", NULL};
 
 	int res = new_cylinder_struct(&scene, args);
 	assert_int_equal(res, 0);
@@ -117,6 +117,12 @@ static void test_new_cylinder_success(void **state) {
 	t_object *obj = scene.objects;
 	assert_int_equal(obj->type, CYLINDER);
 	t_cylinder *cyl = (t_cylinder *)obj->data;
+	assert_float_equal(cyl->coords.x, 50.0, 1e-6);
+	assert_float_equal(cyl->coords.y, 0.0, 1e-6);
+	assert_float_equal(cyl->coords.z, 20.6, 1e-6);
+	assert_float_equal(cyl->orientation.x, 0, 1e-6);
+	assert_float_equal(cyl->orientation.y, 1, 1e-6);
+	assert_float_equal(cyl->orientation.z, 0, 1e-6);
 	assert_float_equal(cyl->diameter, 10.5, 1e-6);
 	assert_float_equal(cyl->height, 20.2, 1e-6);
 	assert_int_equal(cyl->color.r, 255);
@@ -196,6 +202,97 @@ static void test_only_extension(void **state) {
     assert_int_equal(is_valid_extension(".rt"), 1);
 }
 
+/******************************************************************************/
+/*                                                                            */
+/* parse_file                                                                 */
+/*                                                                            */
+/******************************************************************************/
+
+static void test_parse_file_normal(void **state) {
+    (void)state;
+
+	t_scene scene = {0};
+    assert_int_equal(parse_file(&scene, "test_files/sample.rt"), 0);
+
+	assert_non_null(scene.ambient);
+	assert_float_equal(scene.ambient->ratio, 0.2, 1e-6);
+	assert_int_equal(scene.ambient->color.r, 255);
+	assert_int_equal(scene.ambient->color.g, 255);
+	assert_int_equal(scene.ambient->color.b, 255);
+
+	assert_non_null(scene.camera);
+	assert_float_equal(scene.camera->coords.x, -50, 1e-6);
+	assert_float_equal(scene.camera->coords.y, 0, 1e-6);
+	assert_float_equal(scene.camera->coords.z, 20, 1e-6);
+	assert_float_equal(scene.camera->orientation.x, 0, 1e-6);
+	assert_float_equal(scene.camera->orientation.y, 0, 1e-6);
+	assert_float_equal(scene.camera->orientation.z, 1, 1e-6);
+	assert_int_equal(scene.camera->fov, 70);
+
+	assert_non_null(scene.light);
+	assert_float_equal(scene.light->coords.x, -40, 1e-6);
+	assert_float_equal(scene.light->coords.y, 0, 1e-6);
+	assert_float_equal(scene.light->coords.z, 30, 1e-6);
+	assert_float_equal(scene.light->brightness, 0.7, 1e-6);
+	assert_int_equal(scene.light->color.r, 255);
+	assert_int_equal(scene.light->color.g, 255);
+	assert_int_equal(scene.light->color.b, 255);
+
+	assert_non_null(scene.objects);
+	t_object *obj = scene.objects;
+	assert_int_equal(obj->type, PLANE);
+	t_plane *plane = obj->data;
+	assert_float_equal(plane->coords.x, 0, 1e-6);
+	assert_float_equal(plane->coords.y, 0, 1e-6);
+	assert_float_equal(plane->coords.z, 0, 1e-6);
+	assert_float_equal(plane->orientation.x, 0, 1e-6);
+	assert_float_equal(plane->orientation.y, 1.0, 1e-6);
+	assert_float_equal(plane->orientation.z, 0, 1e-6);
+	assert_int_equal(plane->color.r, 255);
+	assert_int_equal(plane->color.g, 0);
+	assert_int_equal(plane->color.b, 225);
+
+	obj = obj->next;
+	assert_int_equal(obj->type, SPHERE);
+	t_sphere *sphere = obj->data;
+	assert_float_equal(sphere->coords.x, 0, 1e-6);
+	assert_float_equal(sphere->coords.y, 0, 1e-6);
+	assert_float_equal(sphere->coords.z, 20, 1e-6);
+	assert_float_equal(sphere->diameter, 20, 1e-6);
+	assert_int_equal(sphere->color.r, 255);
+	assert_int_equal(sphere->color.g, 0);
+	assert_int_equal(sphere->color.b, 0);
+
+	obj = obj->next;
+	assert_int_equal(obj->type, CYLINDER);
+	t_cylinder *cylinder = obj->data;
+	assert_float_equal(cylinder->coords.x, 50.0, 1e-6);
+	assert_float_equal(cylinder->coords.y, 0.0, 1e-6);
+	assert_float_equal(cylinder->coords.z, 20.6, 1e-6);
+	assert_float_equal(cylinder->orientation.x, 0, 1e-6);
+	assert_float_equal(cylinder->orientation.y, 0, 1e-6);
+	assert_float_equal(cylinder->orientation.z, 1.0, 1e-6);
+	assert_float_equal(cylinder->diameter, 14.2, 1e-6);
+	assert_float_equal(cylinder->height, 21.42, 1e-6);
+	assert_int_equal(cylinder->color.r, 10);
+	assert_int_equal(cylinder->color.g, 0);
+	assert_int_equal(cylinder->color.b, 255);
+
+	assert_null(obj->next);
+
+	free(scene.ambient);
+	free(scene.camera);
+	free(scene.light);
+	free(plane);
+	free(sphere);
+	free(cylinder);
+	free(scene.objects->next->next);
+	free(scene.objects->next);
+	free(scene.objects);
+}
+
+
+
 // ---- Runner ----
 int main(void) {
 	const struct CMUnitTest parsing[] = {
@@ -214,6 +311,7 @@ int main(void) {
 		cmocka_unit_test(test_invalid_longer_extension),
 		cmocka_unit_test(test_invalid_longer_extension_rt_end),
 		cmocka_unit_test(test_only_extension),
+		cmocka_unit_test(test_parse_file_normal),
 	};
 	return cmocka_run_group_tests(parsing, NULL, NULL);
 }
