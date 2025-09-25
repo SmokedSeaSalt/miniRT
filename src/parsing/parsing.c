@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:54 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/24 16:25:57 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/09/25 12:37:25 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,18 @@
 #include "parsing.h"
 #include "libft.h"
 
-//TODO
-//error handling
-//make unit tests
+int is_scene_valid(t_scene *scene)
+{
+	if (scene->ambient == NULL)
+		return(printf("Parsing: No ambient element defined\n"), 0);
+	if (scene->camera == NULL)
+		return(printf("Parsing: No camera element defined\n"), 0);
+	if (scene->light == NULL)
+		return(printf("Parsing: No light element defined\n"), 0);
+	if (scene->objects == NULL)
+		return(printf("Parsing: No object element defined\n"), 0);
+	return (1);
+}
 
 int parse_file(t_scene *scene, char *filename)
 {
@@ -35,13 +44,13 @@ int parse_file(t_scene *scene, char *filename)
 		line = get_next_line(fd);
 		if (line == NULL)
 			break;
-		if (line[0] != '\0') //check what happens with line with only whitespaces
+		if (line[0] != '\0')
 			process_line(scene, line);
 		free(line);
 	}
 	close(fd);
-	//check_valid_scene(scene);
-	//check if enough valid elements are present (minimum 1 object, cam, light, ambient)
+	if (is_scene_valid(scene) != 1)
+		return (-1);
 	return (0);
 }
 
@@ -62,10 +71,10 @@ int process_line(t_scene *scene, char *line)
 {
 	char **split_line;
 
-	split_line = ft_split_set(line, " \t,");
+	split_line = ft_split_set(line, " \n\t,");
 	if (split_line == NULL)
 		return(printf("Parsing: Malloc fail\n"), -1);
-	if (line[0] == NULL)
+	if (split_line[0] == NULL)
 		return (free(split_line), 0);
 	select_element(scene, split_line);
 	free_split(split_line);
