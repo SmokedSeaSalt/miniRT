@@ -6,13 +6,14 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:45:52 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/19 14:41:23 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/09/25 12:25:57 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "math_inc.h"
 #include "structs.h"
 #include "libft.h"
+#include "helpers.h"
 
 int	count_arguments(char **line)
 {
@@ -44,7 +45,7 @@ int	orientation_out_of_range(t_vec3 orientation)
 
 int	orientation_all_zero(t_vec3 orientation)
 {
-	if (orientation.x == 0.0f && orientation.x == 0.0f && orientation.y == 0.0f)
+	if (orientation.x == 0.0f && orientation.y == 0.0f && orientation.z == 0.0f)
 		return (1);
 	return (0);
 }
@@ -63,7 +64,7 @@ t_vec3	fill_vec3(char *x_str, char *y_str, char *z_str)
 {
 	t_vec3	vec3;
 
-	vec3 = vec3_new(ft_atoi(x_str), ft_atoi(y_str), ft_atoi(z_str));
+	vec3 = vec3_new(ft_atof(x_str), ft_atof(y_str), ft_atof(z_str));
 	return (vec3);
 }
 
