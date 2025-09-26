@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:14:56 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/19 12:46:21 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/09/26 09:52:53 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,27 +49,6 @@ static int	set_minus_mult(const char *str, size_t *i)
 	return (1);
 }
 
-//overflow calculation
-//DBL_MAX < start_value * 10 + (c - '0');
-//DBL_MAX - ((c - '0') * minus_mult)) / 10 < start_val;
-//DBL_MIN > start_value * 10 - (c - '0');
-//(DBL_MIN + (c - '0')) / 10 > start_value;
-static double	fill_ret_value(char c, double ret_value, int minus_mult)
-{
-	if (((DBL_MAX - (c - '0')) / 10) < ret_value)
-	{
-		errno = ERANGE;
-		return (DBL_MAX);
-	}
-	if (((-1 * DBL_MAX + (c - '0')) / 10) > ret_value)
-	{
-		errno = ERANGE;
-		return (DBL_MIN);
-	}
-	ret_value = ret_value * 10 + ((c - '0') * minus_mult);
-	return (ret_value);
-}
-
 static double	calc_ret_value(const char *str, size_t i, int minus_mult)
 {
 	double	scale;
@@ -88,7 +67,7 @@ static double	calc_ret_value(const char *str, size_t i, int minus_mult)
 			dot_toggle = 1;
 		}
 		else if (dot_toggle == 0)
-			ret_value = fill_ret_value(str[i], ret_value, minus_mult);
+			ret_value = ret_value * 10 + ((str[i] - '0') * minus_mult);
 		else
 		{
 			scale = scale / 10;
