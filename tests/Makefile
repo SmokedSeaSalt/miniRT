@@ -48,7 +48,7 @@ run_test: $(TESTS)
 	    echo "Running $$t..."; \
 	    ./$$t || exit 1; \
 	done
-	@echo "All tests passed ✅"
+	@echo "\033[38:5:2mAll tests passed \033[0m\033[5m✅\033[0m"
 
 clean:
 	rm -f $(TESTS)
