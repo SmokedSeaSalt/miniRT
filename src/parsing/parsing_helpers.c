@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:45:52 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/25 12:25:57 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/09/29 13:14:37 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ t_vec3	fill_vec3(char *x_str, char *y_str, char *z_str)
 
 void	add_object_to_back(t_object **list, t_object *new)
 {
-	t_object *tmp;
+	t_object	*tmp;
 
 	if (list == NULL)
 		return ;

@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 11:59:04 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/25 12:17:25 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/09/29 13:14:12 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,3 @@ int	new_camera_struct(t_scene *scene, char **line)
 	scene->camera = camera;
 	return (0);
 }
-

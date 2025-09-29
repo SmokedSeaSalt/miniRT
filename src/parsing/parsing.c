@@ -6,35 +6,35 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:54 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/25 12:37:25 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/09/29 13:13:05 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>		//to use printf
-#include <unistd.h>		//to use close
 #include "get_next_line.h"
 #include "helpers.h"
-#include "structs.h"
-#include "parsing.h"
 #include "libft.h"
+#include "parsing.h"
+#include "structs.h"
+#include <stdio.h>  //to use printf
+#include <unistd.h> //to use close
 
-int is_scene_valid(t_scene *scene)
+int	is_scene_valid(t_scene *scene)
 {
 	if (scene->ambient == NULL)
-		return(printf("Parsing: No ambient element defined\n"), 0);
+		return (printf("Parsing: No ambient element defined\n"), 0);
 	if (scene->camera == NULL)
-		return(printf("Parsing: No camera element defined\n"), 0);
+		return (printf("Parsing: No camera element defined\n"), 0);
 	if (scene->light == NULL)
-		return(printf("Parsing: No light element defined\n"), 0);
+		return (printf("Parsing: No light element defined\n"), 0);
 	if (scene->objects == NULL)
-		return(printf("Parsing: No object element defined\n"), 0);
+		return (printf("Parsing: No object element defined\n"), 0);
 	return (1);
 }
 
-int parse_file(t_scene *scene, char *filename)
+int	parse_file(t_scene *scene, char *filename)
 {
-	int fd;
-	char *line;
+	int		fd;
+	char	*line;
 
 	fd = open_file(filename);
 	if (fd < 0)
@@ -43,7 +43,7 @@ int parse_file(t_scene *scene, char *filename)
 	{
 		line = get_next_line(fd);
 		if (line == NULL)
-			break;
+			break ;
 		if (line[0] != '\0')
 			process_line(scene, line);
 		free(line);
@@ -56,7 +56,7 @@ int parse_file(t_scene *scene, char *filename)
 
 void	free_split(char **split)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (split[i] != NULL)
@@ -67,13 +67,13 @@ void	free_split(char **split)
 	free(split);
 }
 
-int process_line(t_scene *scene, char *line)
+int	process_line(t_scene *scene, char *line)
 {
-	char **split_line;
+	char	**split_line;
 
 	split_line = ft_split_set(line, " \n\t,");
 	if (split_line == NULL)
-		return(printf("Parsing: Malloc fail\n"), -1);
+		return (printf("Parsing: Malloc fail\n"), -1);
 	if (split_line[0] == NULL)
 		return (free(split_line), 0);
 	select_element(scene, split_line);
@@ -84,18 +84,17 @@ int process_line(t_scene *scene, char *line)
 int	select_element(t_scene *scene, char **line)
 {
 	if (ft_strncmp(line[0], "A", ft_strlen(line[0])) == 0)
-		return(new_ambient_struct(scene, line));
+		return (new_ambient_struct(scene, line));
 	if (ft_strncmp(line[0], "C", ft_strlen(line[0])) == 0)
-		return(new_camera_struct(scene, line));
+		return (new_camera_struct(scene, line));
 	if (ft_strncmp(line[0], "L", ft_strlen(line[0])) == 0)
-		return(new_light_struct(scene, line));
+		return (new_light_struct(scene, line));
 	if (ft_strncmp(line[0], "sp", ft_strlen(line[0])) == 0)
-		return(new_sphere_struct(scene, line));
+		return (new_sphere_struct(scene, line));
 	if (ft_strncmp(line[0], "pl", ft_strlen(line[0])) == 0)
-		return(new_plane_struct(scene, line));
+		return (new_plane_struct(scene, line));
 	if (ft_strncmp(line[0], "cy", ft_strlen(line[0])) == 0)
-		return(new_cylinder_struct(scene, line));
+		return (new_cylinder_struct(scene, line));
 	printf("Parsing: Element %s not found\n", line[1]);
-	return(1);
+	return (1);
 }
-
