@@ -6,13 +6,15 @@
 /*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 10:04:11 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/30 11:24:02 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/09/30 11:46:22 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "structs.h"
 #include "parsing.h"
 #include "consts.h"
+#include "rendering.h"
+#include <stdio.h> //to use printf
 
 static void	hook(void *param)
 {
@@ -39,8 +41,6 @@ int	init_mlx(t_scene *scene)
 
 	return (0);
 }
-
-
 
 int	main(int argc, char *argv[])
 {

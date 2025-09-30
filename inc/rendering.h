@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   helpers.h                                          :+:      :+:    :+:   */
+/*   rendering.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/18 16:08:58 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/30 11:44:52 by egrisel          ###   ########.fr       */
+/*   Created: 2025/09/30 11:42:05 by egrisel           #+#    #+#             */
+/*   Updated: 2025/09/30 11:44:15 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HELPERS_H
-# define HELPERS_H
+#ifndef RENDERING_H
+# define RENDERING_H
+# include "structs.h"
 
-char	**ft_split_set(char const *s, char const *set);
-double	ft_atof(const char *str);
+int	render(t_scene *scene);
 
 #endif
