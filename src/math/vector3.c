@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:16:16 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/30 14:00:54 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/09/30 15:30:48 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,14 @@ float	vec3_dot(t_vec3 a, t_vec3 b)
 
 	tmp.v = a.v * b.v;
 	return (tmp.x + tmp.y + tmp.z);
+}
+
+t_vec3	vec3_cross(t_vec3 a, t_vec3 b)
+{
+	t_vec3	tmp;
+
+	tmp.x = ((a.y * b.z) - (a.z * b.y));
+	tmp.y = -1 * ((a.x * b.z) - (a.z * b.x));
+	tmp.z = ((a.x * b.y) - (a.y * b.x));
+	return (tmp);
 }
