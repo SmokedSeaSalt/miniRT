@@ -4,3 +4,4 @@ lib/MLX42
 build
 *.a
 reports
+miniRT
