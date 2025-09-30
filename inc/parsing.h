@@ -3,18 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
+/*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:10 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/25 12:10:44 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/09/30 11:35:54 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
 # include "structs.h"
-
-int parse_file(t_scene *scene, char *filename);
 
 int is_valid_extension(char* str);
 int parse_file(t_scene *scene, char *filename);

@@ -45,7 +45,8 @@ SRC = 	src/helpers/ft_atof.c \
 		src/parsing/parse_plane.c \
 		src/parsing/parse_sphere.c \
 		src/parsing/parsing_helpers.c \
-		src/parsing/parsing.c
+		src/parsing/parsing.c \
+		src/parsing/file_handling.c
 
 # Header files
 INC = -I inc
