@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
+/*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:17 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/19 14:18:00 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/09/30 11:13:33 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define STRUCTS_H
 //generics
 #include "math_inc.h"
+#include "MLX42.h"
 
 typedef struct s_color
 {
@@ -88,6 +89,8 @@ typedef struct s_scene
 	t_camera	*camera;
 	t_light		*light;
 	t_object	*objects;
+	mlx_t		*mlx;
+	mlx_image_t	*g_img;
 }	t_scene;
 
 #endif

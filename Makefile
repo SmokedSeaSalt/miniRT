@@ -6,7 +6,7 @@
 
 NAME = miniRT
 CC = cc
-CFLAGS = -Wall -Werror -Wextra #-lm
+CFLAGS = -Wall -Werror -Wextra -lm
 CCDEBUG = -g
 
 ################################################################################
@@ -23,7 +23,7 @@ LIBFT_INC = -I $(LIBFT_PATH)/include
 
 LIBMLX_PATH = lib/MLX42
 LIBMLX = $(LIBMLX_PATH)/build/libmlx42.a
-LIBMLX_INC = -I $(LIBMLX_PATH)/include
+LIBMLX_INC = -I $(LIBMLX_PATH)/include/MLX42
 
 ################################################################################
 #                                                                              #
@@ -46,7 +46,8 @@ SRC = 	src/helpers/ft_atof.c \
 		src/parsing/parse_sphere.c \
 		src/parsing/parsing_helpers.c \
 		src/parsing/parsing.c \
-		src/parsing/file_handling.c
+		src/parsing/file_handling.c \
+		src/rendering/rendering.c
 
 # Header files
 INC = -I inc
@@ -70,14 +71,14 @@ clean:
 
 fclean: clean
 	@make fclean -C $(LIBFT_PATH)
-	rm $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
 
 # Build
 $(NAME): $(OBJ)
-	@printf "$(COLOUR_BLUE)test\n$(COLOUR_END)"
-#	@$(CC) $(CFLAGS) $(OBJS) $(INC) $(LIBFT_INC) $(LIBMLX_INC) -o $@ &&
+	@printf "$(COLOUR_BLUE)Compiling miniRT\n$(COLOUR_END)"
+	@$(CC) $(CFLAGS) $(OBJ) $(INC) $(LIBFT) $(LIBFT_INC) $(LIBMLX) $(LIBMLX_INC) -o $@
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c | $(BUILD_DIR)
 	@mkdir -p $(dir $@)
