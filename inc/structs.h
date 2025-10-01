@@ -3,18 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:17 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/30 11:13:33 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/10/01 16:58:58 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 //generics
-#include "math_inc.h"
 #include "MLX42.h"
+
+/// @brief union for adaptable vector operations
+/// @param float v for +-*/ operations on vector	-> vec3_1.v - vec3_2.v
+/// @param struct for x y z access					-> vec3.x
+/// @param float array[4] for array like access 	-> vec3.array[1]
+typedef union u_vec3
+{
+	float v	__attribute__	((vector_size(16)));
+	struct
+	{
+		float	x;
+		float	y;
+		float	z;
+		float	w;
+	};
+	float					array[4];
+}	t_vec3;
 
 typedef struct s_color
 {
@@ -74,6 +90,13 @@ typedef enum e_obj_type
 	PLANE,
 	CYLINDER
 } t_obj_type;
+
+typedef struct s_ray
+{
+	t_vec3		orig;
+	t_vec3		vec3;
+//	t_results	*results;
+}	t_ray;
 
 //list of obj
 typedef struct s_object
