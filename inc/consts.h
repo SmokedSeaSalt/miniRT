@@ -6,15 +6,21 @@
 /*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:14:45 by egrisel           #+#    #+#             */
-/*   Updated: 2025/09/30 11:15:23 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/10/01 14:44:41 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CONSTS_H
 # define CONSTS_H
 
-#define WIDTH 300
-#define HEIGHT 300
+# ifndef WIDTH
+#  define WIDTH 300
+# endif
 
+# ifndef HEIGHT
+#  define HEIGHT 300
+# endif
+
+# define PI 3.14159265358979323846f
 
 #endif
