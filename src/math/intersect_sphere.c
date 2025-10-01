@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 12:22:38 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/01 14:26:30 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/01 16:57:48 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,12 @@
 float	sphere_intersects(t_ray ray, t_sphere sphere)
 {
 	float	disc;
+	//todo:
+	// write unit test
+	// add radius calculation to struct and parsing
 
-	disc = powf(vec3_dot(ray.vec3.v, (ray.orig.v - sphere.coords.v)), 2.0) \
-- (powf(vec3_length(ray.orig.v - sphere.coords.v), 2.0) \
+	disc = powf(vec3_dot(ray.vec3, (t_vec3)(ray.orig.v - sphere.coords.v)), 2.0) \
+- (powf(vec3_length((t_vec3)(ray.orig.v - sphere.coords.v)), 2.0) \
 - powf((sphere.diameter * 0.5), 2.0));
 	return (disc);
 }
