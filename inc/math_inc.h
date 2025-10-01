@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   math_inc.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
+/*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 15:53:33 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/24 14:13:25 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/01 13:52:56 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,5 @@ typedef union u_vec3
 
 t_vec3	vec3_new(float x, float y, float z);
 t_vec3	normalize_vec3(t_vec3 vec3);
-
+float	deg_to_rad(int angle_in_deg);
 #endif

@@ -39,6 +39,7 @@ SRC = 	src/main.c \
 		src/helpers/ft_atof.c \
 		src/helpers/ft_split_set.c \
 		src/math/vector3.c \
+		src/math/trig.c \
 		src/parsing/parse_ambient.c \
 		src/parsing/parse_camera.c \
 		src/parsing/parse_cylinder.c \
@@ -48,7 +49,9 @@ SRC = 	src/main.c \
 		src/parsing/parsing_helpers.c \
 		src/parsing/parsing.c \
 		src/parsing/file_handling.c \
-		src/rendering/rendering.c
+		src/rendering/rendering.c \
+		src/rendering/ray.c \
+
 
 # Header files
 INC = -I inc

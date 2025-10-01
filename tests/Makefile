@@ -8,12 +8,18 @@ LIBFT = $(LIBFT_PATH)/libft.a
 LIBFT_INC = -I $(LIBFT_PATH)/include
 
 
-TESTS = test_helpers test_math test_parsing
+TESTS = test_helpers test_math test_parsing test_rendering
 
 all: $(TESTS)
 
 libft:
 	@make -C $(LIBFT_PATH)
+
+################################################################################
+#                                                                              #
+# Test Helpers                                                                 #
+#                                                                              #
+################################################################################
 
 HELPER_FUNC = $(wildcard ../src/helpers/*.c)
 HELPER_INC = ../inc
@@ -24,6 +30,12 @@ test_helpers: test_helpers.c $(HELPER_FUNC) $(HELPER_INC) libft
 run_helpers: test_helpers
 	./test_helpers
 
+################################################################################
+#                                                                              #
+# Test Math                                                                    #
+#                                                                              #
+################################################################################
+
 MATH_FUNC = $(wildcard ../src/math/*.c)
 MATH_INC = ../inc
 
@@ -32,6 +44,12 @@ test_math: test_math.c $(MATH_FUNC) $(MATH_INC) libft
 
 run_math: test_math
 	./test_math
+
+################################################################################
+#                                                                              #
+# Test Parsing                                                                 #
+#                                                                              #
+################################################################################
 
 PARSING_FUNC = $(wildcard ../src/parsing/*.c) $(HELPER_FUNC) $(MATH_FUNC)
 PARSING_INC = ../inc
@@ -42,7 +60,28 @@ test_parsing: test_parsing.c $(PARSING_FUNC) $(PARSING_INC) libft
 run_parsing: test_parsing
 	./test_parsing
 
-# Run all tests
+################################################################################
+#                                                                              #
+# Test Rendering                                                               #
+#                                                                              #
+################################################################################
+
+RENDERING_FUNC = $(wildcard ../src/rendering/*.c) $(HELPER_FUNC) $(MATH_FUNC)
+RENDERING_INC = ../inc
+
+test_rendering: test_rendering.c $(PARSING_FUNC) $(PARSING_INC) libft
+	$(CC) $(CFLAGS) $< $(RENDERING_FUNC) -I$(RENDERING_INC) -lm $(LIBFT) $(LIBFT_INC) -o $@ $(ARGS_MOCKA)
+
+run_rendering: test_rendering
+	./test_rendering
+
+
+################################################################################
+#                                                                              #
+# Run all tests                                                                #
+#                                                                              #
+################################################################################
+
 run_test: $(TESTS)
 	@for t in $(TESTS); do \
 	    echo "Running $$t..."; \
