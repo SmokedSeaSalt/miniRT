@@ -227,7 +227,7 @@ static void test_parse_file_normal(void **state) {
 	assert_float_equal(scene.camera->orientation.x, 0, 1e-6);
 	assert_float_equal(scene.camera->orientation.y, 0, 1e-6);
 	assert_float_equal(scene.camera->orientation.z, 1, 1e-6);
-	assert_int_equal(scene.camera->fov, 70);
+	assert_int_equal(scene.camera->fov_rad, 70);
 
 	assert_non_null(scene.light);
 	assert_float_equal(scene.light->coords.x, -40, 1e-6);
