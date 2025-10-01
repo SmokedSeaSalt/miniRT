@@ -10,7 +10,7 @@
 
 /******************************************************************************/
 /*                                                                            */
-/* normalize_vec3                                                             */
+/* vec3_normalize                                                             */
 /*                                                                            */
 /******************************************************************************/
 
@@ -19,7 +19,7 @@ static void test_normalize_positive_vector(void **state) {
     (void) state;
 
     t_vec3 v = {3.0f, 4.0f, 0.0f, 0.0f}; // length = 5
-    t_vec3 result = normalize_vec3(v);
+    t_vec3 result = vec3_normalize(v);
 
     assert_float_equal(result.x, 0.6f, 1e-6);
     assert_float_equal(result.y, 0.8f, 1e-6);
@@ -33,7 +33,7 @@ static void test_normalize_negative_vector(void **state) {
     (void) state;
 
     t_vec3 v = {-2.0f, -3.0f, -6.0f, 0.0f};
-    t_vec3 result = normalize_vec3(v);
+    t_vec3 result = vec3_normalize(v);
 
     float magnitude = sqrtf(result.x*result.x + result.y*result.y + result.z*result.z);
     assert_float_equal(magnitude, 1.0f, 1e-6);
@@ -43,7 +43,7 @@ static void test_normalize_zero_vector(void **state) {
     (void) state;
 
     t_vec3 v = {0.0f, 0.0f, 0.0f, 0.0f};
-    t_vec3 result = normalize_vec3(v);
+    t_vec3 result = vec3_normalize(v);
 
     assert_float_equal(result.x, 0.0f, 1e-6);
     assert_float_equal(result.y, 0.0f, 1e-6);
@@ -54,7 +54,7 @@ static void test_normalize_mixed_vector(void **state) {
     (void) state;
 
     t_vec3 v = {-3.0f, 4.0f, -12.0f, 0.0f};
-    t_vec3 result = normalize_vec3(v);
+    t_vec3 result = vec3_normalize(v);
 
     float magnitude = sqrtf(result.x*result.x + result.y*result.y + result.z*result.z);
     assert_float_equal(magnitude, 1.0f, 1e-6);

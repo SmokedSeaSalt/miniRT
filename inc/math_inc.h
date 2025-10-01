@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 15:53:33 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/30 14:32:16 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/01 14:35:56 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,12 @@ typedef union u_vec3
 }	t_vec3;
 
 t_vec3	vec3_new(float x, float y, float z);
-t_vec3	normalize_vec3(t_vec3 vec3);
+t_vec3	vec3_normalize(t_vec3 vec3);
 float	vec3_dot(t_vec3 a, t_vec3 b);
 t_vec3	vec3_cross(t_vec3 a, t_vec3 b);
+float	vec3_lenght(t_vec3 vec3);
+
+float	sphere_intersects(t_ray ray, t_sphere sphere);
+
 
 #endif
