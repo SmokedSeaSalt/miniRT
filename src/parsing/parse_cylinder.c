@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 12:00:29 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/25 12:17:53 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/01 17:00:32 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "helpers.h"
 #include "libft.h"
 #include "structs.h"
+#include "math_inc.h"
 
 static int	fill_cylinder_struct(t_cylinder *cylinder, char **line)
 {
@@ -27,7 +28,7 @@ static int	fill_cylinder_struct(t_cylinder *cylinder, char **line)
 		return (printf("Cylinder: Orientation out of range\n"), 1);
 	if (orientation_all_zero(cylinder->orientation))
 		return (printf("Cylinder: Orientation can not be all zero\n"), 1);
-	cylinder->orientation = normalize_vec3(cylinder->orientation);
+	cylinder->orientation = vec3_normalize(cylinder->orientation);
 	cylinder->diameter = ft_atof(line[7]);
 	cylinder->height = ft_atof(line[8]);
 	cylinder->color = fill_color(line[9], line[10], line[11]);

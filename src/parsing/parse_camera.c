@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 11:59:04 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/29 13:14:12 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/01 17:00:26 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "helpers.h"
 #include "libft.h"
 #include "structs.h"
+#include "math_inc.h"
 
 static int	fill_camera_struct(t_camera *camera, char **line)
 {
@@ -27,7 +28,7 @@ static int	fill_camera_struct(t_camera *camera, char **line)
 		return (printf("Camera: Orientation out of range\n"), 1);
 	if (orientation_all_zero(camera->orientation))
 		return (printf("Camera: Orientation can not be all zero\n"), 1);
-	camera->orientation = normalize_vec3(camera->orientation);
+	camera->orientation = vec3_normalize(camera->orientation);
 	camera->fov = ft_atoi(line[7]);
 	if (camera->fov < 0 || camera->fov > 180)
 		return (printf("Camera: FOV out of range\n"), 1);
