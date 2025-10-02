@@ -6,7 +6,7 @@
 /*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 10:04:11 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/01 16:41:44 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/10/02 12:07:22 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "consts.h"
 #include "rendering.h"
 #include "libft.h"
+#include <math.h>
 #include <stdio.h> //to use printf
 
 // change later for variable window size

@@ -6,7 +6,7 @@
 /*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 12:23:02 by egrisel           #+#    #+#             */
-/*   Updated: 2025/10/02 11:31:25 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/10/02 12:18:30 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,15 @@ t_vec3	local_to_world(t_camera *camera, t_vec3 local_point_on_img_plane)
 
 // (1,1). 10x10
 
-t_ray	*get_ray(int x, int y, t_camera *camera)
+t_ray	get_ray(int x, int y, t_camera *camera)
 {
 	t_vec3	local_point_on_img_plane;
 	t_vec3	world_point_on_img_plane;
-	t_ray	*ray;
+	t_ray	ray;
 	int		width;
 	int		height;
 	
-	ray = ft_calloc(1, sizeof(t_ray));
-	if (ray == NULL)
-		return (NULL);
+	ft_bzero(&ray, sizeof (t_ray));
 	width = camera->window_info.width;
 	height = camera->window_info.height;
 	local_point_on_img_plane.x = (2 * (((float)x + 0.5) / (float)width) - 1)\
@@ -49,8 +47,8 @@ t_ray	*get_ray(int x, int y, t_camera *camera)
 	local_point_on_img_plane.z = -1.0f;
 	world_point_on_img_plane = local_to_world(camera, local_point_on_img_plane);
 	
-	ray->vec3= local_point_on_img_plane;
-	ray->vec3 = vec3_normalize(ray->vec3);
-	ray->orig = camera->coords;
+	ray.vec3= local_point_on_img_plane;
+	ray.vec3 = vec3_normalize(ray.vec3);
+	ray.orig = camera->coords;
 	return (ray);
 }

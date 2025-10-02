@@ -7,6 +7,9 @@ LIBFT_PATH = ../lib/libft
 LIBFT = $(LIBFT_PATH)/libft.a
 LIBFT_INC = -I $(LIBFT_PATH)/include
 
+LIBMLX_PATH = lib/MLX42
+LIBMLX = $(LIBMLX_PATH)/build/libmlx42.a -ldl -lglfw -pthread -lm
+LIBMLX_INC = -I $(LIBMLX_PATH)/include/MLX42
 
 TESTS = test_helpers test_math test_parsing test_intersect test_rendering
 
@@ -84,8 +87,8 @@ run_intersect: test_intersect
 RENDERING_FUNC = $(wildcard ../src/rendering/*.c) $(HELPER_FUNC) $(MATH_FUNC)
 RENDERING_INC = ../inc
 
-test_rendering: test_rendering.c $(PARSING_FUNC) $(PARSING_INC) libft
-	$(CC) $(CFLAGS) $< $(RENDERING_FUNC) -I$(RENDERING_INC) -lm $(LIBFT) $(LIBFT_INC) -o $@ $(ARGS_MOCKA)
+test_rendering: test_rendering.c $(PARSING_FUNC) $(PARSING_INC) libft mlx42
+	$(CC) $(CFLAGS) $< $(RENDERING_FUNC) -I$(RENDERING_INC) -lm $(LIBFT) $(LIBFT_INC) $(LIBMLX) $(LIBMLX_INC) -o $@ $(ARGS_MOCKA)
 
 run_rendering: test_rendering
 	./test_rendering
@@ -107,3 +110,11 @@ clean:
 	rm -f $(TESTS)
 
 .PHONY: all test_example run example test_helpers run_helpers run_test clean libft
+
+#libraries
+mlx42: | $(LIBMLX_PATH)
+	@cmake $(LIBMLX_PATH) -B $(LIBMLX_PATH)/build && make -C $(LIBMLX_PATH)/build -j4
+
+$(LIBMLX_PATH):
+	git -c advice.detachedHead=false clone \
+		--branch v2.4.1 https://github.com/codam-coding-college/MLX42.git $(LIBMLX_PATH)

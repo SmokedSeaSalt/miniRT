@@ -6,7 +6,7 @@
 /*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:17 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/02 11:27:02 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/10/02 12:06:26 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ typedef struct s_object
 	t_obj_type		type;
 	void			*data;
 	struct s_object	*next;
+	
 } t_object;
 
 
@@ -122,11 +123,16 @@ typedef struct s_scene
 	mlx_image_t	*g_img;
 }	t_scene;
 
+typedef struct s_pixel_result
+{
+	int	is_hit;
+}	t_pixel_result;
+
 typedef struct s_ray
 {
-	t_vec3		orig;
-	t_vec3		vec3;
-	void		*results;
+	t_vec3			orig;
+	t_vec3			vec3;
+	t_pixel_result	results;
 }	t_ray;
 
 

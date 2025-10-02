@@ -48,10 +48,10 @@ static void test_pixel_vector(void **state) {
 	mock_camera.orientation.y = 0.0f;
 	mock_camera.orientation.z = -1.0f;
 
-	t_ray *ray1 = get_ray(0, 0, &mock_camera); // Top-left
-	t_ray *ray2 = get_ray(1, 0, &mock_camera); // Top-right
-	t_ray *ray3 = get_ray(0, 1, &mock_camera); // Bottom-left
-	t_ray *ray4 = get_ray(1, 1, &mock_camera); // Bottom-right
+	t_ray ray1 = get_ray(0, 0, &mock_camera); // Top-left
+	t_ray ray2 = get_ray(1, 0, &mock_camera); // Top-right
+	t_ray ray3 = get_ray(0, 1, &mock_camera); // Bottom-left
+	t_ray ray4 = get_ray(1, 1, &mock_camera); // Bottom-right
 
 	//////////////
 	//Assertions//
@@ -64,18 +64,15 @@ static void test_pixel_vector(void **state) {
 
 	// PRINT RESULT
 
-	// print_vec3(&ray1->vec3);
-	// print_vec3(&ray2->vec3);
-	// print_vec3(&ray3->vec3);
-	// print_vec3(&ray4->vec3);
+	print_vec3(&ray1.vec3);
+	print_vec3(&ray2.vec3);
+	print_vec3(&ray3.vec3);
+	print_vec3(&ray4.vec3);
 
 
 
 	// Clean up
-	free(ray1);
-	free(ray2);
-	free(ray3);
-	free(ray4);
+
 
 }
 
