@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 11:59:33 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/25 12:18:36 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/02 10:07:53 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ static int	fill_sphere_struct(t_sphere *sphere, char **line)
 		return (printf("Sphere: Incorrect amount of arguments\n"), 1);
 	sphere->coords = fill_vec3(line[1], line[2], line[3]);
 	sphere->diameter = ft_atof(line[4]);
+	if (sphere->diameter < 0.0f)
+		return (printf("Sphere: Negative diameter not allowed"));
+	sphere->radius = sphere->diameter * 0.5f;
 	sphere->color = fill_color(line[5], line[6], line[7]);
 	if (color_out_of_range(sphere->color))
 		return (printf("Sphere: Color out of range\n"), 1);

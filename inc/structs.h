@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:17 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/30 11:13:33 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/10/02 10:08:14 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_sphere
 {
 	t_vec3		coords;
 	float		diameter;
+	float		radius;
 	t_color		color;
 }	t_sphere;
 
@@ -64,6 +65,7 @@ typedef struct s_cylinder
 	t_vec3		coords;
 	t_vec3		orientation;
 	float		diameter;
+	float		radius;
 	float		height;
 	t_color		color;
 }	t_cylinder;
