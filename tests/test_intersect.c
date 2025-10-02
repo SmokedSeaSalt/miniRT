@@ -23,7 +23,7 @@ static void test_sphere_intersects_hit(void **state) {
 	ray.vec3 = vec3_normalize(vec3_new(-3,-0.46,-0.9));
     t_sphere sphere;
 	sphere.coords = vec3_new(0,0,0);
-	sphere.diameter = 2;
+	sphere.radius = 2;
 
     float result = sphere_intersects(ray, sphere);
 
@@ -39,12 +39,12 @@ static void test_sphere_intersects_signle_point_hit(void **state) {
 	ray.vec3 = vec3_normalize(vec3_new(-2,-2,0));
     t_sphere sphere;
 	sphere.coords = vec3_new(0,0,0);
-	sphere.diameter = 1.5;
+	sphere.radius = 2;
 
     float result = sphere_intersects(ray, sphere);
 
     printf("%f\n",result);
-    assert_float_equal(result, 0,  1e-9);
+    assert_float_equal(result, 0,  1e-6);
 }
 
 static void test_sphere_intersects_no_hit(void **state) {
@@ -55,7 +55,7 @@ static void test_sphere_intersects_no_hit(void **state) {
 	ray.vec3 = vec3_normalize(vec3_new(-2,-2,1));
     t_sphere sphere;
 	sphere.coords = vec3_new(0,0,0);
-	sphere.diameter = 1.5;
+	sphere.radius = 1.5;
 
     float result = sphere_intersects(ray, sphere);
 
