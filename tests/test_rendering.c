@@ -64,10 +64,10 @@ static void test_pixel_vector(void **state) {
 
 	// PRINT RESULT
 
-	print_vec3(&ray1->vec3);
-	print_vec3(&ray2->vec3);
-	print_vec3(&ray3->vec3);
-	print_vec3(&ray4->vec3);
+	// print_vec3(&ray1->vec3);
+	// print_vec3(&ray2->vec3);
+	// print_vec3(&ray3->vec3);
+	// print_vec3(&ray4->vec3);
 
 
 
