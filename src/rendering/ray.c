@@ -6,7 +6,7 @@
 /*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 12:23:02 by egrisel           #+#    #+#             */
-/*   Updated: 2025/10/02 12:18:30 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/10/02 15:08:03 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,21 @@
 #include "math_inc.h"
 #include "math.h" // for tan
 
-/// delete
-#include <stdio.h>
-
 t_vec3	local_to_world(t_camera *camera, t_vec3 local_point_on_img_plane)
 {
-	(void)local_point_on_img_plane;
-	(void)camera;
+	t_vec3	world_up;
+	t_vec3	plane_right;
+	t_vec3	plane_up;
+	t_vec3	result;
+
+
+	world_up = vec3_new(0,1,0);
+	plane_right = vec3_cross(camera->orientation, world_up);
+	plane_up = vec3_cross(camera->orientation, plane_right);
+
+	result.x = camera->coords.x + camera->orientation.x
+		+ plane_right.x * local_point_on_img_plane.x;
+
 	return (local_point_on_img_plane);
 }
 
