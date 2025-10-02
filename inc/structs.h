@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:17 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/01 16:58:58 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/02 10:10:16 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct s_sphere
 {
 	t_vec3		coords;
 	float		diameter;
+	float		radius;
 	t_color		color;
 }	t_sphere;
 
@@ -80,6 +81,7 @@ typedef struct s_cylinder
 	t_vec3		coords;
 	t_vec3		orientation;
 	float		diameter;
+	float		radius;
 	float		height;
 	t_color		color;
 }	t_cylinder;
