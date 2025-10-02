@@ -1,5 +1,5 @@
 CC=cc
-CFLAGS=-I./include -Wall -Wextra -Werror -I ../inc -I ../lib/MLX42/include/MLX42
+CFLAGS=-I./include -Wall -Wextra -Werror -I ../inc -I ../lib/MLX42/include/MLX42 -g
 TEST_LIBS=-lcmocka
 ARGS_MOCKA= -I$(HOME)/local_libs/include -L$(HOME)/local_libs/lib -lcmocka -Wl,-rpath,$(HOME)/local_libs/lib
 
