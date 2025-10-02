@@ -8,7 +8,7 @@ LIBFT = $(LIBFT_PATH)/libft.a
 LIBFT_INC = -I $(LIBFT_PATH)/include
 
 
-TESTS = test_helpers test_math test_parsing test_rendering
+TESTS = test_helpers test_math test_parsing test_intersect test_rendering
 
 all: $(TESTS)
 
@@ -62,6 +62,21 @@ run_parsing: test_parsing
 
 ################################################################################
 #                                                                              #
+# Test Intersect                                                               #
+#                                                                              #
+################################################################################
+
+INTERSECT_FUNC = $(wildcard ../src/math/*.c)
+INTERSECT_INC = ../inc
+
+test_intersect: test_intersect.c $(INTERSECT_FUNC) $(INTERSECT_INC) libft
+	$(CC) $(CFLAGS) $< $(INTERSECT_FUNC) -I$(INTERSECT_INC) -lm -o $@ $(ARGS_MOCKA)
+
+run_intersect: test_intersect
+	./test_intersect
+
+################################################################################
+#                                                                              #
 # Test Rendering                                                               #
 #                                                                              #
 ################################################################################
@@ -74,7 +89,6 @@ test_rendering: test_rendering.c $(PARSING_FUNC) $(PARSING_INC) libft
 
 run_rendering: test_rendering
 	./test_rendering
-
 
 ################################################################################
 #                                                                              #

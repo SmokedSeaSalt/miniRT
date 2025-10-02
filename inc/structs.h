@@ -6,15 +6,31 @@
 /*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:17 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/01 17:00:07 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/10/02 11:27:02 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 //generics
-#include "math_inc.h"
 #include "MLX42.h"
+
+/// @brief union for adaptable vector operations
+/// @param float v for +-*/ operations on vector	-> vec3_1.v - vec3_2.v
+/// @param struct for x y z access					-> vec3.x
+/// @param float array[4] for array like access 	-> vec3.array[1]
+typedef union u_vec3
+{
+	float v	__attribute__	((vector_size(16)));
+	struct
+	{
+		float	x;
+		float	y;
+		float	z;
+		float	w;
+	};
+	float					array[4];
+}	t_vec3;
 
 typedef struct s_color
 {
@@ -58,6 +74,7 @@ typedef struct s_sphere
 {
 	t_vec3		coords;
 	float		diameter;
+	float		radius;
 	t_color		color;
 }	t_sphere;
 
@@ -73,6 +90,7 @@ typedef struct s_cylinder
 	t_vec3		coords;
 	t_vec3		orientation;
 	float		diameter;
+	float		radius;
 	float		height;
 	t_color		color;
 }	t_cylinder;

@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 11:59:50 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/25 12:18:27 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/01 17:00:40 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "helpers.h"
 #include "libft.h"
 #include "structs.h"
+#include "math_inc.h"
 
 static int	fill_plane_struct(t_plane *plane, char **line)
 {
@@ -27,7 +28,7 @@ static int	fill_plane_struct(t_plane *plane, char **line)
 		return (printf("Plane: Orientation out of range\n"), 1);
 	if (orientation_all_zero(plane->orientation))
 		return (printf("Plane: Orientation can not be all zero\n"), 1);
-	plane->orientation = normalize_vec3(plane->orientation);
+	plane->orientation = vec3_normalize(plane->orientation);
 	plane->color = fill_color(line[7], line[8], line[9]);
 	if (color_out_of_range(plane->color))
 		return (printf("Plane: Color out of range\n"), 1);

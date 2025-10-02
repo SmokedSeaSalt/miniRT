@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:54 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/29 13:13:05 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/09/30 14:13:46 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ int	parse_file(t_scene *scene, char *filename)
 		if (line == NULL)
 			break ;
 		if (line[0] != '\0')
-			process_line(scene, line);
+			if (process_line(scene, line) != 0)
+				return(free(line), -1);
 		free(line);
 	}
 	close(fd);
@@ -76,7 +77,8 @@ int	process_line(t_scene *scene, char *line)
 		return (printf("Parsing: Malloc fail\n"), -1);
 	if (split_line[0] == NULL)
 		return (free(split_line), 0);
-	select_element(scene, split_line);
+	if (select_element(scene, split_line) != 0)
+		return (free_split(split_line), -1);
 	free_split(split_line);
 	return (0);
 }
