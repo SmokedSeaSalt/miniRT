@@ -6,13 +6,14 @@
 /*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 12:23:02 by egrisel           #+#    #+#             */
-/*   Updated: 2025/10/02 11:23:23 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/10/02 11:31:25 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "structs.h"
 #include "consts.h"
+#include "math_inc.h"
 #include "math.h" // for tan
 
 /// delete
@@ -49,7 +50,7 @@ t_ray	*get_ray(int x, int y, t_camera *camera)
 	world_point_on_img_plane = local_to_world(camera, local_point_on_img_plane);
 	
 	ray->vec3= local_point_on_img_plane;
-	ray->vec3 = normalize_vec3(ray->vec3);
+	ray->vec3 = vec3_normalize(ray->vec3);
 	ray->orig = camera->coords;
 	return (ray);
 }

@@ -14,6 +14,7 @@
 #include "rendering.h"
 #include <stdio.h>
 #include <math.h>
+#include "math_inc.h"
 
 
 ///////helpers
