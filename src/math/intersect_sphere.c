@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 12:22:38 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/03 11:51:59 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/03 14:35:52 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,18 @@ float	sphere_closest_intersect_distance(t_ray ray, t_sphere sphere)
 	distance1 = -f_tmp2 + sqrt(disc);
 	distance2 = -f_tmp2 - sqrt(disc);
 	return (decide_closest_distance(distance1, distance2));
+}
+
+vec3_t	sphere_normal_at(t_ray ray, t_sphere sphere)
+{
+	t_vec3	hit_point;
+	t_vec3	normal;
+
+	//calculate hit point
+	hit_point.v = ray.orig.v + (ray.vec3.v * ray.results.hit_distance);
+	//get delta
+	normal.v = hit_point.v - sphere.coords.v
+	//normalize delta
+	normal = vec3_normalize(normal);
+	return (normal);
 }
