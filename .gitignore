@@ -1,7 +1,9 @@
 .vscode
 lib/MLX42
+tests/lib/MLX42
 *.o
 build
 *.a
 reports
 miniRT
+test.rt
