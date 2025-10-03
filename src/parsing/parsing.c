@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:54 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/30 14:13:46 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/03 13:44:15 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	parse_file(t_scene *scene, char *filename)
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
-		if (line[0] != '\0')
+		if (line[0] != '\0' && line[0] != '#')
 			if (process_line(scene, line) != 0)
 				return(free(line), -1);
 		free(line);
