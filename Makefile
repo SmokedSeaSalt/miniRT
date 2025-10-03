@@ -6,7 +6,7 @@
 
 NAME = miniRT
 CC = cc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g
 CCDEBUG = -g
 
 ################################################################################
@@ -52,6 +52,7 @@ SRC = 	src/main.c \
 		src/parsing/file_handling.c \
 		src/rendering/rendering.c \
 		src/rendering/ray.c \
+		src/rendering/file_output.c \
 
 
 # Header files

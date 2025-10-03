@@ -64,12 +64,24 @@ int	main(int argc, char *argv[])
 	t_scene		scene;
 
 	ft_bzero(&scene, sizeof(t_scene));
-	if (argc != 2)
-		return (printf("Incorrect amount of arguments"), 1);
+	if (argc < 2 || argc > 3)
+		return (printf("Usage: %s <scene.rt> [output.ppm]\n", argv[0]), 1);
 	if (parse_file(&scene, argv[1]) == -1)
-		return (printf("Parsing error"), 1);
-	if (init_mlx(&scene))
-		return (1); // cleanup scene
-	mlx_loop(scene.mlx);
+		return (printf("Parsing error\n"), 1);
 	
+	// If output filename provided, render to file instead of window
+	if (argc == 3)
+	{
+		set_window_info_struct(&(scene.camera->window_info));
+		set_camera_struct(scene.camera);
+		if (render_to_ppm(&scene, argv[2]) == -1)
+			return (printf("Error: Failed to write output file\n"), 1);
+		return (0);
+	}
+	
+	// Otherwise try to display in window
+	if (init_mlx(&scene))
+		return (printf("Error: MLX initialization failed\n"), 1);
+	mlx_loop(scene.mlx);
+	return (0);
 }
