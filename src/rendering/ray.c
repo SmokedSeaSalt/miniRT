@@ -47,7 +47,7 @@ t_ray	get_ray(int x, int y, t_camera *camera)
 	local_point_on_img_plane.z = -1.0f;
 	world_point_on_img_plane = local_to_world(camera, local_point_on_img_plane);
 	
-	ray.vec3= local_point_on_img_plane;
+	ray.vec3= world_point_on_img_plane;
 	ray.vec3 = vec3_normalize(ray.vec3);
 	ray.orig = camera->coords;
 	return (ray);
