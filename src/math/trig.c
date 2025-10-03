@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rendering.h                                        :+:      :+:    :+:   */
+/*   trig.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/30 11:42:05 by egrisel           #+#    #+#             */
-/*   Updated: 2025/10/02 12:05:44 by egrisel          ###   ########.fr       */
+/*   Created: 2025/10/01 13:47:46 by egrisel           #+#    #+#             */
+/*   Updated: 2025/10/01 13:51:08 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RENDERING_H
-# define RENDERING_H
-# include "structs.h"
+#include "consts.h"
 
-int	render(t_scene *scene);
-t_ray	get_ray(int x, int y, t_camera *camera);
-
-#endif
+float	deg_to_rad(int angle_in_deg)
+{
+	return (angle_in_deg * PI / 180.0f);
+}

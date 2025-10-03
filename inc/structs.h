@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
+/*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:17 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/02 10:10:16 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/02 12:06:26 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,20 @@ typedef struct s_ambient
 	t_color	color;
 }	t_ambient;
 
+typedef struct s_window_info
+{
+	int		width;
+	int		height;
+	float	aspect_ratio;
+} t_window_info;
+
 typedef struct s_camera
 {
-	t_vec3		coords;
-	t_vec3		orientation;
-	int			fov;
+	t_vec3			coords;
+	t_vec3			orientation;
+	float			fov_rad;
+	float			fov_scale;	
+	t_window_info	window_info;
 }	t_camera;
 
 typedef struct s_light
@@ -93,20 +102,16 @@ typedef enum e_obj_type
 	CYLINDER
 } t_obj_type;
 
-typedef struct s_ray
-{
-	t_vec3		orig;
-	t_vec3		vec3;
-//	t_results	*results;
-}	t_ray;
-
 //list of obj
 typedef struct s_object
 {
 	t_obj_type		type;
 	void			*data;
 	struct s_object	*next;
+	
 } t_object;
+
+
 
 typedef struct s_scene
 {
@@ -117,5 +122,18 @@ typedef struct s_scene
 	mlx_t		*mlx;
 	mlx_image_t	*g_img;
 }	t_scene;
+
+typedef struct s_pixel_result
+{
+	int	is_hit;
+}	t_pixel_result;
+
+typedef struct s_ray
+{
+	t_vec3			orig;
+	t_vec3			vec3;
+	t_pixel_result	results;
+}	t_ray;
+
 
 #endif

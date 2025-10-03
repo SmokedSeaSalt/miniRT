@@ -6,7 +6,7 @@
 /*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 10:04:11 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/30 12:03:02 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/10/02 12:07:22 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,29 @@
 #include "consts.h"
 #include "rendering.h"
 #include "libft.h"
+#include <math.h>
 #include <stdio.h> //to use printf
+
+// change later for variable window size
+void	set_window_info_struct(t_window_info *window_info)
+{
+	window_info->width = WIDTH;
+	window_info->height = HEIGHT;
+	window_info->aspect_ratio = WIDTH / HEIGHT;
+}
+
+void	set_camera_struct(t_camera *camera)
+{
+	camera->fov_scale = tanf(camera->fov_rad / 2);
+}
 
 static void	hook(void *param)
 {
 	t_scene	*scene;
 
 	scene = (t_scene*)param;
+	set_window_info_struct(&(scene->camera->window_info));
+	set_camera_struct(scene->camera);
 	// draw_black(mlx_info);
 	render(scene);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_camera.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
+/*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 11:59:04 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/01 17:00:26 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/02 11:28:09 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ static int	fill_camera_struct(t_camera *camera, char **line)
 	if (orientation_all_zero(camera->orientation))
 		return (printf("Camera: Orientation can not be all zero\n"), 1);
 	camera->orientation = vec3_normalize(camera->orientation);
-	camera->fov = ft_atoi(line[7]);
-	if (camera->fov < 0 || camera->fov > 180)
+	camera->fov_rad = deg_to_rad(ft_atof(line[7]));
+	if (camera->fov_rad < 0 || camera->fov_rad > deg_to_rad(180))
 		return (printf("Camera: FOV out of range\n"), 1);
 	return (0);
 }
