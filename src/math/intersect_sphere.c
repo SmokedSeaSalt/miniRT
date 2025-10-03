@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 12:22:38 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/02 10:27:16 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/03 11:13:44 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 /// @brief calculates the determinent for the quadratic
 /// @brief funtions for a vector and sphere
-/// @brief example -> https://www.desmos.com/3d/opwztyzyal
+/// @brief example -> https://www.desmos.com/3d/vb1nicgnja
 /// @param ray
 /// @param sphere
 /// @return <  0 no intersection
@@ -35,4 +35,27 @@ float	sphere_intersects(t_ray ray, t_sphere sphere)
 	disc = (f_tmp2 * f_tmp2) - \
 ((f_tmp1 * f_tmp1) - (sphere.radius * sphere.radius));
 	return (disc);
+}
+
+float	decide_closest_distance(float distance1, float distance2)
+{
+	if (distance1 < distance2)
+		return (distance1);
+	return (distance2);
+}
+
+float	sphere_closest_intersect_distance(t_ray ray, t_sphere sphere)
+{
+	float	disc;
+	float	distance1;
+	float	distance2;
+	float	f_tmp2;
+
+	disc = sphere_intersects(ray, sphere);
+	if (disc < 0.0f)
+		return (disc);
+	f_tmp2 = vec3_dot(ray.vec3, (t_vec3)(ray.orig.v - sphere.coords.v));
+	distance1 = -f_tmp2 + sqrt(disc);
+	distance2 = -f_tmp2 - sqrt(disc);
+	return (decide_closest_distance(distance1, distance2));
 }
