@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   math_inc.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 15:53:33 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/02 11:26:06 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/10/03 11:55:07 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ float	vec3_length(t_vec3 vec3);
 
 float	deg_to_rad(int angle_in_deg);
 
+float	decide_closest_distance(float distance1, float distance2);
+
 float	sphere_intersects(t_ray ray, t_sphere sphere);
+float	sphere_closest_intersect_distance(t_ray ray, t_sphere sphere);
 
 #endif

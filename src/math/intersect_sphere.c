@@ -6,11 +6,11 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 12:22:38 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/03 11:13:44 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/03 11:51:59 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "math.h"
+#include <math.h>
 #include "math_inc.h"
 #include "structs.h"
 
@@ -35,13 +35,6 @@ float	sphere_intersects(t_ray ray, t_sphere sphere)
 	disc = (f_tmp2 * f_tmp2) - \
 ((f_tmp1 * f_tmp1) - (sphere.radius * sphere.radius));
 	return (disc);
-}
-
-float	decide_closest_distance(float distance1, float distance2)
-{
-	if (distance1 < distance2)
-		return (distance1);
-	return (distance2);
 }
 
 float	sphere_closest_intersect_distance(t_ray ray, t_sphere sphere)
