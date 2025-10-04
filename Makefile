@@ -113,6 +113,14 @@ rmmlx42:
 .PHONY: all clean fclean re mlx42 libft debug rmmlx42 test run_test setup_test \
 analyze clean_analisys
 
+################################################################################
+#                                                                              #
+# Run mac                                                                      #
+#                                                                              #
+################################################################################
+
+run_mac:
+	./miniRT test.rt 1.ppm  && convert 1.ppm 1.png
 
 ################################################################################
 #                                                                              #
@@ -163,3 +171,5 @@ COLOUR_END=\033[0m
 # Formatting
 FORMAT_BOLD=\033[1mBold
 FORMAT_NORMAL=\033[0mNormal
+
+
