@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 11:59:50 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/01 17:00:40 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/06 12:00:02 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,9 @@ int	new_plane_struct(t_scene *scene, char **line)
 		return (free (plane), printf("Malloc fail\n"), 2);
 	object->type = PLANE;
 	object->data = plane;
+	object->is_hit = NULL;
+	object->get_hit_dist = NULL;
+	object->get_hit_data = NULL;
 	add_object_to_back(&(scene->objects), object);
 	return (0);
 }

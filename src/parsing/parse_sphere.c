@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 11:59:33 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/02 10:07:53 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/06 14:09:19 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include "helpers.h"
 #include "libft.h"
 #include "structs.h"
+#include "math_inc.h"
+#include "rendering.h"
 
 static int	fill_sphere_struct(t_sphere *sphere, char **line)
 {
@@ -47,6 +49,9 @@ int	new_sphere_struct(t_scene *scene, char **line)
 		return (free (sphere), printf("Malloc fail\n"), 2);
 	object->type = SPHERE;
 	object->data = sphere;
+	object->is_hit = (int (*)(t_ray *, void *))is_hit_sphere;
+	object->get_hit_dist = (float (*)(t_ray *, void *))get_hit_dist_sphere;
+	object->get_hit_data = (void (*)(t_ray *, void *))get_hit_data_sphere;
 	add_object_to_back(&(scene->objects), object);
 	return (0);
 }
