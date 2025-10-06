@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 09:57:43 by egrisel           #+#    #+#             */
-/*   Updated: 2025/10/02 12:17:37 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/10/06 11:19:43 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	calculate_sphere_hit(t_ray *ray, t_sphere *sphere)
 
 void	loop_though_objects(t_ray *ray, t_object *object_list)
 {
-	
+
 	while (object_list != NULL)
 	{
 		if (object_list->type == SPHERE)
@@ -47,10 +47,31 @@ void	loop_though_objects(t_ray *ray, t_object *object_list)
 	}
 }
 
+//void	loop_though_objects(t_ray *ray, t_object *object_list)
+//{
+//	int is_hit;
+//	float hit_dist;
+
+//	while (object_list != NULL)
+//	{
+//		is_hit = object_list.is_hit();
+//		if ( is_hit == 1)
+//		{
+//			hit_dist = object_list.get_dist();
+//			if (hit_dist < ray->results.hit_dist);
+//				ray->results.obj = object_list;
+//		}
+//		object_list = object_list->next;
+//	}
+//	ray->results.obj.get_result_data;
+
+//}
+
+
 void render_pixel(int x, int y, t_scene *scene)
 {
 	t_ray ray;
-	
+
 	ray = get_ray(x, y ,scene->camera);
 	loop_though_objects(&ray, scene->objects);
 	if (ray.results.is_hit == 0)
@@ -63,7 +84,7 @@ int	render(t_scene *scene)
 {
 	int i_x;
 	int i_y;
-	
+
 	i_x = 0;
 	while (i_x < scene->camera->window_info.height)
 	{
@@ -78,6 +99,6 @@ int	render(t_scene *scene)
 	}
 
 
-	
+
 	return (0);
 }

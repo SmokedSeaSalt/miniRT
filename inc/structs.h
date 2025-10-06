@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:17 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/02 12:06:26 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/10/06 11:15:24 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ typedef struct s_camera
 	t_vec3			coords;
 	t_vec3			orientation;
 	float			fov_rad;
-	float			fov_scale;	
+	float			fov_scale;
 	t_window_info	window_info;
 }	t_camera;
 
@@ -108,7 +108,7 @@ typedef struct s_object
 	t_obj_type		type;
 	void			*data;
 	struct s_object	*next;
-	
+
 } t_object;
 
 
@@ -125,7 +125,10 @@ typedef struct s_scene
 
 typedef struct s_pixel_result
 {
-	int	is_hit;
+	int			is_hit;
+	float		hit_dist;
+	t_object	object;
+	t_vec3		normal_at;
 }	t_pixel_result;
 
 typedef struct s_ray
