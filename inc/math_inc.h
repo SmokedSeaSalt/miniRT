@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   math_inc.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
+/*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 15:53:33 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/03 11:55:07 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/06 14:03:34 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,28 @@
 # define MATH_INC_H
 # include "structs.h"
 
+
+// vec3
 t_vec3	vec3_new(float x, float y, float z);
 t_vec3	vec3_normalize(t_vec3 vec3);
 float	vec3_dot(t_vec3 a, t_vec3 b);
 t_vec3	vec3_cross(t_vec3 a, t_vec3 b);
 float	vec3_length(t_vec3 vec3);
+float	vec3_sum_components(t_vec3 vec3);
+
+// vec4
+t_vec4	vec4_new(float x, float y, float z, float w);
+float	vec4_sum_components(t_vec4 vec4);
+
+// mat3
+t_mat3	mat3_new(t_vec3 *row_0, t_vec3 *row_1,t_vec3 *row_2);
+t_vec3	mat3_mul_vec3(t_mat3 *mat3, t_vec3 *input_vec3);
+
+
+// mat4
+t_mat4	mat4_new(t_vec4 *row_0, t_vec4 *row_1, t_vec4 *row_2, t_vec4 *row_3);
+t_vec4	mat4_mul_vec4(t_mat4 *mat4, t_vec4 *input_vec4);
+
 
 float	deg_to_rad(int angle_in_deg);
 

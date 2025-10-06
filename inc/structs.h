@@ -6,7 +6,7 @@
 /*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:17 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/02 12:06:26 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/10/06 13:57:47 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 //generics
 #include "MLX42.h"
 
-/// @brief union for adaptable vector operations
+/// @brief union for adaptable 3d vector operations(w is empty for optimization)
 /// @param float v for +-*/ operations on vector	-> vec3_1.v - vec3_2.v
 /// @param struct for x y z access					-> vec3.x
 /// @param float array[4] for array like access 	-> vec3.array[1]
@@ -31,6 +31,46 @@ typedef union u_vec3
 	};
 	float					array[4];
 }	t_vec3;
+
+/// @brief union for adaptable 4d vector operations
+/// @param float v for +-*/ operations on vector	-> vec3_1.v - vec3_2.v
+/// @param struct for x y z w access				-> vec3.x
+/// @param float array[4] for array like access 	-> vec3.array[1]
+typedef union u_vec4
+{
+	float v	__attribute__	((vector_size(16)));
+	struct
+	{
+		float	x;
+		float	y;
+		float	z;
+		float	w;
+	};
+	float					array[4];
+}	t_vec4;
+
+/// @brief union for 4x4 matrix
+typedef union u_mat4 {
+	struct {
+		t_vec4 row_0;
+		t_vec4 row_1;
+		t_vec4 row_2;
+		t_vec4 row_3;
+	};
+	float array[16];
+	float m[4][4];
+} t_mat4;
+
+/// @brief union for 3x3 matrix
+typedef union u_mat3 {
+	struct {
+		t_vec3 row_0;
+		t_vec3 row_1;
+		t_vec3 row_2;
+	};
+	float array[12];
+	float m[3][3];
+} t_mat3;
 
 typedef struct s_color
 {

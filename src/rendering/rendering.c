@@ -6,7 +6,7 @@
 /*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 09:57:43 by egrisel           #+#    #+#             */
-/*   Updated: 2025/10/02 12:17:37 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/10/06 16:41:57 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,9 @@ void render_pixel(int x, int y, t_scene *scene)
 		mlx_put_pixel(scene->g_img, x, y, 0xff00ffff);
 }
 
-int	render(t_scene *scene)
+
+
+int	render_frame(t_scene *scene)
 {
 	int i_x;
 	int i_y;

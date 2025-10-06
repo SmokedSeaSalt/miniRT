@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
+/*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:16:16 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/01 16:57:11 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/06 14:03:17 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,9 @@ t_vec3	vec3_cross(t_vec3 a, t_vec3 b)
 	tmp.y = -1 * ((a.x * b.z) - (a.z * b.x));
 	tmp.z = ((a.x * b.y) - (a.y * b.x));
 	return (tmp);
+}
+
+float	vec3_sum_components(t_vec3 vec3)
+{
+	return (vec3.x + vec3.y + vec3.z);
 }

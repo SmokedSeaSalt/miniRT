@@ -6,7 +6,7 @@
 /*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 10:04:11 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/02 12:07:22 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/10/06 10:24:12 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	hook(void *param)
 	set_window_info_struct(&(scene->camera->window_info));
 	set_camera_struct(scene->camera);
 	// draw_black(mlx_info);
-	render(scene);
+	render_frame(scene);
 }
 
 int	init_mlx(t_scene *scene)
