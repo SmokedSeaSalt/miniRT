@@ -30,7 +30,7 @@ void	loop_though_objects(t_ray *ray, t_object *object_list)
 			if (hit_dist > 0.0f && hit_dist < ray->results.hit_dist)
 			{
 				ray->results.is_hit = 1;
-				ray->results.is_hit = hit_dist;
+				ray->results.hit_dist = hit_dist;
 				ray->results.object = object_list;
 			}
 		}
