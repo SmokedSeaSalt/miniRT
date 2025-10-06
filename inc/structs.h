@@ -6,14 +6,14 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:17 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/06 11:15:24 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/06 13:36:07 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 //generics
-#include "MLX42.h"
+# include "MLX42.h"
 
 /// @brief union for adaptable vector operations
 /// @param float v for +-*/ operations on vector	-> vec3_1.v - vec3_2.v
@@ -52,7 +52,7 @@ typedef struct s_window_info
 	int		width;
 	int		height;
 	float	aspect_ratio;
-} t_window_info;
+}	t_window_info;
 
 typedef struct s_camera
 {
@@ -100,7 +100,22 @@ typedef enum e_obj_type
 	SPHERE,
 	PLANE,
 	CYLINDER
-} t_obj_type;
+}	t_obj_type;
+
+typedef struct s_pixel_result
+{
+	int				is_hit;
+	float			hit_dist;
+	struct s_object	*object;
+	t_vec3			normal_at;
+}	t_pixel_result;
+
+typedef struct s_ray
+{
+	t_vec3			orig;
+	t_vec3			vec3;
+	t_pixel_result	results;
+}	t_ray;
 
 //list of obj
 typedef struct s_object
@@ -108,10 +123,11 @@ typedef struct s_object
 	t_obj_type		type;
 	void			*data;
 	struct s_object	*next;
-
-} t_object;
-
-
+// Function pointers for object-specific operations
+	int				(*is_hit)(t_ray *ray, void *object_data);
+	float			(*get_hit_dist)(t_ray *ray, void *object_data);
+	void			(*get_hit_data)(t_ray *ray, void *object_data);
+}	t_object;
 
 typedef struct s_scene
 {
@@ -122,21 +138,5 @@ typedef struct s_scene
 	mlx_t		*mlx;
 	mlx_image_t	*g_img;
 }	t_scene;
-
-typedef struct s_pixel_result
-{
-	int			is_hit;
-	float		hit_dist;
-	t_object	object;
-	t_vec3		normal_at;
-}	t_pixel_result;
-
-typedef struct s_ray
-{
-	t_vec3			orig;
-	t_vec3			vec3;
-	t_pixel_result	results;
-}	t_ray;
-
 
 #endif
