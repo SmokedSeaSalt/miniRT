@@ -7,6 +7,12 @@ branch=$(git rev-parse --abbrev-ref HEAD)
 if [ "$branch" = "main" ]; then
     echo "Running pre-commit checks on $branch..."
 
+    # Check for uncommitted or unstaged changes
+    if ! git diff --quiet || ! git diff --cached --quiet; then
+        echo "Error: You have uncommitted changes. Please commit or stash them before pushing."
+        exit 1
+    fi
+
     # Example: run CMocka tests
     make run_test
     if [ $? -ne 0 ]; then
