@@ -107,8 +107,25 @@ static void test_sphere_intersects_distance(void **state) {
 	sphere.radius = 2;
 
     float result = sphere_closest_intersect_distance(ray, sphere);
-    printf("distance = %f\n", result);
     assert_float_equal(result, 3.004506f, 1e-4);
+}
+
+static void test_sphere_intersects_normal(void **state) {
+    (void) state;
+
+    t_ray ray;
+	ray.orig = vec3_new(3.34,2,2);
+	ray.vec3 = vec3_normalize(vec3_new(-3,-0.46,-0.9));
+    ray.results.hit_dist = 3.004506f;
+    t_sphere sphere;
+	sphere.coords = vec3_new(0,0,0);
+	sphere.radius = 2;
+
+    t_vec3 result = sphere_normal_at(ray, sphere);
+    assert_float_equal(result.x, 0.246373f, 1e-4);
+    assert_float_equal(result.y, 0.781719f, 1e-4);
+    assert_float_equal(result.z, 0.572912f, 1e-4);
+
 }
 
 
@@ -121,6 +138,7 @@ int main(void) {
         cmocka_unit_test(test_nearest_hit_distance_one_positive),
         cmocka_unit_test(test_nearest_hit_distance_none_positive),
         cmocka_unit_test(test_sphere_intersects_distance),
+        cmocka_unit_test(test_sphere_intersects_normal),
 
     };
 
