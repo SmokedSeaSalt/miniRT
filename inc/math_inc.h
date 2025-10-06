@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 15:53:33 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/06 10:21:07 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/06 13:44:19 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@ float	deg_to_rad(int angle_in_deg);
 
 float	decide_closest_distance(float distance1, float distance2);
 
-float	sphere_intersects(t_ray ray, t_sphere sphere);
-float	sphere_closest_intersect_distance(t_ray ray, t_sphere sphere);
-t_vec3	sphere_normal_at(t_ray ray, t_sphere sphere);
+int		is_hit_sphere(t_ray *ray, t_sphere *sphere);
+float	sphere_intersects(t_ray *ray, t_sphere *sphere);
+float	get_hit_dist_sphere(t_ray *ray, t_sphere *sphere);
+t_vec3	sphere_normal_at(t_ray *ray, t_sphere *sphere);
 
 #endif
