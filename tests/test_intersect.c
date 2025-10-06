@@ -25,7 +25,7 @@ static void test_sphere_intersects_hit(void **state) {
 	sphere.coords = vec3_new(0,0,0);
 	sphere.radius = 2;
 
-    float result = sphere_intersects(ray, sphere);
+    float result = sphere_intersects(&ray, &sphere);
 
     assert_true(result > 0.0f);
 }
@@ -40,7 +40,7 @@ static void test_sphere_intersects_signle_point_hit(void **state) {
 	sphere.coords = vec3_new(0,0,0);
 	sphere.radius = 2;
 
-    float result = sphere_intersects(ray, sphere);
+    float result = sphere_intersects(&ray, &sphere);
 
     assert_float_equal(result, 0,  1e-6);
 }
@@ -55,7 +55,7 @@ static void test_sphere_intersects_no_hit(void **state) {
 	sphere.coords = vec3_new(0,0,0);
 	sphere.radius = 1.5;
 
-    float result = sphere_intersects(ray, sphere);
+    float result = sphere_intersects(&ray, &sphere);
 
     assert_true(result < 0.0f);
 }
@@ -106,7 +106,7 @@ static void test_sphere_intersects_distance(void **state) {
 	sphere.coords = vec3_new(0,0,0);
 	sphere.radius = 2;
 
-    float result = sphere_closest_intersect_distance(ray, sphere);
+    float result = get_hit_dist_sphere(&ray, &sphere);
     assert_float_equal(result, 3.004506f, 1e-4);
 }
 
@@ -121,7 +121,7 @@ static void test_sphere_intersects_normal(void **state) {
 	sphere.coords = vec3_new(0,0,0);
 	sphere.radius = 2;
 
-    t_vec3 result = sphere_normal_at(ray, sphere);
+    t_vec3 result = sphere_normal_at(&ray, &sphere);
     assert_float_equal(result.x, 0.246373f, 1e-4);
     assert_float_equal(result.y, 0.781719f, 1e-4);
     assert_float_equal(result.z, 0.572912f, 1e-4);
