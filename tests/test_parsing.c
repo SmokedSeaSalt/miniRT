@@ -59,7 +59,6 @@ static void test_add_to_empty_list(void **state) {
 	assert_ptr_equal(list, obj);
 	assert_int_equal(list->type, PLANE);
 	assert_null(list->next);
-plane->
 	free_list(list);
 }
 
