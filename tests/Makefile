@@ -54,11 +54,11 @@ run_math: test_math
 #                                                                              #
 ################################################################################
 
-PARSING_FUNC = $(wildcard ../src/parsing/*.c) $(HELPER_FUNC) $(MATH_FUNC)
+PARSING_FUNC = $(wildcard ../src/parsing/*.c) $(wildcard ../src/rendering/*.c) $(HELPER_FUNC) $(MATH_FUNC)
 PARSING_INC = ../inc
 
 test_parsing: test_parsing.c $(PARSING_FUNC) $(PARSING_INC) libft
-	$(CC) $(CFLAGS) $< $(PARSING_FUNC) -I$(PARSING_INC) -lm $(LIBFT) $(LIBFT_INC) -o $@ $(ARGS_MOCKA)
+	$(CC) $(CFLAGS) $< $(PARSING_FUNC) -I$(PARSING_INC) -lm $(LIBFT) $(LIBFT_INC) $(LIBMLX) $(LIBMLX_INC) -o $@ $(ARGS_MOCKA)
 
 run_parsing: test_parsing
 	./test_parsing

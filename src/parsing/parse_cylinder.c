@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 12:00:29 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/02 10:10:07 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/06 11:59:49 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,9 @@ int	new_cylinder_struct(t_scene *scene, char **line)
 		return (free (cylinder), printf("Malloc fail\n"), 2);
 	object->type = CYLINDER;
 	object->data = cylinder;
+	object->is_hit = NULL;
+	object->get_hit_dist = NULL;
+	object->get_hit_data = NULL;
 	add_object_to_back(&(scene->objects), object);
 	return (0);
 }

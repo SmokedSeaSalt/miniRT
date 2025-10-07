@@ -38,8 +38,8 @@ SRC_DIR = src
 SRC = 	src/main.c \
 		src/helpers/ft_atof.c \
 		src/helpers/ft_split_set.c \
-		src/math/intersect_sphere.c \
 		src/math/intersect_helpers.c \
+		src/math/intersect_sphere.c \
 		src/math/vector3.c \
 		src/math/vector4.c \
 		src/math/trig.c \
@@ -54,8 +54,9 @@ SRC = 	src/main.c \
 		src/parsing/parsing_helpers.c \
 		src/parsing/parsing.c \
 		src/parsing/file_handling.c \
-		src/rendering/rendering.c \
 		src/rendering/ray.c \
+		src/rendering/rendering.c \
+		src/rendering/sphere.c
 
 
 # Header files

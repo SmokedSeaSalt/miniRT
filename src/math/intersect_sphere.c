@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 12:22:38 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/03 11:51:59 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/06 13:45:36 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,22 @@
 /// @return <  0 no intersection
 /// @return == 0 one intersection
 /// @return >  0 two intersections
-float	sphere_intersects(t_ray ray, t_sphere sphere)
+float	sphere_intersects(t_ray *ray, t_sphere *sphere)
 {
 	float	disc;
 	t_vec3	orig_center;
 	float	f_tmp1;
 	float	f_tmp2;
 
-	orig_center = (t_vec3)(ray.orig.v - sphere.coords.v);
+	orig_center = (t_vec3)(ray->orig.v - sphere->coords.v);
 	f_tmp1 = vec3_length(orig_center);
-	f_tmp2 = vec3_dot(ray.vec3, orig_center);
+	f_tmp2 = vec3_dot(ray->vec3, orig_center);
 	disc = (f_tmp2 * f_tmp2) - \
-((f_tmp1 * f_tmp1) - (sphere.radius * sphere.radius));
+((f_tmp1 * f_tmp1) - (sphere->radius * sphere->radius));
 	return (disc);
 }
 
-float	sphere_closest_intersect_distance(t_ray ray, t_sphere sphere)
+float	get_hit_dist_sphere(t_ray *ray, t_sphere *sphere)
 {
 	float	disc;
 	float	distance1;
@@ -47,8 +47,27 @@ float	sphere_closest_intersect_distance(t_ray ray, t_sphere sphere)
 	disc = sphere_intersects(ray, sphere);
 	if (disc < 0.0f)
 		return (disc);
-	f_tmp2 = vec3_dot(ray.vec3, (t_vec3)(ray.orig.v - sphere.coords.v));
+	f_tmp2 = vec3_dot(ray->vec3, (t_vec3)(ray->orig.v - sphere->coords.v));
 	distance1 = -f_tmp2 + sqrt(disc);
 	distance2 = -f_tmp2 - sqrt(disc);
 	return (decide_closest_distance(distance1, distance2));
+}
+
+t_vec3	sphere_normal_at(t_ray *ray, t_sphere *sphere)
+{
+	t_vec3	hit_point;
+	t_vec3	normal;
+
+	hit_point.v = ray->orig.v + (ray->vec3.v * ray->results.hit_dist);
+	normal.v = hit_point.v - sphere->coords.v;
+	normal = vec3_normalize(normal);
+	return (normal);
+}
+
+int	is_hit_sphere(t_ray *ray, t_sphere *sphere)
+{
+	if (sphere_intersects(ray, sphere) < 0.0f)
+		return (0);
+	else
+		return (1);
 }

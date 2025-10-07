@@ -6,57 +6,65 @@
 /*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 09:57:43 by egrisel           #+#    #+#             */
-/*   Updated: 2025/10/06 16:41:57 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/10/07 12:49:12 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <float.h>
+#include <math.h>
 #include "structs.h"
 #include "math_inc.h"
 #include "rendering.h"
 
-
-
-void	calculate_sphere_hit(t_ray *ray, t_sphere *sphere)
-{
-	float disc;
-
-	//todo sometime later: add the check for hit behind vector to set is_hit 0
-	disc = sphere_intersects(*ray, *sphere);
-	if (ray->results.is_hit == 0)
-	{
-		if (disc < 0)
-		ray->results.is_hit = 0;
-		else
-		ray->results.is_hit = 1;
-	}
-}
-
 void	loop_though_objects(t_ray *ray, t_object *object_list)
 {
-	
+	int		is_hit;
+	float	hit_dist;
+
+	ray->results.hit_dist = FLT_MAX;
 	while (object_list != NULL)
 	{
-		if (object_list->type == SPHERE)
-			calculate_sphere_hit(ray, object_list->data);
-		// if (object_list->type == PLANE)
-
-		// if (object_list->type == CYLINDER)
-
-
+		is_hit = object_list->is_hit(ray, object_list->data);
+		if (is_hit == 1)
+		{
+			hit_dist = object_list->get_hit_dist(ray, object_list->data);
+			if (hit_dist > 0.0f && hit_dist < ray->results.hit_dist)
+			{
+				ray->results.is_hit = 1;
+				ray->results.hit_dist = hit_dist;
+				ray->results.object = object_list;
+			}
+		}
 		object_list = object_list->next;
 	}
+	if (ray->results.is_hit == 1)
+		ray->results.object->get_hit_data(ray, ray->results.object->data);
 }
+
 
 void render_pixel(int x, int y, t_scene *scene)
 {
 	t_ray ray;
-	
+	int r;
+	int g;
+	int b;
+	int colour;
+
 	ray = get_ray(x, y ,scene->camera);
 	loop_though_objects(&ray, scene->objects);
 	if (ray.results.is_hit == 0)
 		mlx_put_pixel(scene->g_img, x, y, 0x000000ff);
 	else
-		mlx_put_pixel(scene->g_img, x, y, 0xff00ffff);
+	{
+		r = (int)(0.5f * (ray.results.normal_at.x + 1) * 0xff);
+		g = (int)(0.5f * (ray.results.normal_at.y + 1) * 0xff);
+		b = (int)(0.5f * (ray.results.normal_at.z + 1) * 0xff);
+		//r = (int)(fabs(ray.results.normal_at.x) * 0xff);
+		//g = (int)(fabs(ray.results.normal_at.y) * 0xff);
+		//b = (int)(fabs(ray.results.normal_at.z) * 0xff);
+		colour = (r << 3*8) + (g << 2*8) + (b << 1*8) + 0xff;
+		mlx_put_pixel(scene->g_img, x, y, colour);
+	}
 }
 
 
@@ -65,7 +73,7 @@ int	render_frame(t_scene *scene)
 {
 	int i_x;
 	int i_y;
-	
+
 	i_x = 0;
 	while (i_x < scene->camera->window_info.height)
 	{
@@ -80,6 +88,6 @@ int	render_frame(t_scene *scene)
 	}
 
 
-	
+
 	return (0);
 }
