@@ -59,7 +59,7 @@ static void test_add_to_empty_list(void **state) {
 	assert_ptr_equal(list, obj);
 	assert_int_equal(list->type, PLANE);
 	assert_null(list->next);
-
+plane->
 	free_list(list);
 }
 
@@ -246,9 +246,9 @@ static void test_parse_file_normal(void **state) {
 	assert_float_equal(plane->coords.x, 0, 1e-6);
 	assert_float_equal(plane->coords.y, 0, 1e-6);
 	assert_float_equal(plane->coords.z, 0, 1e-6);
-	assert_float_equal(plane->orientation.x, 0, 1e-6);
-	assert_float_equal(plane->orientation.y, 1.0, 1e-6);
-	assert_float_equal(plane->orientation.z, 0, 1e-6);
+	assert_float_equal(plane->normal.x, 0, 1e-6);
+	assert_float_equal(plane->normal.y, 1.0, 1e-6);
+	assert_float_equal(plane->normal.z, 0, 1e-6);
 	assert_int_equal(plane->color.r, 255);
 	assert_int_equal(plane->color.g, 0);
 	assert_int_equal(plane->color.b, 225);
@@ -329,9 +329,9 @@ static void test_parse_file_comments(void **state) {
 	assert_float_equal(plane->coords.x, 0, 1e-6);
 	assert_float_equal(plane->coords.y, 0, 1e-6);
 	assert_float_equal(plane->coords.z, 0, 1e-6);
-	assert_float_equal(plane->orientation.x, 0, 1e-6);
-	assert_float_equal(plane->orientation.y, 1.0, 1e-6);
-	assert_float_equal(plane->orientation.z, 0, 1e-6);
+	assert_float_equal(plane->normal.x, 0, 1e-6);
+	assert_float_equal(plane->normal.y, 1.0, 1e-6);
+	assert_float_equal(plane->normal.z, 0, 1e-6);
 	assert_int_equal(plane->color.r, 255);
 	assert_int_equal(plane->color.g, 0);
 	assert_int_equal(plane->color.b, 225);
