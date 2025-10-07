@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
+/*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 10:04:11 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/07 13:00:08 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/07 14:43:19 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "libft.h"
 #include <math.h>
 #include <stdio.h> //to use printf
+#include "math_inc.h"
 
 // change later for variable window size
 void	set_window_info_struct(t_window_info *window_info)
@@ -29,6 +30,16 @@ void	set_window_info_struct(t_window_info *window_info)
 void	set_camera_struct(t_camera *camera)
 {
 	camera->fov_scale = tanf(camera->fov_rad / 2);
+}
+
+void	handle_arrows(mlx_key_data_t keydata, t_scene *scene)
+{
+	if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_RELEASE)
+		scene->camera->orientation = vec3_rotate_around_z(
+				&scene->camera->orientation, Z_ROTATION_RAD);
+	if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_RELEASE)
+		scene->camera->orientation = vec3_rotate_around_z(
+				&scene->camera->orientation, -Z_ROTATION_RAD);
 }
 
 void	handle_inputs(mlx_key_data_t keydata, void *param)
@@ -46,6 +57,8 @@ void	handle_inputs(mlx_key_data_t keydata, void *param)
 		scene->render_info.render_miss = &display_black;
 	if (keydata.key == MLX_KEY_0 && keydata.action == MLX_RELEASE)
 		scene->render_info.render_miss = &display_white;
+	handle_arrows(keydata, scene);
+	
 }
 
 static void	hook(void *param)
