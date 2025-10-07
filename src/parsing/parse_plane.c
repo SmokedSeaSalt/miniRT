@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_plane.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
+/*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 11:59:50 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/06 12:00:02 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/07 16:54:10 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ static int	fill_plane_struct(t_plane *plane, char **line)
 	if (count_arguments(line) != 10)
 		return (printf("Plane: Incorrect amount of arguments\n"), 1);
 	plane->coords = fill_vec3(line[1], line[2], line[3]);
-	plane->orientation = fill_vec3(line[4], line[5], line[6]);
-	if (orientation_out_of_range(plane->orientation))
-		return (printf("Plane: Orientation out of range\n"), 1);
-	if (orientation_all_zero(plane->orientation))
-		return (printf("Plane: Orientation can not be all zero\n"), 1);
-	plane->orientation = vec3_normalize(plane->orientation);
+	plane->normal = fill_vec3(line[4], line[5], line[6]);
+	if (orientation_out_of_range(plane->normal))
+		return (printf("Plane: normal out of range\n"), 1);
+	if (orientation_all_zero(plane->normal))
+		return (printf("Plane: normal can not be all zero\n"), 1);
+	plane->normal = vec3_normalize(plane->normal);
 	plane->color = fill_color(line[7], line[8], line[9]);
 	if (color_out_of_range(plane->color))
 		return (printf("Plane: Color out of range\n"), 1);
@@ -50,9 +50,9 @@ int	new_plane_struct(t_scene *scene, char **line)
 		return (free (plane), printf("Malloc fail\n"), 2);
 	object->type = PLANE;
 	object->data = plane;
-	object->is_hit = NULL;
-	object->get_hit_dist = NULL;
-	object->get_hit_data = NULL;
+	object->is_hit = (int (*)(t_ray *, void *))is_hit_plane;
+	object->get_hit_dist = (float (*)(t_ray *, void *))git_hit_dist_plane;
+	object->get_hit_data = (void (*)(t_ray *, void *))get_hit_data_plane;
 	add_object_to_back(&(scene->objects), object);
 	return (0);
 }

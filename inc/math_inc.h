@@ -6,7 +6,7 @@
 /*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 15:53:33 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/07 14:06:20 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/10/07 16:58:46 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,10 @@ int		is_hit_sphere(t_ray *ray, t_sphere *sphere);
 float	sphere_intersects(t_ray *ray, t_sphere *sphere);
 float	get_hit_dist_sphere(t_ray *ray, t_sphere *sphere);
 t_vec3	sphere_normal_at(t_ray *ray, t_sphere *sphere);
+
+// plane
+int	is_hit_plane(t_ray *ray, t_plane *plane);
+float	git_hit_dist_plane(t_ray *ray, t_plane *plane);
+void	get_hit_data_plane(t_ray *ray, t_plane *plane);
 
 #endif

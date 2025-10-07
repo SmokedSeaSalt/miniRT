@@ -39,7 +39,9 @@ SRC = 	src/main.c \
 		src/helpers/ft_atof.c \
 		src/helpers/ft_split_set.c \
 		src/math/intersect_helpers.c \
+		src/math/intersect_plane.c \
 		src/math/intersect_sphere.c \
+		src/math/vector3_rotate.c \
 		src/math/vector3.c \
 		src/math/vector4.c \
 		src/math/trig.c \

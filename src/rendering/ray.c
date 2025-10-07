@@ -6,7 +6,7 @@
 /*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 12:23:02 by egrisel           #+#    #+#             */
-/*   Updated: 2025/10/06 16:58:14 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/10/07 17:01:23 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_vec3	get_pixel_coordinate_to_world_vec3(t_vec3 pixel_coordinates,
 
 	forward = camera->orientation;
 	world_up = vec3_new(0, 0, 1);
-	if (fabs(forward.y) > 0.99f)
+	if (fabs(forward.z) > 0.99f)
 		world_up = vec3_new(1, 0, 0);
 	right = vec3_normalize(vec3_cross(world_up, forward));
 	up = vec3_normalize(vec3_cross(forward, right));
