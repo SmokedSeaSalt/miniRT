@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:17 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/06 13:36:07 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/07 10:56:06 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ typedef struct s_color
 }	t_color;
 
 //scene objects
+typedef struct s_scene t_scene;
+typedef struct s_object t_object;
 
 typedef struct s_ambient
 {
@@ -104,10 +106,10 @@ typedef enum e_obj_type
 
 typedef struct s_pixel_result
 {
-	int				is_hit;
-	float			hit_dist;
-	struct s_object	*object;
-	t_vec3			normal_at;
+	int			is_hit;
+	float		hit_dist;
+	t_object	*object;
+	t_vec3		normal_at;
 }	t_pixel_result;
 
 typedef struct s_ray
@@ -117,8 +119,14 @@ typedef struct s_ray
 	t_pixel_result	results;
 }	t_ray;
 
+typedef struct s_render_info
+{
+	void	(*render_hit)(t_ray *ray, int x, int y, t_scene *scene);
+	void	(*render_miss)(t_ray *ray, int x, int y, t_scene *scene);
+} t_render_info;
+
 //list of obj
-typedef struct s_object
+struct s_object
 {
 	t_obj_type		type;
 	void			*data;
@@ -127,16 +135,17 @@ typedef struct s_object
 	int				(*is_hit)(t_ray *ray, void *object_data);
 	float			(*get_hit_dist)(t_ray *ray, void *object_data);
 	void			(*get_hit_data)(t_ray *ray, void *object_data);
-}	t_object;
+};
 
-typedef struct s_scene
+struct s_scene
 {
-	t_ambient	*ambient;
-	t_camera	*camera;
-	t_light		*light;
-	t_object	*objects;
-	mlx_t		*mlx;
-	mlx_image_t	*g_img;
-}	t_scene;
+	t_ambient		*ambient;
+	t_camera		*camera;
+	t_light			*light;
+	t_object		*objects;
+	mlx_t			*mlx;
+	mlx_image_t		*g_img;
+	t_render_info	render_info;
+};
 
 #endif

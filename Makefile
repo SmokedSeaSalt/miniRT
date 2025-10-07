@@ -51,6 +51,8 @@ SRC = 	src/main.c \
 		src/parsing/parsing_helpers.c \
 		src/parsing/parsing.c \
 		src/parsing/file_handling.c \
+		src/rendering/display_hit_modes.c \
+		src/rendering/display_miss_modes.c \
 		src/rendering/ray.c \
 		src/rendering/rendering.c \
 		src/rendering/sphere.c

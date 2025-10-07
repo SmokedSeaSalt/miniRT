@@ -59,6 +59,12 @@ int	init_mlx(t_scene *scene)
 	return (0);
 }
 
+void init_settings(t_scene *scene)
+{
+	scene->render_info.render_hit = &display_normal;
+	scene->render_info.render_miss = &display_black;
+}
+
 int	main(int argc, char *argv[])
 {
 	t_scene		scene;
@@ -70,6 +76,7 @@ int	main(int argc, char *argv[])
 		return (printf("Parsing error"), 1);
 	if (init_mlx(&scene))
 		return (1); // cleanup scene
+	init_settings(&scene);
 	mlx_loop(scene.mlx);
 	
 }
