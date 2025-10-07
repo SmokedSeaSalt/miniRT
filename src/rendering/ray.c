@@ -6,7 +6,7 @@
 /*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 12:23:02 by egrisel           #+#    #+#             */
-/*   Updated: 2025/10/02 12:18:30 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/10/06 16:58:14 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,39 +16,91 @@
 #include "math_inc.h"
 #include "math.h" // for tan
 
-/// delete
-#include <stdio.h>
 
-t_vec3	local_to_world(t_camera *camera, t_vec3 local_point_on_img_plane)
+// t_mat3	get_camera_to_world_rotation_mat(t_camera *camera)
+// {
+// 	t_vec3	world_up;
+// 	t_vec3	right;
+// 	t_vec3	up;
+// 	t_vec3	forward;
+
+// 	forward = camera->orientation;
+// 	world_up = vec3_new(0, 1, 0);
+// 	if (fabs(forward.y) > 0.99f) 
+// 		world_up = vec3_new(1, 0, 0);
+// 	right = vec3_normalize(vec3_cross(world_up, forward));
+// 	up = vec3_normalize(vec3_cross(forward, right));
+// 	return ((t_mat3){.m =	\
+// 		{{right.x, right.y, right.z},\
+// 		{up.x, up.y, up.z},\
+// 		{-forward.x, -forward.y, -forward.z},\
+// 		}
+// 	});
+// }
+
+// t_vec3	ray_from_camera_to_world(t_camera *camera, t_vec3 *pixel_vec)
+// {
+// 	t_mat3	rotation_mat;
+
+// 	rotation_mat = get_camera_to_world_rotation_mat(camera);
+// 	return (mat3_mul_vec3(&rotation_mat, pixel_vec));
+// }
+
+
+t_vec3	get_pixel_coordinate_to_world_vec3(t_vec3 pixel_coordinates,
+										t_camera *camera)
 {
-	(void)local_point_on_img_plane;
-	(void)camera;
-	return (local_point_on_img_plane);
+	t_vec3	world_up;
+	t_vec3	right;
+	t_vec3	up;
+	t_vec3	forward;
+	t_vec3	world_vec3;
+
+	forward = camera->orientation;
+	world_up = vec3_new(0, 0, 1);
+	if (fabs(forward.y) > 0.99f)
+		world_up = vec3_new(1, 0, 0);
+	right = vec3_normalize(vec3_cross(world_up, forward));
+	up = vec3_normalize(vec3_cross(forward, right));
+	world_vec3 =  forward;
+	world_vec3 = (t_vec3)(world_vec3.v + right.v * pixel_coordinates.x);
+	world_vec3 = (t_vec3)(world_vec3.v + up.v * pixel_coordinates.y);
+	world_vec3 = vec3_normalize(world_vec3);
+	return (world_vec3);
 }
 
-
-// (1,1). 10x10
-
-t_ray	get_ray(int x, int y, t_camera *camera)
+t_vec3	get_pixel_coordinates(int x, int y, t_camera *camera)
 {
-	t_vec3	local_point_on_img_plane;
-	t_vec3	world_point_on_img_plane;
-	t_ray	ray;
-	int		width;
-	int		height;
-	
-	ft_bzero(&ray, sizeof (t_ray));
+	int	width;
+	int	height;
+	t_vec3	local_vec3;
+
+
 	width = camera->window_info.width;
 	height = camera->window_info.height;
-	local_point_on_img_plane.x = (2 * (((float)x + 0.5) / (float)width) - 1)\
+	local_vec3.x = -1 * (2 * (((float)x + 0.5) / (float)width) - 1)\
 * camera->window_info.aspect_ratio * camera->fov_scale;
-	local_point_on_img_plane.y = (1 - 2 * (((float)y + 0.5)\
-/ (float)height)) * camera->fov_scale;
-	local_point_on_img_plane.z = -1.0f;
-	world_point_on_img_plane = local_to_world(camera, local_point_on_img_plane);
+	local_vec3.y = -1 * (2 * (((float)y + 0.5) / (float)height) - 1)\
+* camera->fov_scale;
+	local_vec3.z = -1.0f;
+	return (local_vec3);
+}
+
+// maybe change vec3 to vec2
+// change pixel coordinate name
+t_ray	get_ray(int x, int y, t_camera *camera)
+{
+	t_vec3	pixel_coordinates;
+	t_vec3	world_vec3;
+	t_ray	ray;
+
+	ft_bzero(&ray, sizeof (t_ray));
+	pixel_coordinates = get_pixel_coordinates(x, y, camera);
+	world_vec3 = get_pixel_coordinate_to_world_vec3(pixel_coordinates, camera);
+
 	
-	ray.vec3= local_point_on_img_plane;
-	ray.vec3 = vec3_normalize(ray.vec3);
+	// ray.vec3 = local_direction;
+	ray.vec3 = world_vec3;
 	ray.orig = camera->coords;
 	return (ray);
 }

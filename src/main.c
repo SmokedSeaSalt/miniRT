@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 10:04:11 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/07 12:46:55 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/07 13:00:08 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	hook(void *param)
 	set_window_info_struct(&(scene->camera->window_info));
 	set_camera_struct(scene->camera);
 	// draw_black(mlx_info);
-	render(scene);
+	render_frame(scene);
 }
 
 int	init_mlx(t_scene *scene)

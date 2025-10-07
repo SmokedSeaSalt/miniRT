@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 09:57:43 by egrisel           #+#    #+#             */
-/*   Updated: 2025/10/07 10:56:45 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/07 13:00:37 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,9 @@ void render_pixel(int x, int y, t_scene *scene)
 		scene->render_info.render_hit(&ray, x, y, scene);
 }
 
-int	render(t_scene *scene)
+
+
+int	render_frame(t_scene *scene)
 {
 	int i_x;
 	int i_y;
