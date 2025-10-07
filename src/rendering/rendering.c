@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 09:57:43 by egrisel           #+#    #+#             */
-/*   Updated: 2025/10/07 13:00:37 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/07 17:22:26 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,10 @@ int	render_frame(t_scene *scene)
 	int i_y;
 
 	i_x = 0;
-	while (i_x < scene->camera->window_info.height)
+	while (i_x < scene->camera->window_info.width)
 	{
 		i_y = 0;
-		while (i_y < scene->camera->window_info.width)
+		while (i_y < scene->camera->window_info.height)
 		{
 			render_pixel(i_x, i_y, scene);
 			i_y++;

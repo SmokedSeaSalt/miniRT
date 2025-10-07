@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 10:04:11 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/07 14:43:19 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/10/07 17:27:28 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	set_window_info_struct(t_window_info *window_info)
 {
 	window_info->width = WIDTH;
 	window_info->height = HEIGHT;
-	window_info->aspect_ratio = WIDTH / HEIGHT;
+	window_info->aspect_ratio = (float)WIDTH / (float)HEIGHT;
 }
 
 void	set_camera_struct(t_camera *camera)
@@ -58,7 +58,7 @@ void	handle_inputs(mlx_key_data_t keydata, void *param)
 	if (keydata.key == MLX_KEY_0 && keydata.action == MLX_RELEASE)
 		scene->render_info.render_miss = &display_white;
 	handle_arrows(keydata, scene);
-	
+
 }
 
 static void	hook(void *param)
