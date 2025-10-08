@@ -6,7 +6,7 @@
 /*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 15:53:33 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/08 14:38:05 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/10/08 16:47:09 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ t_vec3	vec3_rotate_around_z(t_vec3 *vec3, float z_rad);
 
 // vec3_math
 float	get_angle_between_vec3(t_vec3 *vec3_a, t_vec3 *vec3_b);
+t_vec3	get_vec3_betweem_two_points(t_vec3 *a, t_vec3 *b);
+int		is_vec3_angle_acute(t_vec3 *a, t_vec3 *b);
 
 // vec4
 t_vec4	vec4_new(float x, float y, float z, float w);

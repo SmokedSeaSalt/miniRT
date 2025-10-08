@@ -6,7 +6,7 @@
 /*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:42:05 by egrisel           #+#    #+#             */
-/*   Updated: 2025/10/08 14:37:30 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/10/08 17:08:23 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,11 @@
 int		render_frame(t_scene *scene);
 t_ray	get_ray(int x, int y, t_camera *camera);
 
+// sphere.c
 void	get_hit_data_sphere(t_ray *ray, t_sphere *sphere);
+
+// plane.c
+void	get_hit_data_plane(t_ray *ray, t_plane *plane);
 
 // display_hit_modes
 void	display_normal(t_ray *ray, int x, int y, t_scene *scene);

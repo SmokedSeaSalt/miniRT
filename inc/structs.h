@@ -6,7 +6,7 @@
 /*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:17 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/08 14:43:25 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/10/08 17:07:01 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,8 @@ typedef struct s_pixel_result
 {
 	int			is_hit;
 	float		hit_dist;
+	float		light_angle;
+	float		light_intensity;
 	t_object	*object;
 	t_vec3		hit_normal;
 }	t_pixel_result;
