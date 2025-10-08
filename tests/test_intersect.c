@@ -128,6 +128,23 @@ static void test_sphere_intersects_normal(void **state) {
 
 }
 
+static void test_sphere_intersects_normal_inside(void **state) {
+    (void) state;
+
+    t_ray ray;
+	ray.orig = vec3_new(0.44,2,2);
+	ray.vec3 = vec3_normalize(vec3_new(-3,-1.5,-1.9));
+    ray.results.hit_dist = 6.715488f;
+    t_sphere sphere;
+	sphere.coords = vec3_new(0,0,0);
+	sphere.radius = 5;
+
+    t_vec3 result = sphere_normal_at(&ray, &sphere);
+    assert_float_equal(result.x, 0.957248f, 1e-4);
+    assert_float_equal(result.y, 0.122624f, 1e-4);
+    assert_float_equal(result.z, 0.261990f, 1e-4);
+}
+
 
 int main(void) {
     const struct CMUnitTest intersects[] = {
@@ -139,6 +156,7 @@ int main(void) {
         cmocka_unit_test(test_nearest_hit_distance_none_positive),
         cmocka_unit_test(test_sphere_intersects_distance),
         cmocka_unit_test(test_sphere_intersects_normal),
+        cmocka_unit_test(test_sphere_intersects_normal_inside),
 
     };
 

@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 12:22:38 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/06 13:45:36 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/08 13:28:25 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,13 @@ t_vec3	sphere_normal_at(t_ray *ray, t_sphere *sphere)
 {
 	t_vec3	hit_point;
 	t_vec3	normal;
+	float	length_ray_to_cent;
 
 	hit_point.v = ray->orig.v + (ray->vec3.v * ray->results.hit_dist);
 	normal.v = hit_point.v - sphere->coords.v;
+	length_ray_to_cent = vec3_length((t_vec3)(ray->orig.v - sphere->coords.v));
+	if (length_ray_to_cent < sphere->radius)
+		normal.v = -normal.v;
 	normal = vec3_normalize(normal);
 	return (normal);
 }
