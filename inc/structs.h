@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:17 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/08 14:52:31 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/08 16:44:42 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,27 +50,31 @@ typedef union u_vec4
 }	t_vec4;
 
 /// @brief union for 4x4 matrix
-typedef union u_mat4 {
-	struct {
-		t_vec4 row_0;
-		t_vec4 row_1;
-		t_vec4 row_2;
-		t_vec4 row_3;
+typedef union u_mat4
+{
+	struct
+	{
+		t_vec4	row_0;
+		t_vec4	row_1;
+		t_vec4	row_2;
+		t_vec4	row_3;
 	};
-	float array[16];
-	float m[4][4];
-} t_mat4;
+	float	array[16];
+	float	m[4][4];
+}	t_mat4;
 
 /// @brief union for 3x3 matrix
-typedef union u_mat3 {
-	struct {
-		t_vec3 row_0;
-		t_vec3 row_1;
-		t_vec3 row_2;
+typedef union u_mat3
+{
+	struct
+	{
+		t_vec3	row_0;
+		t_vec3	row_1;
+		t_vec3	row_2;
 	};
-	float array[12];
-	float m[3][3];
-} t_mat3;
+	float	array[12];
+	float	m[3][3];
+}	t_mat3;
 
 typedef struct s_color
 {
@@ -80,8 +84,8 @@ typedef struct s_color
 }	t_color;
 
 //scene objects
-typedef struct s_scene t_scene;
-typedef struct s_object t_object;
+typedef struct s_scene	t_scene;
+typedef struct s_object	t_object;
 
 typedef struct s_ambient
 {
@@ -149,7 +153,7 @@ typedef struct s_pixel_result
 	int			is_hit;
 	float		hit_dist;
 	t_object	*object;
-	t_vec3		normal_at;
+	t_vec3		hit_normal;
 }	t_pixel_result;
 
 typedef struct s_ray

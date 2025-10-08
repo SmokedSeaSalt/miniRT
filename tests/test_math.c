@@ -185,22 +185,177 @@ static void test_cross_product_anti_commutative(void **state) {
     assert_float_equal(ba.z, -1.0, 1e-9);
 }
 
+/******************************************************************************/
+/*                                                                            */
+/* get_angle_between_vec3                                                     */
+/*                                                                            */
+/******************************************************************************/
+
+static void test_angle_parallel_vectors(void **state) {
+    (void) state;
+
+    t_vec3 a = {1.0f, 0.0f, 0.0f, 0.0f};
+    t_vec3 b = {2.0f, 0.0f, 0.0f, 0.0f}; // Same direction, different magnitude
+
+    float result = get_angle_between_vec3(&a, &b);
+
+    // Parallel vectors should have 0 radians angle
+    assert_float_equal(result, 0.0f, 1e-6);
+}
+
+static void test_angle_antiparallel_vectors(void **state) {
+    (void) state;
+
+    t_vec3 a = {1.0f, 0.0f, 0.0f, 0.0f};
+    t_vec3 b = {-1.0f, 0.0f, 0.0f, 0.0f}; // Opposite direction
+
+    float result = get_angle_between_vec3(&a, &b);
+
+    // Antiparallel vectors should have π radians angle
+    assert_float_equal(result, M_PI, 1e-6);
+}
+
+static void test_angle_orthogonal_vectors(void **state) {
+    (void) state;
+
+    t_vec3 a = {1.0f, 0.0f, 0.0f, 0.0f};
+    t_vec3 b = {0.0f, 1.0f, 0.0f, 0.0f}; // 90 degrees apart
+
+    float result = get_angle_between_vec3(&a, &b);
+
+    // Orthogonal vectors should have π/2 radians angle
+    assert_float_equal(result, M_PI / 2.0f, 1e-6);
+}
+
+static void test_angle_45_degrees(void **state) {
+    (void) state;
+
+    t_vec3 a = {1.0f, 0.0f, 0.0f, 0.0f};
+    t_vec3 b = {1.0f, 1.0f, 0.0f, 0.0f}; // 45 degrees apart
+
+    float result = get_angle_between_vec3(&a, &b);
+
+    // Should be π/4 radians (45 degrees)
+    assert_float_equal(result, M_PI / 4.0f, 1e-6);
+}
+
+static void test_angle_60_degrees(void **state) {
+    (void) state;
+
+    t_vec3 a = {1.0f, 0.0f, 0.0f, 0.0f};
+    t_vec3 b = {0.5f, sqrtf(3.0f)/2.0f, 0.0f, 0.0f}; // 60 degrees apart
+
+    float result = get_angle_between_vec3(&a, &b);
+
+    // Should be π/3 radians (60 degrees)
+    assert_float_equal(result, M_PI / 3.0f, 1e-5);
+}
+
+static void test_angle_3d_vectors(void **state) {
+    (void) state;
+
+    t_vec3 a = {1.0f, 1.0f, 1.0f, 0.0f};
+    t_vec3 b = {1.0f, 0.0f, 0.0f, 0.0f};
+
+    float result = get_angle_between_vec3(&a, &b);
+
+    // Calculate expected angle manually
+    // cos(θ) = (1*1 + 1*0 + 1*0) / (sqrt(3) * 1) = 1/sqrt(3)
+    float expected = acosf(1.0f / sqrtf(3.0f));
+    
+    assert_float_equal(result, expected, 1e-6);
+}
+
+static void test_angle_normalized_vectors(void **state) {
+    (void) state;
+
+    t_vec3 a = {1.0f, 0.0f, 0.0f, 0.0f}; // Already normalized
+    t_vec3 b = {0.0f, 1.0f, 0.0f, 0.0f}; // Already normalized
+
+    float result = get_angle_between_vec3(&a, &b);
+
+    assert_float_equal(result, M_PI / 2.0f, 1e-6);
+}
+
+static void test_angle_identical_vectors(void **state) {
+    (void) state;
+
+    t_vec3 a = {3.5f, -2.1f, 7.8f, 0.0f};
+    t_vec3 b = {3.5f, -2.1f, 7.8f, 0.0f}; // Identical
+
+    float result = get_angle_between_vec3(&a, &b);
+
+    // Identical vectors should have 0 angle
+    assert_float_equal(result, 0.0f, 1e-6);
+}
+
+static void test_angle_very_small_vectors(void **state) {
+    (void) state;
+
+    t_vec3 a = {1e-6f, 0.0f, 0.0f, 0.0f};
+    t_vec3 b = {0.0f, 1e-6f, 0.0f, 0.0f};
+
+    float result = get_angle_between_vec3(&a, &b);
+
+    // Should still be π/2 even for very small vectors
+    assert_float_equal(result, M_PI / 2.0f, 1e-5);
+}
+
+static void test_angle_large_vectors(void **state) {
+    (void) state;
+
+    t_vec3 a = {1000.0f, 0.0f, 0.0f, 0.0f};
+    t_vec3 b = {0.0f, 1000.0f, 0.0f, 0.0f};
+
+    float result = get_angle_between_vec3(&a, &b);
+
+    // Should still be π/2 even for large vectors
+    assert_float_equal(result, M_PI / 2.0f, 1e-6);
+}
+
+// Edge case: This would cause division by zero in your current implementation
+static void test_angle_zero_vector(void **state) {
+    (void) state;
+
+    t_vec3 a = {1.0f, 0.0f, 0.0f, 0.0f};
+    t_vec3 b = {0.0f, 0.0f, 0.0f, 0.0f}; // Zero vector
+
+    // This test exposes a potential bug - your function doesn't handle zero vectors
+    // The result will be undefined (NaN) due to division by zero
+    float result = get_angle_between_vec3(&a, &b);
+    
+    // Check if result is NaN (which indicates the bug)
+    assert_true(isnan(result));
+}
+
 
 int main(void) {
-    const struct CMUnitTest math[] = {
-        cmocka_unit_test(test_normalize_positive_vector),
-        cmocka_unit_test(test_normalize_negative_vector),
-        cmocka_unit_test(test_normalize_zero_vector),
-        cmocka_unit_test(test_normalize_mixed_vector),
-        cmocka_unit_test(test_dot_product_basic),
-        cmocka_unit_test(test_dot_product_with_zero_vector),
-        cmocka_unit_test(test_dot_product_orthogonal),
-        cmocka_unit_test(test_dot_product_parallel),
-        cmocka_unit_test(test_cross_product_basic),
-        cmocka_unit_test(test_cross_product_orthogonal),
-        cmocka_unit_test(test_cross_product_parallel),
-        cmocka_unit_test(test_cross_product_anti_commutative),
+	const struct CMUnitTest math[] = {
+		cmocka_unit_test(test_normalize_positive_vector),
+		cmocka_unit_test(test_normalize_negative_vector),
+		cmocka_unit_test(test_normalize_zero_vector),
+		cmocka_unit_test(test_normalize_mixed_vector),
+		cmocka_unit_test(test_dot_product_basic),
+		cmocka_unit_test(test_dot_product_with_zero_vector),
+		cmocka_unit_test(test_dot_product_orthogonal),
+		cmocka_unit_test(test_dot_product_parallel),
+		cmocka_unit_test(test_cross_product_basic),
+		cmocka_unit_test(test_cross_product_orthogonal),
+		cmocka_unit_test(test_cross_product_parallel),
+		cmocka_unit_test(test_cross_product_anti_commutative),
+		cmocka_unit_test(test_angle_parallel_vectors),
+		cmocka_unit_test(test_angle_antiparallel_vectors),
+		cmocka_unit_test(test_angle_orthogonal_vectors),
+		cmocka_unit_test(test_angle_45_degrees),
+		cmocka_unit_test(test_angle_60_degrees),
+		cmocka_unit_test(test_angle_3d_vectors),
+		cmocka_unit_test(test_angle_normalized_vectors),
+		cmocka_unit_test(test_angle_identical_vectors),
+		cmocka_unit_test(test_angle_very_small_vectors),
+		cmocka_unit_test(test_angle_large_vectors),
+		cmocka_unit_test(test_angle_zero_vector),
     };
 
     return cmocka_run_group_tests(math, NULL, NULL);
 }
+

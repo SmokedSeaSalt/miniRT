@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_helpers.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
+/*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 11:49:59 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/03 11:55:48 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/08 14:22:20 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 /// @return	if all hits are negative distance return
 float	decide_closest_distance(float distance1, float distance2)
 {
-	if (distance1 > 0.0f &&  distance2 > 0.0f)
+	if (distance1 > 0.0f && distance2 > 0.0f)
 		return (fmin(distance1, distance2));
 	else if (distance1 > 0.0f && distance2 < 0.0f)
 		return (distance1);
