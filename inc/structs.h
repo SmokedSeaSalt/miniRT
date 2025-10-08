@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:17 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/09 10:22:36 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/09 12:26:04 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,8 @@ typedef struct s_render_info
 {
 	void	(*render_hit)(t_ray *ray, int x, int y, t_scene *scene);
 	void	(*render_miss)(t_ray *ray, int x, int y, t_scene *scene);
-}	t_render_info;
+	int		fpscounter;
+} t_render_info;
 
 //list of obj
 struct s_object
