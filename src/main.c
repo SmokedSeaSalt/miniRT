@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 10:04:11 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/07 17:27:28 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/08 11:38:16 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "libft.h"
 #include <math.h>
 #include <stdio.h> //to use printf
+#include <stdlib.h> //to use free
 #include "math_inc.h"
 
 // change later for variable window size
@@ -61,6 +62,26 @@ void	handle_inputs(mlx_key_data_t keydata, void *param)
 
 }
 
+void update_framename(t_scene *scene)
+{
+	static int i = 0;
+	char *cycle = "🌕🌔🌓🌒🌑🌘🌗🌖";
+	char *default_title = "miniRT";
+	char *single_moon;
+	char *title_string;
+
+	single_moon = ft_substr(cycle, i, 4);
+	if (single_moon == NULL)
+		return ;
+	i = (i + 4) % 32;
+	title_string = ft_strjoin(default_title, single_moon);
+	free(single_moon);
+	if (title_string == NULL)
+		return ;
+	mlx_set_window_title(scene->mlx, title_string);
+	free(title_string);
+}
+
 static void	hook(void *param)
 {
 	t_scene	*scene;
@@ -71,6 +92,7 @@ static void	hook(void *param)
 	set_camera_struct(scene->camera);
 	// draw_black(mlx_info);
 	render_frame(scene);
+	update_framename(scene);
 }
 
 int	init_mlx(t_scene *scene)
