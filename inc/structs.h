@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:17 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/07 15:08:27 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/10/08 14:52:31 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,7 @@ typedef struct s_render_info
 {
 	void	(*render_hit)(t_ray *ray, int x, int y, t_scene *scene);
 	void	(*render_miss)(t_ray *ray, int x, int y, t_scene *scene);
+	int		fpscounter;
 } t_render_info;
 
 //list of obj

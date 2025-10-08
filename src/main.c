@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 10:04:11 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/08 11:38:16 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/08 16:26:11 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void	handle_inputs(mlx_key_data_t keydata, void *param)
 		scene->render_info.render_miss = &display_black;
 	if (keydata.key == MLX_KEY_0 && keydata.action == MLX_RELEASE)
 		scene->render_info.render_miss = &display_white;
+	if (keydata.key == MLX_KEY_F && keydata.action == MLX_RELEASE)
+		scene->render_info.fpscounter = !scene->render_info.fpscounter;
 	handle_arrows(keydata, scene);
 
 }
@@ -82,6 +84,26 @@ void update_framename(t_scene *scene)
 	free(title_string);
 }
 
+void	update_fpscounter(t_scene *scene)
+{
+	static	mlx_image_t *fps_image = NULL;
+	char	*fps_str;
+
+	if (fps_image)
+	{
+		mlx_delete_image(scene->mlx, fps_image);
+		fps_image = NULL;
+	}
+	if (scene->render_info.fpscounter == 1)
+	{
+		fps_str = ft_itoa((int)(1 / scene->mlx->delta_time));
+		if (fps_str == NULL)
+			return ;
+		fps_image = mlx_put_string(scene->mlx, fps_str, 25, 25);
+		free(fps_str);
+	}
+}
+
 static void	hook(void *param)
 {
 	t_scene	*scene;
@@ -93,6 +115,7 @@ static void	hook(void *param)
 	// draw_black(mlx_info);
 	render_frame(scene);
 	update_framename(scene);
+	update_fpscounter(scene);
 }
 
 int	init_mlx(t_scene *scene)
@@ -117,6 +140,7 @@ void init_settings(t_scene *scene)
 {
 	scene->render_info.render_hit = &display_normal;
 	scene->render_info.render_miss = &display_black;
+	scene->render_info.fpscounter = 1;
 }
 
 int	main(int argc, char *argv[])
