@@ -6,7 +6,7 @@
 /*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 14:58:50 by egrisel           #+#    #+#             */
-/*   Updated: 2025/10/07 16:58:38 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/10/08 13:58:10 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,22 @@ float	git_hit_dist_plane(t_ray *ray, t_plane *plane)
 	d = numerator / denomenator;
 	return (d);
 }
+/// @brief positive dot means angle < 90, negative dot means angle > 90. zero
+/// dot means angle == 90
+/// @param ray 
+/// @param plane 
+/// @return 
+int	should_invert_plane_normal(t_ray *ray, t_plane *plane)
+{
+	if (vec3_dot(ray->vec3, plane->normal) < 0.0f)
+		return (0);
+	return (1);
+}
 
 void get_hit_data_plane(t_ray *ray, t_plane *plane)
 {
-	ray->results.normal_at = plane->normal;
+	ray->results.hit_normal = plane->normal;
 
+	if (should_invert_plane_normal(ray, plane) == 1)
+		ray->results.hit_normal.v = -ray->results.hit_normal.v;
 }

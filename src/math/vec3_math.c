@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sphere.c                                           :+:      :+:    :+:   */
+/*   vec3_math.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/06 13:42:02 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/08 13:13:07 by egrisel          ###   ########.fr       */
+/*   Created: 2025/10/08 12:21:50 by egrisel           #+#    #+#             */
+/*   Updated: 2025/10/08 12:52:13 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "structs.h"
 #include "math_inc.h"
+#include <math.h>
 
-void get_hit_data_sphere(t_ray *ray, t_sphere *sphere)
+// cos(θ) = (dot(a,b)) / (mag(a) * mag(b))
+float	get_angle_between_vec3(t_vec3 *vec3_a, t_vec3 *vec3_b)
 {
-	ray->results.hit_normal = sphere_normal_at(ray, sphere);
-
+	float	numerator;
+	float	denominator;
+	
+	numerator = vec3_dot(*vec3_a, *vec3_b);
+	denominator = vec3_length(*vec3_a) * vec3_length(*vec3_b);
+	return (acosf(numerator / denominator));
 }

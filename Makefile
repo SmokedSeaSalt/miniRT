@@ -45,6 +45,7 @@ SRC = 	src/main.c \
 		src/math/vector3.c \
 		src/math/vector4.c \
 		src/math/trig.c \
+		src/math/vec3_math.c \
 		src/math/mat3.c \
 		src/math/mat4.c \
 		src/parsing/parse_ambient.c \
