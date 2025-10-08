@@ -6,7 +6,7 @@
 /*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 12:21:50 by egrisel           #+#    #+#             */
-/*   Updated: 2025/10/08 12:52:13 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/10/08 14:26:38 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ float	get_angle_between_vec3(t_vec3 *vec3_a, t_vec3 *vec3_b)
 {
 	float	numerator;
 	float	denominator;
-	
+
 	numerator = vec3_dot(*vec3_a, *vec3_b);
 	denominator = vec3_length(*vec3_a) * vec3_length(*vec3_b);
 	return (acosf(numerator / denominator));

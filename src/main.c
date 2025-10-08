@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
+/*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 10:04:11 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/08 11:38:16 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/08 14:31:12 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	handle_inputs(mlx_key_data_t keydata, void *param)
 {
 	t_scene	*scene;
 
-	scene = (t_scene*)param;
+	scene = (t_scene *)param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_RELEASE)
 		mlx_close_window(scene->mlx);
 	if (keydata.key == MLX_KEY_1 && keydata.action == MLX_RELEASE)
@@ -59,16 +59,15 @@ void	handle_inputs(mlx_key_data_t keydata, void *param)
 	if (keydata.key == MLX_KEY_0 && keydata.action == MLX_RELEASE)
 		scene->render_info.render_miss = &display_white;
 	handle_arrows(keydata, scene);
-
 }
 
-void update_framename(t_scene *scene)
+void	update_framename(t_scene *scene)
 {
-	static int i = 0;
-	char *cycle = "🌕🌔🌓🌒🌑🌘🌗🌖";
-	char *default_title = "miniRT";
-	char *single_moon;
-	char *title_string;
+	static int	i = 0;
+	const char	*cycle = "🌕🌔🌓🌒🌑🌘🌗🌖";
+	const char	*default_title = "miniRT";
+	char		*single_moon;
+	char		*title_string;
 
 	single_moon = ft_substr(cycle, i, 4);
 	if (single_moon == NULL)
@@ -86,7 +85,7 @@ static void	hook(void *param)
 {
 	t_scene	*scene;
 
-	scene = (t_scene*)param;
+	scene = (t_scene *)param;
 	//handle_inputs(scene);
 	set_window_info_struct(&(scene->camera->window_info));
 	set_camera_struct(scene->camera);
@@ -109,11 +108,10 @@ int	init_mlx(t_scene *scene)
 	mlx_image_to_window(scene->mlx, scene->g_img, 0, 0); // maybe error handle?
 	mlx_key_hook(scene->mlx, &handle_inputs, scene);
 	mlx_loop_hook(scene->mlx, &hook, scene);
-
 	return (0);
 }
 
-void init_settings(t_scene *scene)
+void	init_settings(t_scene *scene)
 {
 	scene->render_info.render_hit = &display_normal;
 	scene->render_info.render_miss = &display_black;
@@ -132,5 +130,4 @@ int	main(int argc, char *argv[])
 		return (1); // cleanup scene
 	init_settings(&scene);
 	mlx_loop(scene.mlx);
-
 }

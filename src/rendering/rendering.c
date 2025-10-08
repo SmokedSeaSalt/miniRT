@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
+/*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 09:57:43 by egrisel           #+#    #+#             */
-/*   Updated: 2025/10/07 17:22:26 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/08 14:34:50 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <float.h>
-#include "structs.h"
 #include "math_inc.h"
 #include "rendering.h"
+#include "structs.h"
+#include <float.h>
 
 void	loop_though_objects(t_ray *ray, t_object *object_list)
 {
@@ -40,12 +40,11 @@ void	loop_though_objects(t_ray *ray, t_object *object_list)
 		ray->results.object->get_hit_data(ray, ray->results.object->data);
 }
 
-
-void render_pixel(int x, int y, t_scene *scene)
+void	render_pixel(int x, int y, t_scene *scene)
 {
-	t_ray ray;
+	t_ray	ray;
 
-	ray = get_ray(x, y ,scene->camera);
+	ray = get_ray(x, y, scene->camera);
 	loop_though_objects(&ray, scene->objects);
 	if (ray.results.is_hit == 0)
 		scene->render_info.render_miss(&ray, x, y, scene);
@@ -53,12 +52,10 @@ void render_pixel(int x, int y, t_scene *scene)
 		scene->render_info.render_hit(&ray, x, y, scene);
 }
 
-
-
 int	render_frame(t_scene *scene)
 {
-	int i_x;
-	int i_y;
+	int	i_x;
+	int	i_y;
 
 	i_x = 0;
 	while (i_x < scene->camera->window_info.width)
@@ -69,11 +66,7 @@ int	render_frame(t_scene *scene)
 			render_pixel(i_x, i_y, scene);
 			i_y++;
 		}
-
 		i_x++;
 	}
-
-
-
 	return (0);
 }

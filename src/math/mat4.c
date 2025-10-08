@@ -6,7 +6,7 @@
 /*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 10:33:40 by egrisel           #+#    #+#             */
-/*   Updated: 2025/10/06 12:48:31 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/10/08 14:26:04 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ inline t_mat4	mat4_new(t_vec4 *row_0, t_vec4 *row_1,
 inline t_vec4	mat4_mul_vec4(t_mat4 *mat4, t_vec4 *input_vec4)
 {
 	t_vec4	vec4;
-	
+
 	vec4.x = vec4_sum_components((t_vec4)(mat4->row_0.v * input_vec4->v));
 	vec4.y = vec4_sum_components((t_vec4)(mat4->row_1.v * input_vec4->v));
 	vec4.z = vec4_sum_components((t_vec4)(mat4->row_2.v * input_vec4->v));
