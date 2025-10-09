@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   math_inc.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 15:53:33 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/08 16:47:09 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/10/09 10:19:23 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,5 @@ t_vec3	sphere_normal_at(t_ray *ray, t_sphere *sphere);
 // plane
 int		is_hit_plane(t_ray *ray, t_plane *plane);
 float	git_hit_dist_plane(t_ray *ray, t_plane *plane);
-void	get_hit_data_plane(t_ray *ray, t_plane *plane);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:17 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/08 17:07:01 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/10/09 10:22:36 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,7 +180,7 @@ struct s_object
 // Function pointers for object-specific operations
 	int				(*is_hit)(t_ray *ray, void *object_data);
 	float			(*get_hit_dist)(t_ray *ray, void *object_data);
-	void			(*get_hit_data)(t_ray *ray, void *object_data);
+	void			(*get_hit_data)(t_ray *ray, void *object_data, t_scene *scene);
 };
 
 struct s_scene

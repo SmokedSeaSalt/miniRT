@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 09:57:43 by egrisel           #+#    #+#             */
-/*   Updated: 2025/10/09 09:46:41 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/10/09 10:27:14 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 
 void	loop_though_objects(t_scene *scene, t_ray *ray, t_object *object_list)
 {
-	int		is_hit;
-	float	hit_dist;
+	int						is_hit;
+	float					hit_dist;
 
 	ray->results.hit_dist = FLT_MAX;
 	while (object_list != NULL)
@@ -32,15 +32,12 @@ void	loop_though_objects(t_scene *scene, t_ray *ray, t_object *object_list)
 				ray->results.is_hit = 1;
 				ray->results.hit_dist = hit_dist;
 				ray->results.object = object_list;
-				// added
-				
-				//
 			}
 		}
 		object_list = object_list->next;
 	}
 	if (ray->results.is_hit == 1)
-		ray->results.object->get_hit_data(ray, ray->results.object->data);
+		ray->results.object->get_hit_data(ray, ray->results.object->data, scene);
 }
 
 void	render_pixel(int x, int y, t_scene *scene)
