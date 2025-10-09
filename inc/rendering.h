@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:42:05 by egrisel           #+#    #+#             */
-/*   Updated: 2025/10/09 12:40:29 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/09 13:16:12 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	get_hit_data_plane(t_ray *ray, t_plane *plane, t_scene *scene);
 void	display_normal(t_ray *ray, int x, int y, t_scene *scene);
 void	display_xyz(t_ray *ray, int x, int y, t_scene *scene);
 void	display_default(t_ray *ray, int x, int y, t_scene *scene);
+void	display_light_intensity(t_ray *ray, int x, int y, t_scene *scene);
+void	display_distance(t_ray *ray, int x, int y, t_scene *scene);
 
 // display_miss_modes
 void	display_black(t_ray *ray, int x, int y, t_scene *scene);

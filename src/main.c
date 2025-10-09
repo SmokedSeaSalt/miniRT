@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 10:04:11 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/09 12:26:10 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/09 13:16:46 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,15 @@ void	handle_inputs(mlx_key_data_t keydata, void *param)
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_RELEASE)
 		mlx_close_window(scene->mlx);
 	if (keydata.key == MLX_KEY_1 && keydata.action == MLX_RELEASE)
-		scene->render_info.render_hit = &display_normal;
-	if (keydata.key == MLX_KEY_2 && keydata.action == MLX_RELEASE)
-		scene->render_info.render_hit = &display_xyz;
-	if (keydata.key == MLX_KEY_3 && keydata.action == MLX_RELEASE)
 		scene->render_info.render_hit = &display_default;
+	if (keydata.key == MLX_KEY_2 && keydata.action == MLX_RELEASE)
+		scene->render_info.render_hit = &display_normal;
+	if (keydata.key == MLX_KEY_3 && keydata.action == MLX_RELEASE)
+		scene->render_info.render_hit = &display_xyz;
+	if (keydata.key == MLX_KEY_4 && keydata.action == MLX_RELEASE)
+		scene->render_info.render_hit = &display_light_intensity;
+	if (keydata.key == MLX_KEY_5 && keydata.action == MLX_RELEASE)
+		scene->render_info.render_hit = &display_distance;
 	if (keydata.key == MLX_KEY_9 && keydata.action == MLX_RELEASE)
 		scene->render_info.render_miss = &display_black;
 	if (keydata.key == MLX_KEY_0 && keydata.action == MLX_RELEASE)
@@ -138,7 +142,7 @@ int	init_mlx(t_scene *scene)
 
 void	init_settings(t_scene *scene)
 {
-	scene->render_info.render_hit = &display_normal;
+	scene->render_info.render_hit = &display_default;
 	scene->render_info.render_miss = &display_black;
 	scene->render_info.fpscounter = 1;
 }
