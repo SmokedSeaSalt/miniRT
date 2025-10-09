@@ -6,7 +6,7 @@
 /*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 12:21:50 by egrisel           #+#    #+#             */
-/*   Updated: 2025/10/08 16:47:45 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/10/09 09:24:41 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ float	get_angle_between_vec3(t_vec3 *vec3_a, t_vec3 *vec3_b)
 	float	denominator;
 
 	numerator = vec3_dot(*vec3_a, *vec3_b);
+	// todo can delete this as already normalized
 	denominator = vec3_length(*vec3_a) * vec3_length(*vec3_b);
 	return (acosf(numerator / denominator));
 }
