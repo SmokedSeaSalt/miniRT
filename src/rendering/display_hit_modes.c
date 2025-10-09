@@ -6,7 +6,7 @@
 /*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 10:30:44 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/08 14:36:54 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/10/09 09:43:55 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,15 @@ void	display_xyz(t_ray *ray, int x, int y, t_scene *scene)
 	b = (int)(fabs(ray->results.hit_normal.z) * 0xff);
 	colour = (r << 3 * 8) + (g << 2 * 8) + (b << 1 * 8) + 0xff;
 	mlx_put_pixel(scene->g_img, x, y, colour);
+}
+
+void	display_default(t_ray *ray, int x, int y, t_scene *scene)
+{
+	int	r;
+	int	colour;
+
+	r = (int)(ray->results.light_intensity * 0xff);
+	colour = (r << 3 * 8) + (r << 2 * 8) + (r << 1 * 8) + 0xff;
+	mlx_put_pixel(scene->g_img, x, y, colour);
+
 }

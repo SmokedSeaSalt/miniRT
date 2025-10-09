@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:17 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/09 10:06:27 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/09 12:48:52 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,8 @@ typedef struct s_pixel_result
 {
 	int			is_hit;
 	float		hit_dist;
+	float		light_angle;
+	float		light_intensity;
 	t_object	*object;
 	t_vec3		hit_normal;
 	t_color		obj_color;
@@ -180,7 +182,7 @@ struct s_object
 // Function pointers for object-specific operations
 	int				(*is_hit)(t_ray *ray, void *object_data);
 	float			(*get_hit_dist)(t_ray *ray, void *object_data);
-	void			(*get_hit_data)(t_ray *ray, void *object_data);
+	void			(*get_hit_data)(t_ray *ray, void *object_data, t_scene *scene);
 };
 
 struct s_scene

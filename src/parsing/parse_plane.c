@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_plane.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 11:59:50 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/07 16:54:10 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/10/09 10:21:43 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "libft.h"
 #include "structs.h"
 #include "math_inc.h"
+#include "rendering.h"
 
 static int	fill_plane_struct(t_plane *plane, char **line)
 {
@@ -52,7 +53,7 @@ int	new_plane_struct(t_scene *scene, char **line)
 	object->data = plane;
 	object->is_hit = (int (*)(t_ray *, void *))is_hit_plane;
 	object->get_hit_dist = (float (*)(t_ray *, void *))git_hit_dist_plane;
-	object->get_hit_data = (void (*)(t_ray *, void *))get_hit_data_plane;
+	object->get_hit_data = (void (*)(t_ray *, void *, t_scene *))get_hit_data_plane;
 	add_object_to_back(&(scene->objects), object);
 	return (0);
 }
