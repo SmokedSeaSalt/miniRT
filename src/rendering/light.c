@@ -6,14 +6,13 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 16:27:34 by egrisel           #+#    #+#             */
-/*   Updated: 2025/10/09 12:40:55 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/09 16:12:56 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "structs.h"
 #include "math_inc.h"
 #include "consts.h"
-#include "stdio.h"
 
 // float	angle_between_ray_and_light(t_ray *ray, t_light *light)
 // {
@@ -62,7 +61,7 @@ is_light_obstructed(scene->objects, &light_ray, light_dist, ray->results.object)
 	{
 		// todo optimization: maybe no need to calculate exact theta and
 		// instead can deal with cos(theta) for an estimation for intensity
-		ray->results.light_angle = get_angle_between_vec3(&ray->results.hit_normal, &light_ray.vec3);
-		ray->results.light_intensity = 1.0f - (ray->results.light_angle / PI);
+		//ray->results.light_angle = get_angle_between_vec3(&ray->results.hit_normal, &light_ray.vec3);
+		ray->results.light_intensity = vec3_dot(light_ray.vec3, ray->results.hit_normal);
 	}
 }
