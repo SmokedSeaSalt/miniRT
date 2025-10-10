@@ -139,8 +139,14 @@ analyze clean_analisys
 test:
 
 run_test:
-	@make run_test -C tests
-	@make clean -C tests
+	@printf "$(COLOUR_BLUE)Compiling and running tests\n$(COLOUR_END)"
+	@make --no-print-directory run_test -C tests
+	@printf "$(COLOUR_BLUE)Cleaning up tests\n$(COLOUR_END)"
+	@make --no-print-directory clean -C tests
+
+clean_test:
+	@printf "$(COLOUR_BLUE)Cleaning up tests\n$(COLOUR_END)"
+	@make --no-print-directory clean -C tests
 
 setup_test:
 	./tests/setup_tests.sh
@@ -158,7 +164,6 @@ analyze:
 	done
 	@printf "$(COLOUR_BLUE)If bugs were found, reports can be found in /reports\n$(COLOUR_END)"
 #	scan-build-14 -o ./reports make all clean
-
 
 clean_analisys:
 	rm -rf reports
