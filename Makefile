@@ -6,7 +6,7 @@
 
 NAME = miniRT
 CC = cc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -MMD
 CCDEBUG = -g
 
 ################################################################################
@@ -70,7 +70,7 @@ SRC = 	src/main.c \
 INC = -I inc
 
 OBJ = $(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/%.o,$(SRC))
-
+DEP = ${OBJ:.o=.d}
 
 ################################################################################
 #                                                                              #
@@ -80,14 +80,14 @@ OBJ = $(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/%.o,$(SRC))
 
 # Basics
 all: mlx42 libft $(NAME)
-
+	@printf "$(COLOUR_GREEN)Compilation done👍\n$(COLOUR_END)"
 clean:
 	rm -rf $(LIBMLX_PATH)/build
-	@make clean -C $(LIBFT_PATH)
+	@make --no-print-directory clean -C $(LIBFT_PATH)
 	rm -rf $(BUILD_DIR)
 
 fclean: clean
-	@make fclean -C $(LIBFT_PATH)
+	@make --no-print-directory fclean -C $(LIBFT_PATH)
 	rm -f $(NAME)
 
 re: fclean all
@@ -99,21 +99,25 @@ $(NAME): $(OBJ)
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c | $(BUILD_DIR)
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) $(INC) $(LIBFT_INC) $(LIBMLX_INC) -c $< -o $@
+	@printf "$(COLOUR_BLUE)Compiling $@ \n$(COLOUR_END)"
+	@$(CC) $(CFLAGS) $(INC) $(LIBFT_INC) $(LIBMLX_INC) -c $< -o $@ -MF $(basename $@).d
+
+-include $(DEP)
 
 $(BUILD_DIR):
 	mkdir -p $@
 
 # Libraries
 mlx42: | $(LIBMLX_PATH)
-	@cmake $(LIBMLX_PATH) -B $(LIBMLX_PATH)/build && make -C $(LIBMLX_PATH)/build -j4
+	@cmake $(LIBMLX_PATH) -B $(LIBMLX_PATH)/build && make --no-print-directory -C $(LIBMLX_PATH)/build -j4
 
 $(LIBMLX_PATH):
 	git -c advice.detachedHead=false clone \
 		--branch v2.4.1 https://github.com/codam-coding-college/MLX42.git $(LIBMLX_PATH)
 
 libft:
-	@make -C $(LIBFT_PATH)
+	@printf "$(COLOUR_BLUE)Compiling libft\n$(COLOUR_END)"
+	@make --no-print-directory -C $(LIBFT_PATH)
 
 # Extra's
 debug: fclean
