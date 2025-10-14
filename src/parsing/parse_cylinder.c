@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 12:00:29 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/06 11:59:49 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/14 17:16:48 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,67 @@
 #include "libft.h"
 #include "structs.h"
 #include "math_inc.h"
+
+static int	fill_top_endcap_struct(t_scene *scene, t_cylinder *cylinder)
+{
+	t_endcap	*endcap_top;
+	t_object	*object;
+
+	endcap_top = ft_calloc(1, sizeof(t_endcap));
+	if (endcap_top == NULL)
+		return (printf("Malloc fail\n"), 2);
+	endcap_top->color = cylinder->color;
+	endcap_top->diameter = cylinder->diameter;
+	endcap_top->radius = cylinder->radius;
+	endcap_top->orientation = cylinder->orientation;
+	endcap_top->coords.v = (cylinder->coords.v + \
+(cylinder->orientation.v * cylinder->height * 0.5));
+	object = ft_calloc(1, sizeof(t_object));
+	if (object == NULL)
+		return (free (endcap_top), printf("Malloc fail\n"), 2);
+	object->type = ENDCAP;
+	object->data = endcap_top;
+	object->is_hit = NULL;
+	object->get_hit_dist = NULL;
+	object->get_hit_data = NULL;
+	add_object_to_back(&(scene->objects), object);
+	return (0);
+}
+
+static int	fill_bottom_endcap_struct(t_scene *scene, t_cylinder *cylinder)
+{
+	t_endcap	*endcap_bottom;
+	t_object	*object;
+
+	endcap_bottom = ft_calloc(1, sizeof(t_endcap));
+	if (endcap_bottom == NULL)
+		return (printf("Malloc fail\n"), 2);
+	endcap_bottom->color = cylinder->color;
+	endcap_bottom->diameter = cylinder->diameter;
+	endcap_bottom->radius = cylinder->radius;
+	endcap_bottom->orientation.v = -cylinder->orientation.v;
+	endcap_bottom->coords.v = (cylinder->coords.v + \
+(cylinder->orientation.v * cylinder->height * -0.5));
+	object = ft_calloc(1, sizeof(t_object));
+	if (object == NULL)
+		return (free (endcap_bottom), printf("Malloc fail\n"), 2);
+	object->type = ENDCAP;
+	object->data = endcap_bottom;
+	object->is_hit = NULL;
+	object->get_hit_dist = NULL;
+	object->get_hit_data = NULL;
+	add_object_to_back(&(scene->objects), object);
+	return (0);
+}
+
+static int	new_endcap_struct(t_scene *scene, t_cylinder *cylinder)
+{
+	if (fill_top_endcap_struct(scene, cylinder) != 0)
+		return (1);
+	if (fill_bottom_endcap_struct(scene, cylinder) != 0)
+		return (1);
+	return (0);
+}
 
 static int	fill_cylinder_struct(t_cylinder *cylinder, char **line)
 {
@@ -61,5 +122,7 @@ int	new_cylinder_struct(t_scene *scene, char **line)
 	object->get_hit_dist = NULL;
 	object->get_hit_data = NULL;
 	add_object_to_back(&(scene->objects), object);
+	if (new_endcap_struct(scene, cylinder) != 0)
+		return (1);
 	return (0);
 }

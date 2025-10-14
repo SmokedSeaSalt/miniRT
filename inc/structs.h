@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:17 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/09 12:48:52 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/14 17:05:44 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,11 +141,21 @@ typedef struct s_cylinder
 	t_color		color;
 }	t_cylinder;
 
+typedef struct s_endcap
+{
+	t_vec3		coords;
+	t_vec3		orientation;
+	float		diameter;
+	float		radius;
+	t_color		color;
+}	t_endcap;
+
 typedef enum e_obj_type
 {
 	SPHERE,
 	PLANE,
-	CYLINDER
+	CYLINDER,
+	ENDCAP,
 }	t_obj_type;
 
 typedef struct s_pixel_result
