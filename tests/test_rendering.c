@@ -76,9 +76,41 @@ static void test_pixel_vector(void **state) {
 
 }
 
+static void test_cylinder(void **state) {
+	(void) state;
+
+	t_ray ray;
+	t_cylinder cylinder;
+
+	ray.orig.x = 0;
+	ray.orig.y = 0;
+	ray.orig.z = 5;
+	ray.vec3.x = 0.05823434;
+	ray.vec3.y = 0;
+	ray.vec3.z = -0.99830294;
+	cylinder.coords.x = 0;
+	cylinder.coords.y = 0;
+	cylinder.coords.z = -3.9;
+	cylinder.orientation.x = 1;
+	cylinder.orientation.y = 0;
+	cylinder.orientation.z = 0;
+	cylinder.diameter = 0.8;
+	cylinder.radius = 0.4;
+	cylinder.height = 5;
+
+	printf("is hit = %d\n", is_hit_cylinder(&ray, &cylinder));
+	printf("hit dist= %f\n", get_hit_dist_cylinder(&ray, &cylinder));
+
+
+}
+
+
+
+
 int main(void) {
 	const struct CMUnitTest parsing[] = {
 		cmocka_unit_test(test_pixel_vector),
+		cmocka_unit_test(test_cylinder),
 	};
 	return cmocka_run_group_tests(parsing, NULL, NULL);
 }
