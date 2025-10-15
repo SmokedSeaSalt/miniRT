@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 12:23:02 by egrisel           #+#    #+#             */
-/*   Updated: 2025/10/08 14:33:43 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/10/15 15:49:24 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_vec3	get_pixel_coordinate_to_world_vec3(t_vec3 pixel_coordinates,
 	forward = camera->orientation;
 	world_up = vec3_new(0, 0, 1);
 	if (fabs(forward.z) > 0.99f)
-		world_up = vec3_new(1, 0, 0);
+		world_up = vec3_new(0, 1, 0);
 	right = vec3_normalize(vec3_cross(world_up, forward));
 	up = vec3_normalize(vec3_cross(forward, right));
 	world_vec3 = forward;
