@@ -278,6 +278,34 @@ static void test_parse_file_normal(void **state) {
 	assert_int_equal(cylinder->color.g, 0);
 	assert_int_equal(cylinder->color.b, 255);
 
+	obj = obj->next;
+	assert_int_equal(obj->type, ENDCAP);
+	t_endcap *endcap1 = obj->data;
+	assert_float_equal(endcap1->coords.x, 50.0, 1e-6);
+	assert_float_equal(endcap1->coords.y, 0.0, 1e-6);
+	assert_float_equal(endcap1->coords.z, 31.31, 1e-6);
+	assert_float_equal(endcap1->orientation.x, 0, 1e-6);
+	assert_float_equal(endcap1->orientation.y, 0, 1e-6);
+	assert_float_equal(endcap1->orientation.z, 1.0, 1e-6);
+	assert_float_equal(endcap1->diameter, 14.2, 1e-6);
+	assert_int_equal(endcap1->color.r, 10);
+	assert_int_equal(endcap1->color.g, 0);
+	assert_int_equal(endcap1->color.b, 255);
+
+	obj = obj->next;
+	assert_int_equal(obj->type, ENDCAP);
+	t_endcap *endcap2 = obj->data;
+	assert_float_equal(endcap2->coords.x, 50.0, 1e-6);
+	assert_float_equal(endcap2->coords.y, 0.0, 1e-6);
+	assert_float_equal(endcap2->coords.z, 9.89, 1e-6);
+	assert_float_equal(endcap2->orientation.x, 0, 1e-6);
+	assert_float_equal(endcap2->orientation.y, 0, 1e-6);
+	assert_float_equal(endcap2->orientation.z, -1.0, 1e-6);
+	assert_float_equal(endcap2->diameter, 14.2, 1e-6);
+	assert_int_equal(endcap2->color.r, 10);
+	assert_int_equal(endcap2->color.g, 0);
+	assert_int_equal(endcap2->color.b, 255);
+
 	assert_null(obj->next);
 
 	free(scene.ambient);
@@ -286,6 +314,10 @@ static void test_parse_file_normal(void **state) {
 	free(plane);
 	free(sphere);
 	free(cylinder);
+	free(endcap1);
+	free(endcap2);
+	free(scene.objects->next->next->next->next);
+	free(scene.objects->next->next->next);
 	free(scene.objects->next->next);
 	free(scene.objects->next);
 	free(scene.objects);
@@ -361,6 +393,34 @@ static void test_parse_file_comments(void **state) {
 	assert_int_equal(cylinder->color.g, 0);
 	assert_int_equal(cylinder->color.b, 255);
 
+	obj = obj->next;
+	assert_int_equal(obj->type, ENDCAP);
+	t_endcap *endcap1 = obj->data;
+	assert_float_equal(endcap1->coords.x, 50.0, 1e-6);
+	assert_float_equal(endcap1->coords.y, 0.0, 1e-6);
+	assert_float_equal(endcap1->coords.z, 31.31, 1e-6);
+	assert_float_equal(endcap1->orientation.x, 0, 1e-6);
+	assert_float_equal(endcap1->orientation.y, 0, 1e-6);
+	assert_float_equal(endcap1->orientation.z, 1.0, 1e-6);
+	assert_float_equal(endcap1->diameter, 14.2, 1e-6);
+	assert_int_equal(endcap1->color.r, 10);
+	assert_int_equal(endcap1->color.g, 0);
+	assert_int_equal(endcap1->color.b, 255);
+
+	obj = obj->next;
+	assert_int_equal(obj->type, ENDCAP);
+	t_endcap *endcap2 = obj->data;
+	assert_float_equal(endcap2->coords.x, 50.0, 1e-6);
+	assert_float_equal(endcap2->coords.y, 0.0, 1e-6);
+	assert_float_equal(endcap2->coords.z, 9.89, 1e-6);
+	assert_float_equal(endcap2->orientation.x, 0, 1e-6);
+	assert_float_equal(endcap2->orientation.y, 0, 1e-6);
+	assert_float_equal(endcap2->orientation.z, -1.0, 1e-6);
+	assert_float_equal(endcap2->diameter, 14.2, 1e-6);
+	assert_int_equal(endcap2->color.r, 10);
+	assert_int_equal(endcap2->color.g, 0);
+	assert_int_equal(endcap2->color.b, 255);
+
 	assert_null(obj->next);
 
 	free(scene.ambient);
@@ -369,6 +429,10 @@ static void test_parse_file_comments(void **state) {
 	free(plane);
 	free(sphere);
 	free(cylinder);
+	free(endcap1);
+	free(endcap2);
+	free(scene.objects->next->next->next->next);
+	free(scene.objects->next->next->next);
 	free(scene.objects->next->next);
 	free(scene.objects->next);
 	free(scene.objects);
