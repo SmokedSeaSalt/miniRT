@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_sphere.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 12:22:38 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/08 14:26:46 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/10/15 11:44:23 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "math_inc.h"
 #include "structs.h"
 
-/// @brief calculates the determinent for the quadratic
+/// @brief calculates the discriminant for the quadratic
 /// @brief funtions for a vector and sphere
 /// @brief example -> https://www.desmos.com/3d/vb1nicgnja
 /// @param ray
