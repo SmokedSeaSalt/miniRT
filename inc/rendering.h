@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:42:05 by egrisel           #+#    #+#             */
-/*   Updated: 2025/10/09 13:16:12 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/15 14:18:06 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,15 @@ void	get_hit_data_sphere(t_ray *ray, t_sphere *sphere, t_scene *scene);
 
 // plane.c
 void	get_hit_data_plane(t_ray *ray, t_plane *plane, t_scene *scene);
+
+// cylinder.c
+int		is_hit_cylinder(t_ray *ray, t_cylinder *cylinder);
+float	get_hit_dist_cylinder(t_ray *ray, t_cylinder *cylinder);
+void	get_hit_data_cylinder(t_ray *ray, t_cylinder *cylinder, t_scene *scene);
+
+// endcap.c
+int		is_hit_endcap(t_ray *ray, t_endcap *endcap);
+
 
 // display_hit_modes
 void	display_normal(t_ray *ray, int x, int y, t_scene *scene);

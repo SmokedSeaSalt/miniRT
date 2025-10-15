@@ -57,8 +57,10 @@ SRC = 	src/main.c \
 		src/parsing/parsing_helpers.c \
 		src/parsing/parsing.c \
 		src/parsing/file_handling.c \
+		src/rendering/cylinder.c \
 		src/rendering/display_hit_modes.c \
 		src/rendering/display_miss_modes.c \
+		src/rendering/endcap.c \
 		src/rendering/light.c \
 		src/rendering/plane.c \
 		src/rendering/ray.c \
