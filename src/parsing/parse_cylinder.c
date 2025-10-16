@@ -58,7 +58,7 @@ static int	fill_bottom_endcap_struct(t_scene *scene, t_cylinder *cylinder)
 	endcap_bottom->radius = cylinder->radius;
 	endcap_bottom->orientation.v = -cylinder->orientation.v;
 	endcap_bottom->coords.v = (cylinder->coords.v + \
-(cylinder->orientation.v * cylinder->height * -0.5));
+(cylinder->orientation.v * cylinder->height * -0.5f));
 	object = ft_calloc(1, sizeof(t_object));
 	if (object == NULL)
 		return (free (endcap_bottom), printf("Malloc fail\n"), 2);

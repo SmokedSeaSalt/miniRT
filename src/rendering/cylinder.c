@@ -104,6 +104,38 @@ float	get_hit_dist_cylinder(t_ray *ray, t_cylinder *cylinder)
 	return (decide_closest_distance(distances[0], distances[1]));
 }
 
+int	ray_origin_within_cylinder(t_ray *ray, t_cylinder *cylinder)
+{
+	t_vec3	vec_oc;
+	float	proj;
+	t_vec3	closest_point;
+	float	dist2;
+	float	radius2;
+
+	// Vector from cylinder base to ray origin
+	vec_oc.v = ray->orig.v - cylinder->coords.v;
+
+	// Project onto cylinder axis
+	proj = vec3_dot(vec_oc, cylinder->orientation);
+
+	// Check if within height limits
+	if (proj < 0.0f || proj > cylinder->height)
+		return (0);
+
+	// Find closest point on axis to ray origin
+	closest_point.v = cylinder->coords.v + cylinder->orientation.v * proj;
+
+	// Compute squared distance from origin to axis
+	dist2 = vec3_length((t_vec3)(ray->orig.v - closest_point.v));
+	dist2 = dist2 * dist2;
+	radius2 = cylinder->radius * cylinder->radius;
+
+	// Inside if within radius
+	if (dist2 <= radius2)
+		return (1);
+	return (0);
+}
+
 /// @brief Calculate the normal vector of the hit on the cylinder.
 /// Needs ray.results.hit_dist to be known
 /// @param ray
@@ -117,13 +149,15 @@ t_vec3	cylinder_normal_at(t_ray *ray, t_cylinder *cylinder)
 	t_vec3	tmp1;
 	t_vec3	tmp2;
 
-	//todo flip normal if inside cylinder
 	orig_dist.v = cylinder->coords.v - ray->orig.v;
 	hit_height = get_hit_height(ray, cylinder, ray->results.hit_dist);
 	tmp1.v = (ray->vec3.v * ray->results.hit_dist);
 	tmp2.v = (cylinder->orientation.v * hit_height);
 	normal.v = tmp1.v - tmp2.v - orig_dist.v;
 	normal = vec3_normalize(normal);
+	//todo flip normal if inside cylinder
+	if (ray_origin_within_cylinder(ray, cylinder) == 1)
+		normal.v = -normal.v;
 	return (normal);
 }
 
