@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 11:18:10 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/15 16:16:53 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/17 09:40:10 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ float	cylinder_intersects(t_ray *ray, t_cylinder *cylinder)
 	tmp1 = vec3_dot(rc_cross, rc_cross) * cylinder->radius * cylinder->radius;
 	tmp2 = vec3_dot(orig_dist, rc_cross);
 	disc = tmp1 - (tmp2 * tmp2);
-	//printf("disc = %f\n", disc);
 	return (disc);
 }
 
@@ -86,21 +85,13 @@ float	get_hit_dist_cylinder(t_ray *ray, t_cylinder *cylinder)
 	disc = cylinder_intersects(ray, cylinder);
 	rc_cross = vec3_cross(ray->vec3, cylinder->orientation);
 	orig_dist.v = cylinder->coords.v - ray->orig.v;
-
-	//printf("rc_cross x = %f , y = %f , z = %f\n", rc_cross.x, rc_cross.y, rc_cross.z);
-	//printf("orig_dist x = %f , y = %f , z = %f\n", orig_dist.x, orig_dist.y, orig_dist.z);
-
 	tmp1 = vec3_dot(rc_cross, vec3_cross(orig_dist, cylinder->orientation));
-
-	//printf("tmp1 = %f \n", tmp1);
-
 	distances[0] = (tmp1 + sqrt(disc)) / vec3_dot(rc_cross, rc_cross);
 	distances[1] = (tmp1 - sqrt(disc)) / vec3_dot(rc_cross, rc_cross);
 	if (is_hit_within_height(ray, cylinder, distances[0]) == 0)
 		distances[0] = -1;
 	if (is_hit_within_height(ray, cylinder, distances[1]) == 0)
 		distances[1] = -1;
-	//printf("hitdist1 = %f , hitdist2 = %f\n", distances[0], distances[1]);
 	return (decide_closest_distance(distances[0], distances[1]));
 }
 

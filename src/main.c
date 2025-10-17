@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 10:04:11 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/09 16:14:34 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/17 16:34:43 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,26 @@ void	init_settings(t_scene *scene)
 	scene->render_info.fpscounter = 1;
 }
 
+void cleanup_scene(t_scene *scene)
+{
+	t_object *current;
+	t_object *next;
+
+	free(scene->ambient);
+	free(scene->camera);
+	free(scene->light);
+	current = scene->objects;
+	while (current != NULL)
+	{
+		next = current->next;
+		free(current->data);
+		free(current);
+		current = next;
+	}
+	mlx_delete_image(scene->mlx, scene->g_img);
+	mlx_terminate(scene->mlx);
+}
+
 int	main(int argc, char *argv[])
 {
 	t_scene		scene;
@@ -157,7 +177,8 @@ int	main(int argc, char *argv[])
 	if (parse_file(&scene, argv[1]) == -1)
 		return (printf("Parsing error"), 1);
 	if (init_mlx(&scene))
-		return (1); // cleanup scene
+		return (cleanup_scene(&scene), 1);
 	init_settings(&scene);
 	mlx_loop(scene.mlx);
+	cleanup_scene(&scene);
 }
