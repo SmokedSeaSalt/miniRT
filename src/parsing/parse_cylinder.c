@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 12:00:29 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/15 14:16:25 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/17 11:13:09 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	fill_top_endcap_struct(t_scene *scene, t_cylinder *cylinder)
 	endcap_top->color = cylinder->color;
 	endcap_top->diameter = cylinder->diameter;
 	endcap_top->radius = cylinder->radius;
-	endcap_top->orientation = cylinder->orientation;
+	endcap_top->normal = cylinder->orientation;
 	endcap_top->coords.v = (cylinder->coords.v + \
 (cylinder->orientation.v * cylinder->height * 0.5));
 	object = ft_calloc(1, sizeof(t_object));
@@ -39,8 +39,8 @@ static int	fill_top_endcap_struct(t_scene *scene, t_cylinder *cylinder)
 	object->type = ENDCAP;
 	object->data = endcap_top;
 	object->is_hit = (int (*)(t_ray *, void *))is_hit_endcap;
-	object->get_hit_dist = NULL;
-	object->get_hit_data = NULL;
+	object->get_hit_dist = (float (*)(t_ray *, void *))get_hit_dist_endcap;
+	object->get_hit_data = (void (*)(t_ray *, void *, t_scene *))get_hit_data_endcap;
 	add_object_to_back(&(scene->objects), object);
 	return (0);
 }
@@ -56,7 +56,7 @@ static int	fill_bottom_endcap_struct(t_scene *scene, t_cylinder *cylinder)
 	endcap_bottom->color = cylinder->color;
 	endcap_bottom->diameter = cylinder->diameter;
 	endcap_bottom->radius = cylinder->radius;
-	endcap_bottom->orientation.v = -cylinder->orientation.v;
+	endcap_bottom->normal.v = -cylinder->orientation.v;
 	endcap_bottom->coords.v = (cylinder->coords.v + \
 (cylinder->orientation.v * cylinder->height * -0.5));
 	object = ft_calloc(1, sizeof(t_object));
@@ -65,8 +65,8 @@ static int	fill_bottom_endcap_struct(t_scene *scene, t_cylinder *cylinder)
 	object->type = ENDCAP;
 	object->data = endcap_bottom;
 	object->is_hit = (int (*)(t_ray *, void *))is_hit_endcap;
-	object->get_hit_dist = NULL;
-	object->get_hit_data = NULL;
+	object->get_hit_dist = (float (*)(t_ray *, void *))get_hit_dist_endcap;
+	object->get_hit_data = (void (*)(t_ray *, void *, t_scene *))get_hit_data_endcap;
 	add_object_to_back(&(scene->objects), object);
 	return (0);
 }

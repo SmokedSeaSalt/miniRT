@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:17 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/14 17:05:44 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/17 10:39:08 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ typedef struct s_cylinder
 typedef struct s_endcap
 {
 	t_vec3		coords;
-	t_vec3		orientation;
+	t_vec3		normal;
 	float		diameter;
 	float		radius;
 	t_color		color;
