@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 10:30:44 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/09 13:21:40 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/20 16:01:51 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,21 +42,37 @@ void	display_xyz(t_ray *ray, int x, int y, t_scene *scene)
 	mlx_put_pixel(scene->g_img, x, y, colour);
 }
 
+unsigned char srgb_ftochar(float f)
+{
+	int ret;
+
+	if (f < 0.003)
+		return 0;
+	ret = ((1.055 * powf(f,(1/2.4)) - 0.055)) * 255;
+	//if ( ret > 255)
+	//	return ((char)255);
+	return (ret);
+}
+
+
 void	display_default(t_ray *ray, int x, int y, t_scene *scene)
 {
-	int	r;
-	int b;
-	int g;
+	float	r;
+	float	b;
+	float	g;
 	int	colour;
 	float brightness;
 
 	brightness = (ray->results.light_intensity + scene->ambient->ratio);
 	if (brightness > 1.0f)
 		brightness = 1.0f;
-	r = (int)(brightness * ray->results.obj_color.r);
-	g = (int)(brightness * ray->results.obj_color.g);
-	b = (int)(brightness * ray->results.obj_color.b);
-	colour = (r << 3 * 8) + (g << 2 * 8) + (b << 1 * 8) + 0xff;
+	r = (ray->results.obj_color.r / 0xff) * brightness;
+	g = (ray->results.obj_color.g / 0xff) * brightness;
+	b = (ray->results.obj_color.b / 0xff) * brightness;
+
+	colour = (srgb_ftochar(r) << 3 * 8) + \
+(srgb_ftochar(g) << 2 * 8) + \
+(srgb_ftochar(b) << 1 * 8) + 0xff;
 	mlx_put_pixel(scene->g_img, x, y, colour);
 }
 
