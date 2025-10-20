@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 10:30:44 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/20 16:06:48 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/20 16:23:33 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,15 @@ void	display_xyz(t_ray *ray, int x, int y, t_scene *scene)
 	mlx_put_pixel(scene->g_img, x, y, colour);
 }
 
-unsigned char srgb_ftochar(float f)
+int srgb_ftochar(float f)
 {
 	int ret;
 
 	if (f < 0.003)
 		return 0;
-	ret = ((1.055 * powf(f,(1/2.4)) - 0.055)) * 255;
-	//if ( ret > 255)
-	//	return ((char)255);
+	ret = ((1.055 * powf(f,(1.0f/2.4f)) - 0.055)) * 255;
+	if ( ret > 255)
+		return (255);
 	return (ret);
 }
 
@@ -60,7 +60,9 @@ float srgb_inttof(int color)
 
 	if (color < 1)
 		return 0.0f;
-	ret = powf((((color/255)+0.055)/1.055), 2.4f);
+	ret = powf((((color/255.0f)+0.055f)/1.055f), 2.4f);
+	if (ret > 1.0f)
+		return (1.0f);
 	return (ret);
 }
 
