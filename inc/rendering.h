@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:42:05 by egrisel           #+#    #+#             */
-/*   Updated: 2025/10/17 10:53:52 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/20 14:37:54 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@ void	get_hit_data_cylinder(t_ray *ray, t_cylinder *cylinder, t_scene *scene);
 int		is_hit_endcap(t_ray *ray, t_endcap *endcap);
 float	get_hit_dist_endcap(t_ray *ray, t_endcap *endcap);
 void	get_hit_data_endcap(t_ray *ray, t_endcap *endcap, t_scene *scene);
+
+// camera movement
+void	move_cam_direction(t_camera *camera, int direction);
+void	move_horizontal(t_camera *camera, int direction);
+void	rotate_camera_up_down(t_camera *camera, int direction);
 
 // display_hit_modes
 void	display_normal(t_ray *ray, int x, int y, t_scene *scene);

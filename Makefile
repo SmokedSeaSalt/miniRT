@@ -62,6 +62,7 @@ SRC = 	src/main.c \
 		src/rendering/display_miss_modes.c \
 		src/rendering/endcap.c \
 		src/rendering/light.c \
+		src/rendering/movement.c \
 		src/rendering/plane.c \
 		src/rendering/ray.c \
 		src/rendering/rendering.c \
@@ -95,11 +96,11 @@ fclean: clean
 re: fclean all
 
 # Build
-$(NAME): $(OBJ)
+$(NAME): Makefile $(OBJ)
 	@printf "$(COLOUR_BLUE)Compiling miniRT\n$(COLOUR_END)"
 	@$(CC) $(CFLAGS) $(OBJ) $(INC) $(LIBFT) $(LIBFT_INC) $(LIBMLX) $(LIBMLX_INC) -lm -o $@
 
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c | $(BUILD_DIR)
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c Makefile | $(BUILD_DIR)
 	@mkdir -p $(dir $@)
 	@printf "$(COLOUR_BLUE)Compiling $@ \n$(COLOUR_END)"
 	@$(CC) $(CFLAGS) $(INC) $(LIBFT_INC) $(LIBMLX_INC) -c $< -o $@ -MF $(basename $@).d

@@ -27,4 +27,12 @@
 #  define Z_ROTATION_RAD 0.175
 # endif
 
+# ifndef UPDOWN_ROT
+#  define UPDOWN_ROT 0.1
+# endif
+
+# ifndef STEP_SIZE
+#  define STEP_SIZE 0.1f
+# endif
+
 #endif

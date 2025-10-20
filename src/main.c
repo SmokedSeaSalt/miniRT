@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 10:04:11 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/17 16:34:43 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/20 14:44:18 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,22 @@ void	handle_arrows(mlx_key_data_t keydata, t_scene *scene)
 	if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_RELEASE)
 		scene->camera->orientation = vec3_rotate_around_z(
 				&scene->camera->orientation, -Z_ROTATION_RAD);
+	if (keydata.key == MLX_KEY_UP && keydata.action == MLX_RELEASE)
+		rotate_camera_up_down(scene->camera, 1);
+	if (keydata.key == MLX_KEY_DOWN && keydata.action == MLX_RELEASE)
+		rotate_camera_up_down(scene->camera, -1);
+	if (keydata.key == MLX_KEY_SPACE && keydata.action == MLX_RELEASE)
+		scene->camera->coords.z += STEP_SIZE;
+	if (keydata.key == MLX_KEY_LEFT_SHIFT && keydata.action == MLX_RELEASE)
+		scene->camera->coords.z -= STEP_SIZE;
+	if (keydata.key == MLX_KEY_W && keydata.action == MLX_RELEASE)
+		move_cam_direction(scene->camera, 1);
+	if (keydata.key == MLX_KEY_S && keydata.action == MLX_RELEASE)
+		move_cam_direction(scene->camera, -1);
+	if (keydata.key == MLX_KEY_A && keydata.action == MLX_RELEASE)
+		move_horizontal(scene->camera, 1);
+	if (keydata.key == MLX_KEY_D && keydata.action == MLX_RELEASE)
+		move_horizontal(scene->camera, -1);
 }
 
 void	handle_inputs(mlx_key_data_t keydata, void *param)
