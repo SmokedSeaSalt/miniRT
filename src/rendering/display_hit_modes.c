@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 10:30:44 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/20 16:01:51 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/20 16:06:48 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,15 @@ unsigned char srgb_ftochar(float f)
 	return (ret);
 }
 
+float srgb_inttof(int color)
+{
+	float ret;
+
+	if (color < 1)
+		return 0.0f;
+	ret = powf((((color/255)+0.055)/1.055), 2.4f);
+	return (ret);
+}
 
 void	display_default(t_ray *ray, int x, int y, t_scene *scene)
 {
@@ -66,9 +75,9 @@ void	display_default(t_ray *ray, int x, int y, t_scene *scene)
 	brightness = (ray->results.light_intensity + scene->ambient->ratio);
 	if (brightness > 1.0f)
 		brightness = 1.0f;
-	r = (ray->results.obj_color.r / 0xff) * brightness;
-	g = (ray->results.obj_color.g / 0xff) * brightness;
-	b = (ray->results.obj_color.b / 0xff) * brightness;
+	r = srgb_inttof(ray->results.obj_color.r) * brightness;
+	g = srgb_inttof(ray->results.obj_color.g) * brightness;
+	b = srgb_inttof(ray->results.obj_color.b) * brightness;
 
 	colour = (srgb_ftochar(r) << 3 * 8) + \
 (srgb_ftochar(g) << 2 * 8) + \
