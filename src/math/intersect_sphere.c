@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 12:22:38 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/15 11:44:23 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/21 16:17:28 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 #include "structs.h"
 
 /// @brief calculates the discriminant for the quadratic
-/// @brief funtions for a vector and sphere
+/// @brief funtions for a vector and sphere.
 /// @brief example -> https://www.desmos.com/3d/vb1nicgnja
 /// @param ray
 /// @param sphere
-/// @return <  0 no intersection
-/// @return == 0 one intersection
-/// @return >  0 two intersections
+/// @return <  0 no intersection,
+/// @return == 0 one intersection,
+/// @return >  0 two intersections.
 float	sphere_intersects(t_ray *ray, t_sphere *sphere)
 {
 	float	disc;
@@ -37,6 +37,10 @@ float	sphere_intersects(t_ray *ray, t_sphere *sphere)
 	return (disc);
 }
 
+/// @brief calculates the distance from ray origin to sphere surface.
+/// @param ray
+/// @param sphere
+/// @return closest distance as a float.
 float	get_hit_dist_sphere(t_ray *ray, t_sphere *sphere)
 {
 	float	disc;
@@ -53,6 +57,11 @@ float	get_hit_dist_sphere(t_ray *ray, t_sphere *sphere)
 	return (decide_closest_distance(distance1, distance2));
 }
 
+/// @brief calculates the surface normal for a hitpoint.
+/// @brief needs ray.results.hit_dist to be known.
+/// @param ray
+/// @param sphere
+/// @return	the normalized vector for the surface.
 t_vec3	sphere_normal_at(t_ray *ray, t_sphere *sphere)
 {
 	t_vec3	hit_point;
@@ -68,6 +77,10 @@ t_vec3	sphere_normal_at(t_ray *ray, t_sphere *sphere)
 	return (normal);
 }
 
+/// @brief check function for if the ray hits a sphere or not.
+/// @param ray
+/// @param sphere
+/// @return	1 if hit, 0 if miss.
 int	is_hit_sphere(t_ray *ray, t_sphere *sphere)
 {
 	if (sphere_intersects(ray, sphere) < 0.0f)

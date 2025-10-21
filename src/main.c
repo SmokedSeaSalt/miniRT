@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 10:04:11 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/21 11:21:18 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/21 16:57:26 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ void	handle_inputs(mlx_key_data_t keydata, void *param)
 	handle_arrows(keydata, scene);
 }
 
+/// @brief change the rotating moon emoji each frame.
+/// @param scene
 void	update_framename(t_scene *scene)
 {
 	static int	i = 0;
@@ -105,6 +107,9 @@ void	update_framename(t_scene *scene)
 	free(title_string);
 }
 
+/// @brief update and display the fps counter
+/// @brief when scene.render_info.fpscounter flag is set.
+/// @param scene
 void	update_fpscounter(t_scene *scene)
 {
 	static	mlx_image_t *fps_image = NULL;
@@ -163,6 +168,8 @@ void	init_settings(t_scene *scene)
 	scene->render_info.fpscounter = 1;
 }
 
+/// @brief general cleanup function that will free all malloced values.
+/// @param scene
 void cleanup_scene(t_scene *scene)
 {
 	t_object	*current;

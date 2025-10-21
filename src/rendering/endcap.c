@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 14:11:44 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/17 11:20:15 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/21 16:42:05 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 #include "math_inc.h"
 #include "rendering.h"
 
-// optimization potential for first dot and calculation in the first if
+/// @brief check if the ray intersects with the endcap plane.
+/// @param ray
+/// @param endcap
+/// @return 1 if ray hits plane, 0 if ray misses plane.
 int	is_hit_endcap(t_ray *ray, t_endcap *endcap)
 {
 	if (vec3_dot(ray->vec3, endcap->normal) == 0)
@@ -23,6 +26,12 @@ int	is_hit_endcap(t_ray *ray, t_endcap *endcap)
 
 }
 
+/// @brief calculates the distance from ray origin to endcap surface.
+/// @brief also checks if the hit is within the sphere surface.
+/// @param ray
+/// @param endcap
+/// @return closest distance as a float.
+/// @return is minus if hit is outside sphere range.
 float	get_hit_dist_endcap(t_ray *ray, t_endcap *endcap)
 {
 	float	dist;
@@ -40,6 +49,10 @@ float	get_hit_dist_endcap(t_ray *ray, t_endcap *endcap)
 	return (dist);
 }
 
+/// @brief fills ray.results with the relevant endcap data.
+/// @param ray
+/// @param endcap
+/// @param scene
 void	get_hit_data_endcap(t_ray *ray, t_endcap *endcap, t_scene *scene)
 {
 	ray->results.hit_normal = endcap->normal;

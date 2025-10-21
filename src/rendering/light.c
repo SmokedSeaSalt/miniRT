@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 16:27:34 by egrisel           #+#    #+#             */
-/*   Updated: 2025/10/21 15:54:04 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/21 16:45:36 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,15 @@
 //should we ignore the object were comming from because it could couse issues because ray starts on that surface?
 //could also have issues if we are for example inside a sphere. then we might see light outside the sphere.
 //to fix this add small ofset to light ray in direction of surface normal and still compare with self?
+
+/// @brief loops trough the object list to check if any of the objects
+/// @brief obstruct the current light_ray.
+/// @param object_list
+/// @param light_ray
+/// @param light_dist
+/// @param self
+/// @return 1 if the light_ray is blocked by any object.
+/// @return 0 if the light_ray is not blocked.
 int	is_light_obstructed(t_object *object_list, t_ray *light_ray, float light_dist, t_object *self)
 {
 	float	hit_dist;
@@ -36,6 +45,10 @@ int	is_light_obstructed(t_object *object_list, t_ray *light_ray, float light_dis
 	return (0);
 }
 
+/// @brief calculates a single light intensity value and adds it to ray.results.
+/// @param scene
+/// @param light
+/// @param ray
 void	add_single_light_result(t_scene *scene, t_lights *light, t_ray *ray)
 {
 	t_ray	light_ray;
@@ -58,6 +71,9 @@ is_light_obstructed(scene->objects, &light_ray, light_dist, ray->results.object)
 	}
 }
 
+/// @brief calculates a total light intensity value and adds it to ray.results.
+/// @param scene
+/// @param ray
 void	set_light_hit_angle_and_intensity(t_scene *scene, t_ray *ray)
 {
 	t_lights *current_light;

@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 11:26:56 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/20 14:38:21 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/21 16:48:03 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "math_inc.h"
 
 /// @brief move the camera in the orientation axis.
+/// @brief stepsize can be set by changing STEP_SIZE.
 /// @param camera		camera struct to adjust
 /// @param direction	1 for forwards, -1 for backwards
 void move_cam_direction(t_camera *camera, int direction)
@@ -23,7 +24,9 @@ void move_cam_direction(t_camera *camera, int direction)
 (camera->orientation.v * (float)direction * STEP_SIZE);
 }
 
-/// @brief move the camera in the orientation axis.
+/// @brief move the camera in the horizontal axis according to current
+/// @brief camera orientation.
+/// @brief stepsize can be set by changing STEP_SIZE.
 /// @param camera		camera struct to adjust
 /// @param direction	1 for right, -1 for left
 void move_horizontal(t_camera *camera, int direction)
@@ -41,6 +44,10 @@ void move_horizontal(t_camera *camera, int direction)
 (move_dir.v * STEP_SIZE);
 }
 
+/// @brief rotate the camera up or down.
+/// @brief stepsize can be set by changing UPDOWN_ROT.
+/// @param camera
+/// @param direction
 void rotate_camera_up_down(t_camera *camera, int direction)
 {
 	t_vec3	tmp;

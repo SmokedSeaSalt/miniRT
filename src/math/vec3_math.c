@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vec3_math.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 12:21:50 by egrisel           #+#    #+#             */
-/*   Updated: 2025/10/09 09:24:41 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/10/21 16:17:53 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 #include "math_inc.h"
 #include <math.h>
 
-// cos(θ) = (dot(a,b)) / (mag(a) * mag(b))
+/// @brief gives the angle in degrees from two vectors.
+/// @brief cos(θ) = (dot(a,b)) / (mag(a) * mag(b)).
+/// @param vec3_a
+/// @param vec3_b
+/// @return	angle in degrees as float.
 float	get_angle_between_vec3(t_vec3 *vec3_a, t_vec3 *vec3_b)
 {
 	float	numerator;
@@ -26,19 +30,10 @@ float	get_angle_between_vec3(t_vec3 *vec3_a, t_vec3 *vec3_b)
 	return (acosf(numerator / denominator));
 }
 
-// Vector from A to B is vec3 = [B.x - A.x, B.y - A.y, B.z - A.z]
-t_vec3	get_vec3_betweem_two_points(t_vec3 *a, t_vec3 *b)
-{
-	t_vec3	vec3;
-
-	vec3.x = b->x - a->x;
-	vec3.y = b->x - a->y;
-	vec3.z = b->z - a->z;
-	return (vec3);
-}
-
-/// @brief positive dot means angle < 90 (acute), negative dot means angle > 90.
-/// zero dot means angle == 90
+/// @brief check for acute angle between two vectors.
+/// @param a
+/// @param b
+/// @return 1 if angle is acute, 0 if angle is not acute.
 int	is_vec3_angle_acute(t_vec3 *a, t_vec3 *b)
 {
 	return (vec3_dot(*a, *b) > 0.0f);

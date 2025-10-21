@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 12:23:02 by egrisel           #+#    #+#             */
-/*   Updated: 2025/10/15 15:49:24 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/21 16:52:32 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 #include "math_inc.h"
 #include "math.h" // for tan
 
+/// @brief translate the 3d pixel coordinates to camera orientation.
+/// @param pixel_coordinates
+/// @param camera
+/// @return normalized t_vec3 vector.
 t_vec3	get_pixel_coordinate_to_world_vec3(t_vec3 pixel_coordinates,
 										t_camera *camera)
 {
@@ -38,6 +42,11 @@ t_vec3	get_pixel_coordinate_to_world_vec3(t_vec3 pixel_coordinates,
 	return (world_vec3);
 }
 
+/// @brief get the ray coordinates on the screen based on aspect ratio and fov.
+/// @param x
+/// @param y
+/// @param camera
+/// @return t_vec3 x,y,z of 3d pixel coordinates.
 t_vec3	get_pixel_coordinates(int x, int y, t_camera *camera)
 {
 	int		width;
@@ -56,6 +65,12 @@ t_vec3	get_pixel_coordinates(int x, int y, t_camera *camera)
 
 // maybe change vec3 to vec2
 // change pixel coordinate name
+
+/// @brief get a ray orientation value for current x,y pixel on screen.
+/// @param x
+/// @param y
+/// @param camera
+/// @return t_ray with orig and normal vector.
 t_ray	get_ray(int x, int y, t_camera *camera)
 {
 	t_vec3	pixel_coordinates;

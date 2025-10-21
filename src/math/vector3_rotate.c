@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector3_rotate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 13:54:55 by egrisel           #+#    #+#             */
-/*   Updated: 2025/10/07 14:44:36 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/10/21 16:18:59 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 #include "math.h"
 #include "math_inc.h"
 
+/// @brief rotate around the z axis using a rotation matrix.
+/// @brief https://en.wikipedia.org/wiki/Rotation_matrix.
+/// @param vec3
+/// @param z_rad
+/// @return the new vector after rotation.
 t_vec3	vec3_rotate_around_z(t_vec3 *vec3, float z_rad)
 {
 	t_mat3	rotation_matrix;

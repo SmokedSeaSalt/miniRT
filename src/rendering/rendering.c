@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 09:57:43 by egrisel           #+#    #+#             */
-/*   Updated: 2025/10/09 12:41:12 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/21 16:53:58 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 #include "structs.h"
 #include <float.h>
 
+/// @brief loop trough all object to check what object needs to be rendered.
+/// @param scene
+/// @param ray
+/// @param object_list
 void	loop_though_objects(t_scene *scene, t_ray *ray, t_object *object_list)
 {
 	int						is_hit;
@@ -40,6 +44,10 @@ void	loop_though_objects(t_scene *scene, t_ray *ray, t_object *object_list)
 		ray->results.object->get_hit_data(ray, ray->results.object->data, scene);
 }
 
+/// @brief render single pixel.
+/// @param x
+/// @param y
+/// @param scene
 void	render_pixel(int x, int y, t_scene *scene)
 {
 	t_ray	ray;
@@ -52,6 +60,9 @@ void	render_pixel(int x, int y, t_scene *scene)
 		scene->render_info.render_hit(&ray, x, y, scene);
 }
 
+/// @brief loop through all pixels and render the values.
+/// @param scene
+/// @return
 int	render_frame(t_scene *scene)
 {
 	int	i_x;
@@ -68,5 +79,5 @@ int	render_frame(t_scene *scene)
 		}
 		i_x++;
 	}
-	return (0);
+	return (0); //change to void?
 }

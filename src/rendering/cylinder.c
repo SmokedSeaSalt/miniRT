@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 11:18:10 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/17 09:40:10 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/21 16:40:09 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,10 @@ float	cylinder_intersects(t_ray *ray, t_cylinder *cylinder)
 	return (disc);
 }
 
+/// @brief check function for if the ray hits a cylinder or not.
+/// @param ray
+/// @param cylinder
+/// @return	1 if hit, 0 if miss.
 int	is_hit_cylinder(t_ray *ray, t_cylinder *cylinder)
 {
 	if (cylinder_intersects(ray, cylinder) < 0.0f)
@@ -49,6 +53,12 @@ int	is_hit_cylinder(t_ray *ray, t_cylinder *cylinder)
 	return (1);
 }
 
+/// @brief calculates the hit height based on the origin and
+/// @brief direction of the cylinder base.
+/// @param ray
+/// @param cylinder
+/// @param hit_dist
+/// @return distance from origin height.
 float	get_hit_height(t_ray *ray, t_cylinder *cylinder, float hit_dist)
 {
 	t_vec3	orig_dist;
@@ -62,7 +72,12 @@ float	get_hit_height(t_ray *ray, t_cylinder *cylinder, float hit_dist)
 	return (hit_height);
 }
 
-
+/// @brief a boundry check to check wether the hit height fits within
+/// @brief the cylinder height.
+/// @param ray
+/// @param cylinder
+/// @param hit_dist
+/// @return 1 on height within cylinder limits. 0 outside cylinder limits.
 int is_hit_within_height(t_ray *ray, t_cylinder *cylinder, float hit_dist)
 {
 	float hit_height;
@@ -74,6 +89,10 @@ hit_height > (-0.5 * cylinder->height))
 	return (0);
 }
 
+/// @brief calculates the distance from ray origin to cylinder surface.
+/// @param ray
+/// @param cylinder
+/// @return closest distance as a float.
 float	get_hit_dist_cylinder(t_ray *ray, t_cylinder *cylinder)
 {
 	float	disc;
@@ -95,6 +114,11 @@ float	get_hit_dist_cylinder(t_ray *ray, t_cylinder *cylinder)
 	return (decide_closest_distance(distances[0], distances[1]));
 }
 
+/// @brief checks if the ray was cast from within the sphere to check if
+/// @brief the surface normal needs to be inverted.
+/// @param ray
+/// @param cylinder
+/// @return 1 if ray started from within, 0 if ray started outside.
 int	ray_origin_within_cylinder(t_ray *ray, t_cylinder *cylinder)
 {
 	t_vec3	vec_oc;
@@ -110,7 +134,7 @@ int	ray_origin_within_cylinder(t_ray *ray, t_cylinder *cylinder)
 	proj = vec3_dot(vec_oc, cylinder->orientation);
 
 	// Check if within height limits
-	if (proj < 0.0f || proj > cylinder->height)
+	if (proj > (0.5 * cylinder->height) || proj < (-0.5 * cylinder->height))
 		return (0);
 
 	// Find closest point on axis to ray origin
@@ -146,12 +170,15 @@ t_vec3	cylinder_normal_at(t_ray *ray, t_cylinder *cylinder)
 	tmp2.v = (cylinder->orientation.v * hit_height);
 	normal.v = tmp1.v - tmp2.v - orig_dist.v;
 	normal = vec3_normalize(normal);
-	//todo flip normal if inside cylinder
 	if (ray_origin_within_cylinder(ray, cylinder) == 1)
 		normal.v = -normal.v;
 	return (normal);
 }
 
+/// @brief fills ray.results with the relevant cylinder data.
+/// @param ray
+/// @param cylinder
+/// @param scene
 void	get_hit_data_cylinder(t_ray *ray, t_cylinder *cylinder, t_scene *scene)
 {
 	ray->results.hit_normal = cylinder_normal_at(ray, cylinder);

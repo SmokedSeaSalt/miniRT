@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 10:30:44 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/21 15:59:26 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/21 16:37:46 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 #include "structs.h"
 #include "MLX42.h"
 
+/// @brief displays the surface normal of the object.
+/// @param ray
+/// @param x
+/// @param y
+/// @param scene
 void	display_normal(t_ray *ray, int x, int y, t_scene *scene)
 {
 	int	r;
@@ -28,6 +33,11 @@ void	display_normal(t_ray *ray, int x, int y, t_scene *scene)
 	mlx_put_pixel(scene->g_img, x, y, colour);
 }
 
+/// @brief displays the normal vector in x = r, y = g, z = b representation.
+/// @param ray
+/// @param x
+/// @param y
+/// @param scene
 void	display_xyz(t_ray *ray, int x, int y, t_scene *scene)
 {
 	int	r;
@@ -42,6 +52,11 @@ void	display_xyz(t_ray *ray, int x, int y, t_scene *scene)
 	mlx_put_pixel(scene->g_img, x, y, colour);
 }
 
+/// @brief the standart ray tracer output. displays light and color values.
+/// @param ray
+/// @param x
+/// @param y
+/// @param scene
 void	display_default(t_ray *ray, int x, int y, t_scene *scene)
 {
 	float	r;
@@ -65,6 +80,11 @@ void	display_default(t_ray *ray, int x, int y, t_scene *scene)
 	mlx_put_pixel(scene->g_img, x, y, colour);
 }
 
+/// @brief grayscale representation of average light intensity.
+/// @param ray
+/// @param x
+/// @param y
+/// @param scene
 void	display_light_intensity(t_ray *ray, int x, int y, t_scene *scene)
 {
 	int		b;
@@ -81,6 +101,11 @@ ray->results.light_intensity.y + ray->results.light_intensity.z) * 0.3333f);
 	mlx_put_pixel(scene->g_img, x, y, colour);
 }
 
+/// @brief grayscale representation of object distance from camera.
+/// @param ray
+/// @param x
+/// @param y
+/// @param scene
 void	display_distance(t_ray *ray, int x, int y, t_scene *scene)
 {
 	int			b;
