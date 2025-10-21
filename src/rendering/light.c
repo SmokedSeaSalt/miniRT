@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 16:27:34 by egrisel           #+#    #+#             */
-/*   Updated: 2025/10/21 12:25:27 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/21 15:54:04 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,9 @@
 #include "math_inc.h"
 #include "consts.h"
 
-// float	angle_between_ray_and_light(t_ray *ray, t_light *light)
-// {
-// 	return (get_angle_between_vec3(&ray->orig, &light->coords));
-// }
-
 //should we ignore the object were comming from because it could couse issues because ray starts on that surface?
+//could also have issues if we are for example inside a sphere. then we might see light outside the sphere.
+//to fix this add small ofset to light ray in direction of surface normal and still compare with self?
 int	is_light_obstructed(t_object *object_list, t_ray *light_ray, float light_dist, t_object *self)
 {
 	float	hit_dist;
@@ -39,7 +36,6 @@ int	is_light_obstructed(t_object *object_list, t_ray *light_ray, float light_dis
 	return (0);
 }
 
-#include <stdio.h>
 void	add_single_light_result(t_scene *scene, t_lights *light, t_ray *ray)
 {
 	t_ray	light_ray;
@@ -61,8 +57,6 @@ is_light_obstructed(scene->objects, &light_ray, light_dist, ray->results.object)
 		ray->results.light_intensity.b += (light->color_brightness.b * light_lambertian);
 	}
 }
-
-
 
 void	set_light_hit_angle_and_intensity(t_scene *scene, t_ray *ray)
 {

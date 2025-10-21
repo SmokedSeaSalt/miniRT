@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 10:30:44 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/21 12:52:06 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/21 15:59:26 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	display_default(t_ray *ray, int x, int y, t_scene *scene)
 	float	g;
 	int		colour;
 
-
 	r = (ray->results.light_intensity.r + scene->ambient->intensity.r);
 	if (r > 1.0f)
 		r = 1.0f;
@@ -68,9 +67,9 @@ void	display_default(t_ray *ray, int x, int y, t_scene *scene)
 
 void	display_light_intensity(t_ray *ray, int x, int y, t_scene *scene)
 {
-	int b;
-	int	colour;
-	float brightness;
+	int		b;
+	int		colour;
+	float	brightness;
 
 	brightness = ((ray->results.light_intensity.x + \
 ray->results.light_intensity.y + ray->results.light_intensity.z) * 0.3333f);
@@ -84,10 +83,11 @@ ray->results.light_intensity.y + ray->results.light_intensity.z) * 0.3333f);
 
 void	display_distance(t_ray *ray, int x, int y, t_scene *scene)
 {
-	const float max_dist = 2; //to be changed later(calculate right after parsing)
-	int b;
-	int	colour;
-	float dist_mult;
+	int			b;
+	int			colour;
+	float		dist_mult;
+	//to be changed later(calculate right after parsing)
+	const float	max_dist = 2;
 
 	dist_mult = 1.0f - (ray->results.hit_dist / max_dist);
 	b = (int)(dist_mult * 0xff);
