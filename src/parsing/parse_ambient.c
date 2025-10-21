@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 11:58:48 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/25 12:17:39 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/21 11:02:57 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "helpers.h"
 #include "libft.h"
 #include "structs.h"
+#include "math_inc.h"
 
 static int	fill_ambient_struct(t_ambient *ambient, char **line)
 {
@@ -27,6 +28,10 @@ static int	fill_ambient_struct(t_ambient *ambient, char **line)
 	ambient->color = fill_color(line[2], line[3], line[4]);
 	if (color_out_of_range(ambient->color))
 		return (printf("Ambient: Color out of range\n"), 1);
+	ambient->intensity = vec3_new( \
+(ambient->color.r / 255) * ambient->ratio, \
+(ambient->color.g / 255) * ambient->ratio, \
+(ambient->color.b / 255) * ambient->ratio);
 	return (0);
 }
 

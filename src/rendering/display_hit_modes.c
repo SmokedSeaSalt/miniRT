@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 10:30:44 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/09 13:21:40 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/21 11:04:46 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,24 @@ void	display_xyz(t_ray *ray, int x, int y, t_scene *scene)
 
 void	display_default(t_ray *ray, int x, int y, t_scene *scene)
 {
-	int	r;
-	int b;
-	int g;
-	int	colour;
-	float brightness;
+	float	r;
+	float	b;
+	float	g;
+	int		colour;
 
-	brightness = (ray->results.light_intensity + scene->ambient->ratio);
-	if (brightness > 1.0f)
-		brightness = 1.0f;
-	r = (int)(brightness * ray->results.obj_color.r);
-	g = (int)(brightness * ray->results.obj_color.g);
-	b = (int)(brightness * ray->results.obj_color.b);
-	colour = (r << 3 * 8) + (g << 2 * 8) + (b << 1 * 8) + 0xff;
+	r = (ray->results.light_intensity.r + scene->ambient->intensity.r);
+	if (r > 1.0f)
+		r = 1.0f;
+	g = (ray->results.light_intensity.g + scene->ambient->intensity.g);
+	if (g > 1.0f)
+		g = 1.0f;
+	b = (ray->results.light_intensity.b + scene->ambient->intensity.b);
+	if (b > 1.0f)
+		b = 1.0f;
+	r = r * ray->results.obj_color.r;
+	g = g * ray->results.obj_color.g;
+	b = b * ray->results.obj_color.b;
+	colour = ((int)r << 3 * 8) + ((int)g << 2 * 8) + ((int)b << 1 * 8) + 0xff;
 	mlx_put_pixel(scene->g_img, x, y, colour);
 }
 
@@ -66,7 +71,9 @@ void	display_light_intensity(t_ray *ray, int x, int y, t_scene *scene)
 	int	colour;
 	float brightness;
 
-	brightness = (ray->results.light_intensity + scene->ambient->ratio);
+	brightness = ((ray->results.light_intensity.x + \
+ray->results.light_intensity.y + ray->results.light_intensity.z) * 0.3333f);
+	brightness += scene->ambient->ratio;
 	if (brightness > 1.0f)
 		brightness = 1.0f;
 	b = (int)(brightness * 0xff);

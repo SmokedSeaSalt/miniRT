@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 16:27:34 by egrisel           #+#    #+#             */
-/*   Updated: 2025/10/09 16:12:56 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/21 10:48:59 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	set_light_hit_angle_and_intensity(t_scene *scene, t_ray *ray)
 {
 	t_ray	light_ray;
 	float	light_dist;
+	float	light_lambertian;
 
 	light_ray.orig.v = ray->orig.v + (ray->vec3.v * ray->results.hit_dist);
 	light_ray.vec3.v = scene->light->coords.v - light_ray.orig.v;
@@ -54,14 +55,15 @@ void	set_light_hit_angle_and_intensity(t_scene *scene, t_ray *ray)
 is_light_obstructed(scene->objects, &light_ray, light_dist, ray->results.object) == 1)
 	{
 		ray->results.light_angle = -1.0f;
-		ray->results.light_intensity = 0;
+		ray->results.light_intensity = vec3_new(0.0f, 0.0f, 0.0f);
 		return ;
 	}
 	else
 	{
-		// todo optimization: maybe no need to calculate exact theta and
-		// instead can deal with cos(theta) for an estimation for intensity
-		//ray->results.light_angle = get_angle_between_vec3(&ray->results.hit_normal, &light_ray.vec3);
-		ray->results.light_intensity = vec3_dot(light_ray.vec3, ray->results.hit_normal);
+		light_lambertian = vec3_dot(light_ray.vec3, ray->results.hit_normal);
+		ray->results.light_intensity = vec3_new( \
+((float)scene->light->color.r / 255) * light_lambertian, \
+((float)scene->light->color.g / 255) * light_lambertian, \
+((float)scene->light->color.b / 255) * light_lambertian);
 	}
 }

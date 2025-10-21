@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:17 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/17 10:39:08 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/21 11:03:56 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ typedef struct s_ambient
 {
 	float	ratio;
 	t_color	color;
+	t_vec3	intensity;
 }	t_ambient;
 
 typedef struct s_window_info
@@ -170,7 +171,7 @@ typedef struct s_pixel_result
 	int			is_hit;
 	float		hit_dist;
 	float		light_angle;
-	float		light_intensity;
+	t_vec3		light_intensity;
 	t_object	*object;
 	t_vec3		hit_normal;
 	t_color		obj_color;
