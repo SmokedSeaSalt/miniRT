@@ -229,14 +229,14 @@ static void test_parse_file_normal(void **state) {
 	assert_float_equal(scene.camera->orientation.z, 1, 1e-6);
 	assert_float_equal(scene.camera->fov_rad, deg_to_rad(70), 1e-6);
 
-	assert_non_null(scene.light);
-	assert_float_equal(scene.light->coords.x, -40, 1e-6);
-	assert_float_equal(scene.light->coords.y, 0, 1e-6);
-	assert_float_equal(scene.light->coords.z, 30, 1e-6);
-	assert_float_equal(scene.light->brightness, 0.7, 1e-6);
-	assert_int_equal(scene.light->color.r, 255);
-	assert_int_equal(scene.light->color.g, 255);
-	assert_int_equal(scene.light->color.b, 255);
+	assert_non_null(scene.lights);
+	assert_float_equal(scene.lights->coords.x, -40, 1e-6);
+	assert_float_equal(scene.lights->coords.y, 0, 1e-6);
+	assert_float_equal(scene.lights->coords.z, 30, 1e-6);
+	assert_float_equal(scene.lights->brightness, 0.7, 1e-6);
+	assert_int_equal(scene.lights->color.r, 255);
+	assert_int_equal(scene.lights->color.g, 255);
+	assert_int_equal(scene.lights->color.b, 255);
 
 	assert_non_null(scene.objects);
 	t_object *obj = scene.objects;
@@ -310,7 +310,7 @@ static void test_parse_file_normal(void **state) {
 
 	free(scene.ambient);
 	free(scene.camera);
-	free(scene.light);
+	free(scene.lights);
 	free(plane);
 	free(sphere);
 	free(cylinder);
@@ -344,14 +344,14 @@ static void test_parse_file_comments(void **state) {
 	assert_float_equal(scene.camera->orientation.z, 1, 1e-6);
 	assert_float_equal(scene.camera->fov_rad, deg_to_rad(70), 1e-6);
 
-	assert_non_null(scene.light);
-	assert_float_equal(scene.light->coords.x, -40, 1e-6);
-	assert_float_equal(scene.light->coords.y, 0, 1e-6);
-	assert_float_equal(scene.light->coords.z, 30, 1e-6);
-	assert_float_equal(scene.light->brightness, 0.7, 1e-6);
-	assert_int_equal(scene.light->color.r, 255);
-	assert_int_equal(scene.light->color.g, 255);
-	assert_int_equal(scene.light->color.b, 255);
+	assert_non_null(scene.lights);
+	assert_float_equal(scene.lights->coords.x, -40, 1e-6);
+	assert_float_equal(scene.lights->coords.y, 0, 1e-6);
+	assert_float_equal(scene.lights->coords.z, 30, 1e-6);
+	assert_float_equal(scene.lights->brightness, 0.7, 1e-6);
+	assert_int_equal(scene.lights->color.r, 255);
+	assert_int_equal(scene.lights->color.g, 255);
+	assert_int_equal(scene.lights->color.b, 255);
 
 	assert_non_null(scene.objects);
 	t_object *obj = scene.objects;
@@ -425,7 +425,7 @@ static void test_parse_file_comments(void **state) {
 
 	free(scene.ambient);
 	free(scene.camera);
-	free(scene.light);
+	free(scene.lights);
 	free(plane);
 	free(sphere);
 	free(cylinder);
