@@ -29,6 +29,13 @@ typedef union u_vec3
 		float	z;
 		float	w;
 	};
+	struct
+	{
+		float	r;
+		float	g;
+		float	b;
+		float	i;
+	};
 	float					array[4];
 }	t_vec3;
 
