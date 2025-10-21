@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:17 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/21 11:03:56 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/21 11:35:51 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,12 +117,14 @@ typedef struct s_camera
 	t_window_info	window_info;
 }	t_camera;
 
-typedef struct s_light
+typedef struct s_lights
 {
-	t_vec3		coords;
-	float		brightness;
-	t_color		color;
-}	t_light;
+	t_vec3			coords;
+	float			brightness;
+	t_vec3			color_brightness;
+	t_color			color;
+	struct s_lights	*next;
+}	t_lights;
 
 typedef struct s_sphere
 {
@@ -170,7 +172,6 @@ typedef struct s_pixel_result
 {
 	int			is_hit;
 	float		hit_dist;
-	float		light_angle;
 	t_vec3		light_intensity;
 	t_object	*object;
 	t_vec3		hit_normal;
@@ -207,7 +208,7 @@ struct s_scene
 {
 	t_ambient		*ambient;
 	t_camera		*camera;
-	t_light			*light;
+	t_lights		*lights;
 	t_object		*objects;
 	mlx_t			*mlx;
 	mlx_image_t		*g_img;

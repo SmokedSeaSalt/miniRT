@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:54 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/08 14:27:52 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/10/21 11:33:46 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	is_scene_valid(t_scene *scene)
 		return (printf("Parsing: No ambient element defined\n"), 0);
 	if (scene->camera == NULL)
 		return (printf("Parsing: No camera element defined\n"), 0);
-	if (scene->light == NULL)
+	if (scene->lights == NULL)
 		return (printf("Parsing: No light element defined\n"), 0);
 	if (scene->objects == NULL)
 		return (printf("Parsing: No object element defined\n"), 0);

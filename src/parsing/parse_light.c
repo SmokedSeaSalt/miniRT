@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 11:59:15 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/25 12:18:12 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/21 12:26:24 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@
 #include "helpers.h"
 #include "libft.h"
 #include "structs.h"
+#include "math_inc.h"
 
-static int	fill_light_struct(t_light *light, char **line)
+static int	fill_light_struct(t_lights *light, char **line)
 {
 	if (count_arguments(line) != 8)
 		return (printf("Light: Incorrect amount of arguments\n"), 1);
@@ -28,20 +29,23 @@ static int	fill_light_struct(t_light *light, char **line)
 	light->color = fill_color(line[5], line[6], line[7]);
 	if (color_out_of_range(light->color))
 		return (printf("Light: Color out of range\n"), 1);
+	light->color_brightness = vec3_new( \
+light->brightness * ((float)light->color.r / 255.0f), \
+light->brightness * ((float)light->color.g / 255.0f), \
+light->brightness * ((float)light->color.b / 255.0f));
 	return (0);
 }
 
 int	new_light_struct(t_scene *scene, char **line)
 {
-	t_light	*light;
+	t_lights	*light;
 
-	if (scene->light != NULL)
-		return (printf("Light: Does not support multiple elements\n"), 1);
-	light = ft_calloc(1, sizeof(t_light));
+	light = ft_calloc(1, sizeof(t_lights));
 	if (light == NULL)
 		return (printf("Malloc fail\n"), 2);
 	if (fill_light_struct(light, line) != 0)
 		return (free(light), 1);
-	scene->light = light;
+	light->next = scene->lights;
+	scene->lights = light;
 	return (0);
 }

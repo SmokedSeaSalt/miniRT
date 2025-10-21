@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 10:30:44 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/21 11:04:46 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/21 12:52:06 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	display_default(t_ray *ray, int x, int y, t_scene *scene)
 	float	b;
 	float	g;
 	int		colour;
+
 
 	r = (ray->results.light_intensity.r + scene->ambient->intensity.r);
 	if (r > 1.0f)

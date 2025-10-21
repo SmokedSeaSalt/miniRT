@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 10:04:11 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/20 14:44:18 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/21 11:21:18 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,12 +165,20 @@ void	init_settings(t_scene *scene)
 
 void cleanup_scene(t_scene *scene)
 {
-	t_object *current;
-	t_object *next;
+	t_object	*current;
+	t_object	*next;
+	t_lights	*current_light;
+	t_lights	*next_light;
 
 	free(scene->ambient);
 	free(scene->camera);
-	free(scene->light);
+	current_light = scene->lights;
+	while (current_light != NULL)
+	{
+		next_light = current_light->next;
+		free(current_light);
+		current_light = next_light;
+	}
 	current = scene->objects;
 	while (current != NULL)
 	{
