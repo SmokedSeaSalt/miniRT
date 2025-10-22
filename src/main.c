@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 10:04:11 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/22 10:50:21 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/22 14:53:21 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ void	handle_inputs(mlx_key_data_t keydata, void *param)
 		scene->render_info.render_hit = &display_light_intensity;
 	if (keydata.key == MLX_KEY_5 && keydata.action == MLX_RELEASE)
 		scene->render_info.render_hit = &display_distance;
+	if (keydata.key == MLX_KEY_8 && keydata.action == MLX_RELEASE)
+		scene->render_info.render_miss = &display_horizon_blue_sky;
 	if (keydata.key == MLX_KEY_9 && keydata.action == MLX_RELEASE)
 		scene->render_info.render_miss = &display_black;
 	if (keydata.key == MLX_KEY_0 && keydata.action == MLX_RELEASE)

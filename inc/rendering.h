@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:42:05 by egrisel           #+#    #+#             */
-/*   Updated: 2025/10/22 10:51:21 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/22 14:55:02 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,6 @@ void	display_distance(t_ray *ray, int x, int y, t_scene *scene);
 
 void	display_black(t_ray *ray, int x, int y, t_scene *scene);
 void	display_white(t_ray *ray, int x, int y, t_scene *scene);
+void	display_horizon_blue_sky(t_ray *ray, int x, int y, t_scene *scene);
 
 #endif
