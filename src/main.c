@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 10:04:11 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/21 16:57:26 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/22 10:50:21 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	set_window_info_struct(t_window_info *window_info)
 	window_info->aspect_ratio = (float)WIDTH / (float)HEIGHT;
 }
 
-void	set_camera_struct(t_camera *camera)
+void	set_fov_scale(t_window_info *window_info, t_camera *camera)
 {
-	camera->fov_scale = tanf(camera->fov_rad / 2);
+	window_info->fov_scale = tanf(camera->fov_rad / 2);
 }
 
 void	handle_arrows(mlx_key_data_t keydata, t_scene *scene)
@@ -136,8 +136,8 @@ static void	hook(void *param)
 
 	scene = (t_scene *)param;
 	//handle_inputs(scene);
-	set_window_info_struct(&(scene->camera->window_info));
-	set_camera_struct(scene->camera);
+	set_window_info_struct(&(scene->window_info));
+	set_fov_scale(&(scene->window_info), scene->camera);
 	// draw_black(mlx_info);
 	render_frame(scene);
 	update_framename(scene);

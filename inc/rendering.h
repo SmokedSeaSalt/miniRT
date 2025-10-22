@@ -15,7 +15,7 @@
 # include "structs.h"
 
 int		render_frame(t_scene *scene);
-t_ray	get_ray(int x, int y, t_camera *camera);
+t_ray	get_ray(int x, int y, t_camera *camera, t_window_info *window_info);
 
 
 ////////////////////////////////////////////////////////////////////////////////

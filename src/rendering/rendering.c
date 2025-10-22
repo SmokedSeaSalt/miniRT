@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 09:57:43 by egrisel           #+#    #+#             */
-/*   Updated: 2025/10/21 16:53:58 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/22 10:51:40 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	render_pixel(int x, int y, t_scene *scene)
 {
 	t_ray	ray;
 
-	ray = get_ray(x, y, scene->camera);
+	ray = get_ray(x, y, scene->camera, &(scene->window_info));
 	loop_though_objects(scene, &ray, scene->objects);
 	if (ray.results.is_hit == 0)
 		scene->render_info.render_miss(&ray, x, y, scene);
@@ -69,10 +69,10 @@ int	render_frame(t_scene *scene)
 	int	i_y;
 
 	i_x = 0;
-	while (i_x < scene->camera->window_info.width)
+	while (i_x < scene->window_info.width)
 	{
 		i_y = 0;
-		while (i_y < scene->camera->window_info.height)
+		while (i_y < scene->window_info.height)
 		{
 			render_pixel(i_x, i_y, scene);
 			i_y++;
