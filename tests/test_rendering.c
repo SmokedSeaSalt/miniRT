@@ -35,23 +35,27 @@ static void test_pixel_vector(void **state) {
 	(void) state;
 	// Create mock camera
 	t_camera mock_camera;
+	// Create mock window_info
+	t_window_info window_info;
+
 	// Set camera struct
 	mock_camera.coords.x = 0.0f;
 	mock_camera.coords.y = 0.0f;
 	mock_camera.coords.z = 0.0f;
 	mock_camera.fov_rad = deg_to_rad(60);
-	mock_camera.fov_scale = tanf(mock_camera.fov_rad / 2);
-	mock_camera.window_info.height = HEIGHT;
-	mock_camera.window_info.width = WIDTH;
-	mock_camera.window_info.aspect_ratio = (float)WIDTH / (float)HEIGHT;
 	mock_camera.orientation.x = 0.0f;
 	mock_camera.orientation.y = 0.0f;
 	mock_camera.orientation.z = -1.0f;
+	// Set window_info
+	window_info.fov_scale = tanf(mock_camera.fov_rad / 2);
+	window_info.height = HEIGHT;
+	window_info.width = WIDTH;
+	window_info.aspect_ratio = (float)WIDTH / (float)HEIGHT;
 
-	t_ray ray1 = get_ray(0, 0, &mock_camera); // Top-left
-	t_ray ray2 = get_ray(1, 0, &mock_camera); // Top-right
-	t_ray ray3 = get_ray(0, 1, &mock_camera); // Bottom-left
-	t_ray ray4 = get_ray(1, 1, &mock_camera); // Bottom-right
+	t_ray ray1 = get_ray(0, 0, &mock_camera, &window_info); // Top-left
+	t_ray ray2 = get_ray(1, 0, &mock_camera, &window_info); // Top-right
+	t_ray ray3 = get_ray(0, 1, &mock_camera, &window_info); // Bottom-left
+	t_ray ray4 = get_ray(1, 1, &mock_camera, &window_info); // Bottom-right
 
 	//////////////
 	//Assertions//
