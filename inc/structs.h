@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:17 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/21 11:35:51 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/22 14:22:37 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 # define STRUCTS_H
 //generics
 # include "MLX42.h"
+
+////////////////////////////////////////////////////////////////////////////////
+// vectors																	  //
+////////////////////////////////////////////////////////////////////////////////
 
 /// @brief union for adaptable 3d vector operations(w is empty for optimization)
 /// @param float v for +-*/ operations on vector	-> vec3_1.v - vec3_2.v
@@ -83,6 +87,10 @@ typedef union u_mat3
 	float	m[3][3];
 }	t_mat3;
 
+////////////////////////////////////////////////////////////////////////////////
+// element members															  //
+////////////////////////////////////////////////////////////////////////////////
+
 typedef struct s_color
 {
 	int	r;
@@ -90,9 +98,20 @@ typedef struct s_color
 	int	b;
 }	t_color;
 
-//scene objects
+typedef enum e_obj_type
+{
+	SPHERE,
+	PLANE,
+	CYLINDER,
+	ENDCAP,
+}	t_obj_type;
+
+////////////////////////////////////////////////////////////////////////////////
+// scene elements															  //
+////////////////////////////////////////////////////////////////////////////////
+
 typedef struct s_scene	t_scene;
-typedef struct s_object	t_object;
+typedef struct s_ray	t_ray;
 
 typedef struct s_ambient
 {
@@ -101,20 +120,11 @@ typedef struct s_ambient
 	t_vec3	intensity;
 }	t_ambient;
 
-typedef struct s_window_info
-{
-	int		width;
-	int		height;
-	float	aspect_ratio;
-}	t_window_info;
-
 typedef struct s_camera
 {
 	t_vec3			coords;
 	t_vec3			orientation;
 	float			fov_rad;
-	float			fov_scale;
-	t_window_info	window_info;
 }	t_camera;
 
 typedef struct s_lights
@@ -160,13 +170,20 @@ typedef struct s_endcap
 	t_color		color;
 }	t_endcap;
 
-typedef enum e_obj_type
+typedef struct s_object
 {
-	SPHERE,
-	PLANE,
-	CYLINDER,
-	ENDCAP,
-}	t_obj_type;
+	t_obj_type		type;
+	void			*data;
+	struct s_object	*next;
+// Function pointers for object-specific operations
+	int				(*is_hit)(t_ray *ray, void *object_data);
+	float			(*get_hit_dist)(t_ray *ray, void *object_data);
+	void			(*get_hit_data)(t_ray *ray, void *object_data, t_scene *scene);
+} t_object;
+
+////////////////////////////////////////////////////////////////////////////////
+// rays																		  //
+////////////////////////////////////////////////////////////////////////////////
 
 typedef struct s_pixel_result
 {
@@ -178,12 +195,24 @@ typedef struct s_pixel_result
 	t_color		obj_color;
 }	t_pixel_result;
 
-typedef struct s_ray
+struct s_ray
 {
 	t_vec3			orig;
 	t_vec3			vec3;
 	t_pixel_result	results;
-}	t_ray;
+};
+
+////////////////////////////////////////////////////////////////////////////////
+// scene																	  //
+////////////////////////////////////////////////////////////////////////////////
+
+typedef struct s_window_info
+{
+	int		width;
+	int		height;
+	float	aspect_ratio;
+	float	fov_scale;
+}	t_window_info;
 
 typedef struct s_render_info
 {
@@ -191,18 +220,6 @@ typedef struct s_render_info
 	void	(*render_miss)(t_ray *ray, int x, int y, t_scene *scene);
 	int		fpscounter;
 } t_render_info;
-
-//list of obj
-struct s_object
-{
-	t_obj_type		type;
-	void			*data;
-	struct s_object	*next;
-// Function pointers for object-specific operations
-	int				(*is_hit)(t_ray *ray, void *object_data);
-	float			(*get_hit_dist)(t_ray *ray, void *object_data);
-	void			(*get_hit_data)(t_ray *ray, void *object_data, t_scene *scene);
-};
 
 struct s_scene
 {
@@ -213,6 +230,7 @@ struct s_scene
 	mlx_t			*mlx;
 	mlx_image_t		*g_img;
 	t_render_info	render_info;
+	t_window_info	window_info;
 };
 
 #endif
