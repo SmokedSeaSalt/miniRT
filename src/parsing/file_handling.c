@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 10:18:18 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/29 13:15:13 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/22 15:04:37 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ int	open_file(char *filename)
 	int	fd;
 
 	if (is_valid_extension(filename) == 0)
-		return (printf("Parsing: Filetype not supported\n"), -1);
+		return (printf("Error\nParsing: Filetype not supported\n"), -1);
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-		return (printf("Parsing: Opening file failed\n"), -1);
+		return (printf("Error\nParsing: Opening file failed\n"), -1);
 	return (fd);
 }

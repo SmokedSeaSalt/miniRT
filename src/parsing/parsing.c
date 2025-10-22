@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:54 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/21 11:33:46 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/22 15:06:23 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@
 int	is_scene_valid(t_scene *scene)
 {
 	if (scene->ambient == NULL)
-		return (printf("Parsing: No ambient element defined\n"), 0);
+		return (printf("Error\nParsing: No ambient element defined\n"), 0);
 	if (scene->camera == NULL)
-		return (printf("Parsing: No camera element defined\n"), 0);
+		return (printf("Error\nParsing: No camera element defined\n"), 0);
 	if (scene->lights == NULL)
-		return (printf("Parsing: No light element defined\n"), 0);
+		return (printf("Error\nParsing: No light element defined\n"), 0);
 	if (scene->objects == NULL)
-		return (printf("Parsing: No object element defined\n"), 0);
+		return (printf("Error\nParsing: No object element defined\n"), 0);
 	return (1);
 }
 
@@ -74,7 +74,7 @@ int	process_line(t_scene *scene, char *line)
 
 	split_line = ft_split_set(line, " \n\t,");
 	if (split_line == NULL)
-		return (printf("Parsing: Malloc fail\n"), -1);
+		return (printf("Error\nParsing: Malloc fail\n"), -1);
 	if (split_line[0] == NULL)
 		return (free(split_line), 0);
 	if (select_element(scene, split_line) != 0)
@@ -97,6 +97,6 @@ int	select_element(t_scene *scene, char **line)
 		return (new_plane_struct(scene, line));
 	if (ft_strncmp(line[0], "cy", ft_strlen(line[0])) == 0)
 		return (new_cylinder_struct(scene, line));
-	printf("Parsing: Element %s not found\n", line[1]);
+	printf("Error\nParsing: Element %s not found\n", line[1]);
 	return (1);
 }

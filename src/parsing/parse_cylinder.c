@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 12:00:29 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/17 11:13:09 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/22 15:05:26 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	fill_top_endcap_struct(t_scene *scene, t_cylinder *cylinder)
 
 	endcap_top = ft_calloc(1, sizeof(t_endcap));
 	if (endcap_top == NULL)
-		return (printf("Malloc fail\n"), 2);
+		return (printf("Error\nMalloc fail\n"), 2);
 	endcap_top->color = cylinder->color;
 	endcap_top->diameter = cylinder->diameter;
 	endcap_top->radius = cylinder->radius;
@@ -35,7 +35,7 @@ static int	fill_top_endcap_struct(t_scene *scene, t_cylinder *cylinder)
 (cylinder->orientation.v * cylinder->height * 0.5));
 	object = ft_calloc(1, sizeof(t_object));
 	if (object == NULL)
-		return (free (endcap_top), printf("Malloc fail\n"), 2);
+		return (free (endcap_top), printf("Error\nMalloc fail\n"), 2);
 	object->type = ENDCAP;
 	object->data = endcap_top;
 	object->is_hit = (int (*)(t_ray *, void *))is_hit_endcap;
@@ -52,7 +52,7 @@ static int	fill_bottom_endcap_struct(t_scene *scene, t_cylinder *cylinder)
 
 	endcap_bottom = ft_calloc(1, sizeof(t_endcap));
 	if (endcap_bottom == NULL)
-		return (printf("Malloc fail\n"), 2);
+		return (printf("Error\nMalloc fail\n"), 2);
 	endcap_bottom->color = cylinder->color;
 	endcap_bottom->diameter = cylinder->diameter;
 	endcap_bottom->radius = cylinder->radius;
@@ -61,7 +61,7 @@ static int	fill_bottom_endcap_struct(t_scene *scene, t_cylinder *cylinder)
 (cylinder->orientation.v * cylinder->height * -0.5f));
 	object = ft_calloc(1, sizeof(t_object));
 	if (object == NULL)
-		return (free (endcap_bottom), printf("Malloc fail\n"), 2);
+		return (free (endcap_bottom), printf("Error\nMalloc fail\n"), 2);
 	object->type = ENDCAP;
 	object->data = endcap_bottom;
 	object->is_hit = (int (*)(t_ray *, void *))is_hit_endcap;
@@ -83,24 +83,24 @@ static int	new_endcap_struct(t_scene *scene, t_cylinder *cylinder)
 static int	fill_cylinder_struct(t_cylinder *cylinder, char **line)
 {
 	if (count_arguments(line) != 12)
-		return (printf("Cylinder: Incorrect amount of arguments\n"), 1);
+		return (printf("Error\nCylinder: Incorrect amount of arguments\n"), 1);
 	cylinder->coords = fill_vec3(line[1], line[2], line[3]);
 	cylinder->orientation = fill_vec3(line[4], line[5], line[6]);
 	if (orientation_out_of_range(cylinder->orientation))
-		return (printf("Cylinder: Orientation out of range\n"), 1);
+		return (printf("Error\nCylinder: Orientation out of range\n"), 1);
 	if (orientation_all_zero(cylinder->orientation))
-		return (printf("Cylinder: Orientation can not be all zero\n"), 1);
+		return (printf("Error\nCylinder: Orientation can not be all zero\n"), 1);
 	cylinder->orientation = vec3_normalize(cylinder->orientation);
 	cylinder->diameter = ft_atof(line[7]);
 	if (cylinder->diameter < 0.0f)
-		return (printf("Cylinder: Negative diameter not allowed"));
+		return (printf("Error\nCylinder: Negative diameter not allowed"));
 	cylinder->radius = cylinder->diameter * 0.5f;
 	cylinder->height = ft_atof(line[8]);
 	if (cylinder->diameter < 0.0f)
-		return (printf("Cylinder: Negative height not allowed"));
+		return (printf("Error\nCylinder: Negative height not allowed"));
 	cylinder->color = fill_color(line[9], line[10], line[11]);
 	if (color_out_of_range(cylinder->color))
-		return (printf("Cylinder: Color out of range\n"), 1);
+		return (printf("Error\nCylinder: Color out of range\n"), 1);
 	return (0);
 }
 
@@ -111,12 +111,12 @@ int	new_cylinder_struct(t_scene *scene, char **line)
 
 	cylinder = ft_calloc(1, sizeof(t_cylinder));
 	if (cylinder == NULL)
-		return (printf("Malloc fail\n"), 2);
+		return (printf("Error\nMalloc fail\n"), 2);
 	if (fill_cylinder_struct(cylinder, line) != 0)
 		return (free(cylinder), 1);
 	object = ft_calloc(1, sizeof(t_object));
 	if (object == NULL)
-		return (free (cylinder), printf("Malloc fail\n"), 2);
+		return (free (cylinder), printf("Error\nMalloc fail\n"), 2);
 	object->type = CYLINDER;
 	object->data = cylinder;
 	object->is_hit = (int (*)(t_ray *, void *))is_hit_cylinder;
