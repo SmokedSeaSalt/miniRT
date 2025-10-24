@@ -129,6 +129,21 @@ static void atof_scientific_notation(void **state) {
 	assert_double_equal(-2.0, ft_atof("-2E5"), 1e-9);
 }
 
+/******************************************************************************/
+/*                                                                            */
+/* ft_atof.c                                                                  */
+/*                                                                            */
+/******************************************************************************/
+
+// Explicitly check unsupported scientific notation
+static void ftoa_basics(void **state) {
+	(void) state;
+	assert_string_equal("1.0", ft_ftoa(1.0f));
+	assert_string_equal("-123.0", ft_ftoa(-123.0f));
+}
+
+
+
 int main(void) {
 	const struct CMUnitTest helpers[] = {
 		cmocka_unit_test(split_set_basic_split),
@@ -142,6 +157,7 @@ int main(void) {
 		cmocka_unit_test(atof_invalid_input),
 		cmocka_unit_test(atof_edge_cases),
 		cmocka_unit_test(atof_scientific_notation),
+		cmocka_unit_test(ftoa_basics),
 	};
 	return cmocka_run_group_tests(helpers, NULL, NULL);
 }

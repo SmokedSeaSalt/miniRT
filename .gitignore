@@ -8,3 +8,4 @@ reports
 miniRT
 test.rt
 sandbox
+*.d

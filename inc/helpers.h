@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helpers.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:08:58 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/30 11:44:52 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/10/24 11:09:54 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,6 @@
 
 char	**ft_split_set(char const *s, char const *set);
 double	ft_atof(const char *str);
+char	*ft_ftoa(double val);
 
 #endif
