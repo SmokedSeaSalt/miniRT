@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 16:27:34 by egrisel           #+#    #+#             */
-/*   Updated: 2025/10/21 16:45:36 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/23 15:12:51 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,16 @@ void	add_single_light_result(t_scene *scene, t_lights *light, t_ray *ray)
 	light_ray.vec3 = vec3_normalize(light_ray.vec3);
 
 	//fist cheap is bigger than 90 check, then brightness from light = 0 so we can skip looping linked list of objects.
-	if (!(is_vec3_angle_acute(&ray->results.hit_normal, &light_ray.vec3) == 0 || \
-is_light_obstructed(scene->objects, &light_ray, light_dist, ray->results.object) == 1))
-	{
-		light_lambertian = vec3_dot(light_ray.vec3, ray->results.hit_normal);
-		ray->results.light_intensity.r += (light->color_brightness.r * light_lambertian);
-		ray->results.light_intensity.g += (light->color_brightness.g * light_lambertian);
-		ray->results.light_intensity.b += (light->color_brightness.b * light_lambertian);
-	}
+	//if (!(is_vec3_angle_acute(&ray->results.hit_normal, &light_ray.vec3)))
+	//	return ;
+	light_lambertian = vec3_dot(light_ray.vec3, ray->results.hit_normal);
+	if (light_lambertian < 0.0f)
+		return ;
+	if (is_light_obstructed(scene->objects, &light_ray, light_dist, ray->results.object) == 1)
+		return ;
+	ray->results.light_intensity.r += (light->color_brightness.r * light_lambertian);
+	ray->results.light_intensity.g += (light->color_brightness.g * light_lambertian);
+	ray->results.light_intensity.b += (light->color_brightness.b * light_lambertian);
 }
 
 /// @brief calculates a total light intensity value and adds it to ray.results.

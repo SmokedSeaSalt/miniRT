@@ -140,6 +140,10 @@ static void ftoa_basics(void **state) {
 	(void) state;
 	assert_string_equal("1.0", ft_ftoa(1.0f));
 	assert_string_equal("-123.0", ft_ftoa(-123.0f));
+	assert_string_equal("0.7", ft_ftoa(0.7f));
+	assert_string_equal("0.1", ft_ftoa(0.1f));
+	assert_string_equal("-0.7", ft_ftoa(-0.7f));
+	assert_string_equal("-0.1", ft_ftoa(-0.1f));
 }
 
 

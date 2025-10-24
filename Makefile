@@ -6,7 +6,7 @@
 
 NAME = miniRT
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -MMD -Ofast
+CFLAGS = -Wall -Werror -Wextra -MMD
 CCDEBUG = -g
 
 ################################################################################
@@ -37,6 +37,7 @@ SRC_DIR = src
 # C files
 SRC = 	src/main.c \
 		src/helpers/ft_atof.c \
+		src/helpers/ft_ftoa.c \
 		src/helpers/ft_split_set.c \
 		src/math/intersect_helpers.c \
 		src/math/intersect_plane.c \
@@ -58,6 +59,7 @@ SRC = 	src/main.c \
 		src/parsing/parsing.c \
 		src/parsing/file_handling.c \
 		src/rendering/cylinder.c \
+		src/rendering/debug_window.c \
 		src/rendering/display_hit_modes.c \
 		src/rendering/display_miss_modes.c \
 		src/rendering/endcap.c \
