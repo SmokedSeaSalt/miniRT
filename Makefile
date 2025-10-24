@@ -6,7 +6,7 @@
 
 NAME = miniRT
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -MMD
+CFLAGS = -Wall -Werror -Wextra -MMD -Ofast
 CCDEBUG = -g
 
 ################################################################################
@@ -129,7 +129,7 @@ rmmlx42:
 	rm -rf $(LIBMLX_PATH)
 
 .PHONY: all clean fclean re mlx42 libft debug rmmlx42 test run_test setup_test \
-analyze clean_analisys
+analyze clean_analisys fast small small_fast
 
 
 ################################################################################
@@ -137,6 +137,21 @@ analyze clean_analisys
 # Testing                                                                      #
 #                                                                              #
 ################################################################################
+
+FAST_FLAGS = -ffast-math -Ofast
+SMALL_FLAGS = -DWIDTH=300 -DHEIGHT=300
+#enable speedup compile flags
+fast: fclean mlx42 libft
+	@$(MAKE) CFLAGS="$(CFLAGS) $(FAST_FLAGS)" --no-print-directory all
+
+#smaller window
+small: fclean mlx42 libft
+	@$(MAKE) CFLAGS="$(CFLAGS) $(SMALL_FLAGS)" --no-print-directory all
+
+#smaller window, enable speedup compile flags
+small_fast: fclean mlx42 libft
+	@$(MAKE) CFLAGS="$(CFLAGS) $(SMALL_FLAGS) $(FAST_FLAGS)" --no-print-directory all
+
 
 #unit testing
 test:
