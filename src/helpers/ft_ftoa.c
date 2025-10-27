@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 10:38:50 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/24 11:53:42 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/27 10:07:13 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,13 @@ static char *geti(double *val)
 static char *getf(double val)
 {
 	char *tmp;
+	double	fpart;
 	char *retf;
 
-	retf = ft_itoa((int)(((val - (int)val) * 10) + 0.5));
+	fpart = (((val - (int)val) * 10) + 0.5);
+	if (fpart > 9.99f)
+		fpart = 9.0f;
+	retf = ft_itoa((int)fpart);
 	if (retf == NULL)
 		return ( NULL);
 	tmp = ft_strjoin(".", retf);
