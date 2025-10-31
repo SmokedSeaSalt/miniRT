@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:17 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/22 14:22:37 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/30 11:54:07 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,6 +190,7 @@ typedef struct s_pixel_result
 	int			is_hit;
 	float		hit_dist;
 	t_vec3		light_intensity;
+	t_vec3		specular_intensity;
 	t_object	*object;
 	t_vec3		hit_normal;
 	t_color		obj_color;

@@ -6,13 +6,14 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 16:27:34 by egrisel           #+#    #+#             */
-/*   Updated: 2025/10/23 15:12:51 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/30 14:52:16 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "structs.h"
 #include "math_inc.h"
 #include "consts.h"
+#include <math.h>
 
 //should we ignore the object were comming from because it could couse issues because ray starts on that surface?
 //could also have issues if we are for example inside a sphere. then we might see light outside the sphere.
@@ -45,6 +46,37 @@ int	is_light_obstructed(t_object *object_list, t_ray *light_ray, float light_dis
 	return (0);
 }
 
+/// @brief calculates the ideal reflection angle for the light.
+/// https://en.wikipedia.org/wiki/Phong_reflection_model
+/// @param ray needs results.hit_normal to be known.
+/// @param light_ray
+/// @return the normalized reflection vector
+t_vec3	light_reflection_angle(t_ray *ray, t_ray *light_ray)
+{
+	float	dot;
+	t_vec3	angle;
+
+	dot = vec3_dot(light_ray->vec3,ray->results.hit_normal);
+	angle.v = 2 * dot * ray->results.hit_normal.v - light_ray->vec3.v;
+	return (vec3_normalize(angle));
+}
+
+void	add_specular(t_lights *light, t_ray *ray, t_ray	*light_ray)
+{
+	t_vec3	reflection;
+	float	dot;
+	float	specular_intensity;
+	float	exponent;
+
+	exponent = 25.0f;
+	reflection = light_reflection_angle(ray, light_ray);
+	dot = fmax(0.0f, vec3_dot(reflection, (t_vec3)-ray->vec3.v));
+	specular_intensity = powf(dot, exponent);
+	ray->results.specular_intensity.r += (light->color_brightness.r * specular_intensity);
+	ray->results.specular_intensity.g += (light->color_brightness.g * specular_intensity);
+	ray->results.specular_intensity.b += (light->color_brightness.b * specular_intensity);
+}
+
 /// @brief calculates a single light intensity value and adds it to ray.results.
 /// @param scene
 /// @param light
@@ -71,6 +103,7 @@ void	add_single_light_result(t_scene *scene, t_lights *light, t_ray *ray)
 	ray->results.light_intensity.r += (light->color_brightness.r * light_lambertian);
 	ray->results.light_intensity.g += (light->color_brightness.g * light_lambertian);
 	ray->results.light_intensity.b += (light->color_brightness.b * light_lambertian);
+	add_specular(light, ray, &light_ray);
 }
 
 /// @brief calculates a total light intensity value and adds it to ray.results.
