@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 16:27:34 by egrisel           #+#    #+#             */
-/*   Updated: 2025/10/31 10:32:38 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/31 14:41:14 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,19 @@
 /// @param self
 /// @return 1 if the light_ray is blocked by any object.
 /// @return 0 if the light_ray is not blocked.
-int	is_light_obstructed(t_object *object_list, t_ray *light_ray, float light_dist, t_object *self)
+int	is_light_obstructed(t_object *object_list, t_ray light_ray, float light_dist, t_object *self)
 {
 	float	hit_dist;
 	int		is_hit;
 
+	(void)self;
+	light_ray.orig.v = light_ray.orig.v + (0.0001f * light_ray.vec3.v);
 	while (object_list != NULL)
 	{
-		is_hit = object_list->is_hit(light_ray, object_list->data);
-		if (is_hit == 1 && object_list != self)
+		is_hit = object_list->is_hit(&light_ray, object_list->data);
+		if (is_hit == 1)
 		{
-			hit_dist = object_list->get_hit_dist(light_ray, object_list->data);
+			hit_dist = object_list->get_hit_dist(&light_ray, object_list->data);
 			if (hit_dist > 0.0f && hit_dist < light_dist)
 				return (1);
 		}
@@ -103,7 +105,7 @@ void	add_single_light_result(t_scene *scene, t_lights *light, t_ray *ray)
 	light_lambertian = vec3_dot(light_ray.vec3, ray->results.hit_normal);
 	if (light_lambertian < 0.0f)
 		return ;
-	if (is_light_obstructed(scene->objects, &light_ray, light_dist, ray->results.object) == 1)
+	if (is_light_obstructed(scene->objects, light_ray, light_dist, ray->results.object) == 1)
 		return ;
 	ray->results.light_intensity.r += (light->color_brightness.r * light_lambertian);
 	ray->results.light_intensity.g += (light->color_brightness.g * light_lambertian);
