@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 16:27:34 by egrisel           #+#    #+#             */
-/*   Updated: 2025/10/30 14:52:16 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/10/31 10:32:38 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,11 @@ t_vec3	light_reflection_angle(t_ray *ray, t_ray *light_ray)
 	return (vec3_normalize(angle));
 }
 
+/// @brief calculates the specular reflection as per phong model.
+/// https://en.wikipedia.org/wiki/Phong_reflection_model.
+/// @param light
+/// @param ray
+/// @param light_ray
 void	add_specular(t_lights *light, t_ray *ray, t_ray	*light_ray)
 {
 	t_vec3	reflection;
