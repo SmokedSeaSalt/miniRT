@@ -109,7 +109,7 @@ static void test_add_multiple(void **state) {
 static void test_new_cylinder_success(void **state) {
 	(void)state;
 	t_scene scene = {0};
-	char *args[] = {"c", "50.0","0","20.6", "0","1","0", "10.5", "20.2", "255","255","255", NULL};
+	char *args[] = {"c", "50.0,0,20.6", "0,1,0", "10.5", "20.2", "255,255,255", NULL};
 
 	int res = new_cylinder_struct(&scene, args);
 	assert_int_equal(res, 0);
@@ -148,7 +148,7 @@ static void test_new_cylinder_invalid_args(void **state) {
 static void test_new_cylinder_orientation_zero(void **state) {
 	(void)state;
 	t_scene scene = {0};
-	char *args[] = {"c", "0","0","0", "0","0","0", "10", "20", "255","255","255", NULL};
+	char *args[] = {"c", "0,0,0", "0,0,0", "10", "20", "255,255,255", NULL};
 
 	int res = new_cylinder_struct(&scene, args);
 	assert_int_equal(res, 1);
