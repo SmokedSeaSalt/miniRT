@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:54 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/22 15:06:23 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/11/04 14:04:57 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	process_line(t_scene *scene, char *line)
 {
 	char	**split_line;
 
-	split_line = ft_split_set(line, " \n\t,");
+	split_line = ft_split_set(line, " \n\t");
 	if (split_line == NULL)
 		return (printf("Error\nParsing: Malloc fail\n"), -1);
 	if (split_line[0] == NULL)

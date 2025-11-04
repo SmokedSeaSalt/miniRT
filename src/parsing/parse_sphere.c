@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 11:59:33 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/22 15:06:03 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/11/04 13:47:24 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,19 @@
 #include "structs.h"
 #include "math_inc.h"
 #include "rendering.h"
+#include "consts.h"
+#include <math.h>
 
 static int	fill_sphere_struct(t_sphere *sphere, char **line)
 {
-	if (count_arguments(line) != 8)
+	if (count_arguments(line) != 4)
 		return (printf("Error\nSphere: Incorrect amount of arguments\n"), 1);
-	sphere->coords = fill_vec3(line[1], line[2], line[3]);
-	sphere->diameter = ft_atof(line[4]);
-	if (sphere->diameter < 0.0f)
-		return (printf("Error\nSphere: Negative diameter not allowed"));
+	if (parse_orig(&(sphere->coords), line[1]) != 0)
+		return (printf("Sphere: Origin parsing error\n"), 1);
+	sphere->diameter = fabs(ft_atof(line[2]));
 	sphere->radius = sphere->diameter * 0.5f;
-	sphere->color = fill_color(line[5], line[6], line[7]);
-	if (color_out_of_range(sphere->color))
-		return (printf("Error\nSphere: Color out of range\n"), 1);
+	if (parse_color(&(sphere->color), line[3]) != 0)
+		return (printf("Sphere: Color parsing error\n"), 1);
 	return (0);
 }
 

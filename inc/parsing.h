@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:10 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/22 10:21:33 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/11/04 13:28:51 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,15 @@ int		count_arguments(char **line);
 int		color_out_of_range(t_color color);
 int		orientation_out_of_range(t_vec3 orientation);
 int		orientation_all_zero(t_vec3 orientation);
-t_color	fill_color(char *r_str, char *g_str, char *b_str);
 t_vec3	fill_vec3(char *x_str, char *y_str, char *z_str);
 void	add_object_to_back(t_object **list, t_object *new);
+int		parse_color(t_color *color, char *str);
+int		parse_orig(t_vec3 *orig, char *str);
+int		parse_normal_vector(t_vec3 *vec, char *str);
+int		parse_ratio(float *ratio, char *str);
+int		parse_fov(float *fov, char *str);
+
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // parse_structs															  //

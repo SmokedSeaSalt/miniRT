@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 11:59:50 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/22 15:05:48 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/11/04 13:47:16 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,18 @@
 #include "structs.h"
 #include "math_inc.h"
 #include "rendering.h"
+#include "consts.h"
 
 static int	fill_plane_struct(t_plane *plane, char **line)
 {
-	if (count_arguments(line) != 10)
+	if (count_arguments(line) != 4)
 		return (printf("Error\nPlane: Incorrect amount of arguments\n"), 1);
-	plane->coords = fill_vec3(line[1], line[2], line[3]);
-	plane->normal = fill_vec3(line[4], line[5], line[6]);
-	if (orientation_out_of_range(plane->normal))
-		return (printf("Error\nPlane: normal out of range\n"), 1);
-	if (orientation_all_zero(plane->normal))
-		return (printf("Error\nPlane: normal can not be all zero\n"), 1);
-	plane->normal = vec3_normalize(plane->normal);
-	plane->color = fill_color(line[7], line[8], line[9]);
-	if (color_out_of_range(plane->color))
-		return (printf("Error\nPlane: Color out of range\n"), 1);
+	if (parse_orig(&(plane->coords), line[1]) != 0)
+		return (printf("Plane: Origin parsing error\n"), 1);
+	if (parse_normal_vector(&(plane->normal), line[2]) != 0)
+		return (printf("Plane: Vector parsing error\n"), 1);
+	if (parse_color(&(plane->color), line[3]) != 0)
+		return (printf("Plane: Color parsing error\n"), 1);
 	return (0);
 }
 

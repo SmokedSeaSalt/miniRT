@@ -6,19 +6,24 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:15:52 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/18 16:15:53 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/11/04 14:01:27 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-static void	*ft_free(char **ret, long nstr)
+void	*ft_free_split(char **ret)
 {
-	while (nstr >= 0)
+	int i;
+
+	if (ret == NULL)
+		return (NULL);
+	i = 0;
+	while (ret[i] != NULL)
 	{
-		free(ret[nstr]);
-		nstr--;
+		free(ret[i]);
+		i++;
 	}
 	free(ret);
 	return (NULL);
@@ -80,7 +85,7 @@ static char	**fill_str_array(const char *s, const char *set, char **ret)
 		{
 			ret[nstr] = ft_substr(s, start_i, i - start_i);
 			if (ret[nstr] == NULL)
-				return (ft_free(ret, nstr));
+				return (ft_free_split(ret));
 			nstr++;
 			start_i = -1;
 		}

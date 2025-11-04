@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 12:00:29 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/22 15:05:26 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/11/04 13:47:09 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #include "structs.h"
 #include "math_inc.h"
 #include "rendering.h"
+#include "consts.h"
+#include <math.h>
 
 static int	fill_top_endcap_struct(t_scene *scene, t_cylinder *cylinder)
 {
@@ -82,25 +84,17 @@ static int	new_endcap_struct(t_scene *scene, t_cylinder *cylinder)
 
 static int	fill_cylinder_struct(t_cylinder *cylinder, char **line)
 {
-	if (count_arguments(line) != 12)
+	if (count_arguments(line) != 6)
 		return (printf("Error\nCylinder: Incorrect amount of arguments\n"), 1);
-	cylinder->coords = fill_vec3(line[1], line[2], line[3]);
-	cylinder->orientation = fill_vec3(line[4], line[5], line[6]);
-	if (orientation_out_of_range(cylinder->orientation))
-		return (printf("Error\nCylinder: Orientation out of range\n"), 1);
-	if (orientation_all_zero(cylinder->orientation))
-		return (printf("Error\nCylinder: Orientation can not be all zero\n"), 1);
-	cylinder->orientation = vec3_normalize(cylinder->orientation);
-	cylinder->diameter = ft_atof(line[7]);
-	if (cylinder->diameter < 0.0f)
-		return (printf("Error\nCylinder: Negative diameter not allowed"));
+	if (parse_orig(&(cylinder->coords), line[1]) != 0)
+		return (printf("Cylinder: Origin parsing error\n"), 1);
+	if (parse_normal_vector(&(cylinder->orientation), line[2]) != 0)
+		return (printf("Cylinder: Orientation parsing error\n"), 1);
+	cylinder->diameter = fabs(ft_atof(line[3]));
 	cylinder->radius = cylinder->diameter * 0.5f;
-	cylinder->height = ft_atof(line[8]);
-	if (cylinder->diameter < 0.0f)
-		return (printf("Error\nCylinder: Negative height not allowed"));
-	cylinder->color = fill_color(line[9], line[10], line[11]);
-	if (color_out_of_range(cylinder->color))
-		return (printf("Error\nCylinder: Color out of range\n"), 1);
+	cylinder->height = fabs(ft_atof(line[4]));
+	if (parse_color(&(cylinder->color), line[5]) != 0)
+		return (printf("Cylinder: Color parsing error\n"), 1);
 	return (0);
 }
 

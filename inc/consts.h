@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   consts.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:14:45 by egrisel           #+#    #+#             */
-/*   Updated: 2025/10/07 14:41:25 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/11/04 14:23:49 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,10 @@
 # ifndef STEP_SIZE
 #  define STEP_SIZE 0.1f
 # endif
+
+# define N_ARGS_ERR "Incorrect amount or arguments"
+# define RANGE_ERR "Out of range"
+# define VEC_0_ERR "Orientation can not be all zero"
+# define N_ELEMENTS_ERR "Does not support multiple elements"
 
 #endif

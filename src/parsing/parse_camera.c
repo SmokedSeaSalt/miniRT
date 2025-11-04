@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 11:59:04 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/22 15:05:03 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/11/04 14:24:23 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,18 @@
 #include "libft.h"
 #include "structs.h"
 #include "math_inc.h"
+#include "consts.h"
 
 static int	fill_camera_struct(t_camera *camera, char **line)
 {
-	if (count_arguments(line) != 8)
-		return (printf("Error\nCamera: Incorrect amount of arguments\n"), 1);
-	camera->coords = fill_vec3(line[1], line[2], line[3]);
-	camera->orientation = fill_vec3(line[4], line[5], line[6]);
-	if (orientation_out_of_range(camera->orientation))
-		return (printf("Error\nCamera: Orientation out of range\n"), 1);
-	if (orientation_all_zero(camera->orientation))
-		return (printf("Error\nCamera: Orientation can not be all zero\n"), 1);
-	camera->orientation = vec3_normalize(camera->orientation);
-	camera->fov_rad = deg_to_rad(ft_atof(line[7]));
-	if (camera->fov_rad < 0 || camera->fov_rad > deg_to_rad(180))
-		return (printf("Error\nCamera: FOV out of range\n"), 1);
+	if (count_arguments(line) != 4)
+		return (printf("Error\nCamera: "N_ARGS_ERR"\n"), 1);
+	if (parse_orig(&(camera->coords), line[1]) != 0)
+		return (printf("Camera: Origin parsing error\n"), 1);
+	if (parse_normal_vector(&(camera->orientation), line[2]) != 0)
+		return (printf("Camera: Orientation parsing error\n"), 1);
+	if (parse_fov(&(camera->fov_rad), line[3]) != 0)
+		return (printf("Camera: Fov parsing error\n"), 1);
 	return (0);
 }
 
@@ -40,7 +37,7 @@ int	new_camera_struct(t_scene *scene, char **line)
 	t_camera	*camera;
 
 	if (scene->camera != NULL)
-		return (printf("Error\nCamera: Does not support multiple elements\n"), 1);
+		return (printf("Error\nCamera: "N_ELEMENTS_ERR"\n"), 1);
 	camera = ft_calloc(1, sizeof(t_camera));
 	if (camera == NULL)
 		return (printf("Error\nMalloc fail\n"), 2);
