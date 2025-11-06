@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 10:30:44 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/30 12:37:17 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/11/06 14:08:51 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,24 +65,23 @@ void	display_default(t_ray *ray, int x, int y, t_scene *scene)
 	int		colour;
 
 	r = (ray->results.light_intensity.r + scene->ambient->intensity.r);
-	r = r * (ray->results.obj_color.r / 255);
+	r = r * ((float)ray->results.obj_color.r / 255);
 	r += ray->results.specular_intensity.r;
 	if (r > 1.0f)
 		r = 1.0f;
 	r *= 255;
 	g = (ray->results.light_intensity.g + scene->ambient->intensity.g);
-	g = g * (ray->results.obj_color.g / 255);
+	g = g * ((float)ray->results.obj_color.g / 255);
 	g += ray->results.specular_intensity.g;
 	if (g > 1.0f)
 		g = 1.0f;
 	g *= 255;
 	b = (ray->results.light_intensity.b + scene->ambient->intensity.b);
-	b = b * (ray->results.obj_color.b / 255);
+	b = b * ((float)ray->results.obj_color.b / 255);
 	b += ray->results.specular_intensity.b;
 	if (b > 1.0f)
 		b = 1.0f;
 	b *= 255;
-
 	colour = ((int)r << 3 * 8) + ((int)g << 2 * 8) + ((int)b << 1 * 8) + 0xff;
 	mlx_put_pixel(scene->g_img, x, y, colour);
 }
