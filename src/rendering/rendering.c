@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 09:57:43 by egrisel           #+#    #+#             */
-/*   Updated: 2025/11/06 09:53:27 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/11/06 11:00:40 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,47 +88,17 @@ void render_block(int x, int y, t_scene *scene)
 	}
 }
 
-/// @brief loop through all pixels and render the values.
-/// @param scene
-/// @return
-//int	render_frame(t_scene *scene)
-//{
-//	int	i_x;
-//	int	i_y;
-
-//	i_x = 0;
-//	while (i_x < scene->window_info.width)
-//	{
-//		i_y = 0;
-//		while (i_y < scene->window_info.height)
-//		{
-//			render_pixel(i_x, i_y, scene);
-//			i_y++;
-//		}
-//		i_x++;
-//	}
-//	return (0); //change to void?
-//}
-
 int block_already_rendered(int x, int y, t_window_info *window_info)
 {
-	int block_size;
+	int higher_block_size;
 	int depth_check;
 
-	if (x == 0 && y == 0)
-	{
-		if (window_info->max_render_depth == window_info->render_depth)
+	if (window_info->max_render_depth == window_info->render_depth)
 			return (0);
-		return (1);
-	}
 	depth_check = window_info->render_depth + 1;
-	while (depth_check < window_info->max_render_depth)
-	{
-		block_size = powf(2, depth_check);
-		if (x % block_size == 0 && y % block_size == 0)
-			return (1);
-		depth_check++;
-	}
+	higher_block_size = pow(2, depth_check);
+	if (x % higher_block_size == 0 && y % higher_block_size == 0)
+		return (1);
 	return (0);
 }
 
@@ -143,14 +113,14 @@ void render_frame(t_scene *scene)
 
 	if (scene->window_info.render_depth < 0)
 		return ;
-	block_size = powf(2, scene->window_info.render_depth);
+	block_size = pow(2, scene->window_info.render_depth);
 	i_x = 0;
 	while (i_x < scene->window_info.width)
 	{
 		i_y = 0;
 		while (i_y < scene->window_info.height)
 		{
-			if (block_already_rendered(i_x, i_y, &(scene->window_info)) != 0)
+			if (block_already_rendered(i_x, i_y, &(scene->window_info)) == 0)
 				render_block(i_x, i_y, scene);
 			i_y += block_size;
 		}
