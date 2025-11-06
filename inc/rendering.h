@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:42:05 by egrisel           #+#    #+#             */
-/*   Updated: 2025/10/24 11:22:37 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/11/06 09:53:43 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define RENDERING_H
 # include "structs.h"
 
-int		render_frame(t_scene *scene);
+void	render_frame(t_scene *scene);
 t_ray	get_ray(int x, int y, t_camera *camera, t_window_info *window_info);
 
 

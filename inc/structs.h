@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:17 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/30 11:54:07 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/11/06 09:41:32 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,6 +213,8 @@ typedef struct s_window_info
 	int		height;
 	float	aspect_ratio;
 	float	fov_scale;
+	int		render_depth;
+	int		max_render_depth;
 }	t_window_info;
 
 typedef struct s_render_info

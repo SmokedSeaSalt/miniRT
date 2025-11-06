@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 10:04:11 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/24 11:14:20 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/11/06 09:57:43 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ void	handle_inputs(mlx_key_data_t keydata, void *param)
 	t_scene	*scene;
 
 	scene = (t_scene *)param;
+	if (keydata.action == MLX_RELEASE)
+		scene->window_info.render_depth = scene->window_info.max_render_depth;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_RELEASE)
 		mlx_close_window(scene->mlx);
 	if (keydata.key == MLX_KEY_1 && keydata.action == MLX_RELEASE)
@@ -114,10 +116,8 @@ static void	hook(void *param)
 	t_scene	*scene;
 
 	scene = (t_scene *)param;
-	//handle_inputs(scene);
 	set_window_info_struct(&(scene->window_info));
 	set_fov_scale(&(scene->window_info), scene->camera);
-	// draw_black(mlx_info);
 	render_frame(scene);
 	update_framename(scene);
 	update_fpscounter(scene);
@@ -145,6 +145,8 @@ void	init_settings(t_scene *scene)
 	scene->render_info.render_hit = &display_default;
 	scene->render_info.render_miss = &display_black;
 	scene->render_info.fpscounter = 1;
+	scene->window_info.max_render_depth = 7;
+	scene->window_info.render_depth = 7;
 }
 
 /// @brief general cleanup function that will free all malloced values.
