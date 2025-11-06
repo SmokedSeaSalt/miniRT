@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:14:45 by egrisel           #+#    #+#             */
-/*   Updated: 2025/11/04 14:23:49 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/11/06 14:29:29 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 # define CONSTS_H
 
 # ifndef WIDTH
-#  define WIDTH 1000
+#  define WIDTH 1920
 # endif
 
 # ifndef HEIGHT
-#  define HEIGHT 1000
+#  define HEIGHT 1080
 # endif
 
 # define PI 3.14159265358979323846f
