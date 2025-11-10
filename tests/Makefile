@@ -1,5 +1,5 @@
 CC=cc
-CFLAGS=-I./include -Wall -Wextra -Werror -I ../inc -I ../lib/MLX42/include/MLX42 -g
+CFLAGS=-I./include -Wall -Wextra -Werror -I ../inc -I ../lib/MLX42/include/MLX42 -g -Wno-error=missing-braces
 TEST_LIBS=-lcmocka
 ARGS_MOCKA= -I$(HOME)/local_libs/include -L$(HOME)/local_libs/lib -lcmocka -Wl,-rpath,$(HOME)/local_libs/lib
 
@@ -7,7 +7,7 @@ LIBFT_PATH = ../lib/libft
 LIBFT = $(LIBFT_PATH)/libft.a
 LIBFT_INC = -I $(LIBFT_PATH)/include
 
-LIBMLX_PATH = lib/MLX42
+LIBMLX_PATH = ../lib/MLX42
 LIBMLX = $(LIBMLX_PATH)/build/libmlx42.a -ldl -lglfw -pthread -lm
 LIBMLX_INC = -I $(LIBMLX_PATH)/include/MLX42
 
