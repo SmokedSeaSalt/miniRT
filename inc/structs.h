@@ -215,6 +215,7 @@ typedef struct s_window_info
 	float	fov_scale;
 	int		render_depth;
 	int		max_render_depth;
+	int		render_y;
 }	t_window_info;
 
 typedef struct s_render_info

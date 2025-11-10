@@ -65,7 +65,10 @@ void	handle_inputs(mlx_key_data_t keydata, void *param)
 
 	scene = (t_scene *)param;
 	if (keydata.action == MLX_RELEASE)
+	{
 		scene->window_info.render_depth = scene->window_info.max_render_depth;
+		scene->window_info.render_y = 0;
+	}
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_RELEASE)
 		mlx_close_window(scene->mlx);
 	if (keydata.key == MLX_KEY_1 && keydata.action == MLX_RELEASE)
@@ -147,6 +150,7 @@ void	init_settings(t_scene *scene)
 	scene->render_info.fpscounter = 1;
 	scene->window_info.max_render_depth = 7;
 	scene->window_info.render_depth = 7;
+	scene->window_info.render_y = 0;
 }
 
 /// @brief general cleanup function that will free all malloced values.
