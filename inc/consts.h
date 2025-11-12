@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:14:45 by egrisel           #+#    #+#             */
-/*   Updated: 2025/11/06 14:29:29 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/11/12 16:01:10 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 
 # ifndef WIDTH
 #  define WIDTH 1920
+# endif
+
+# ifndef SCREEN_FPS
+#  define SCREEN_FPS 60
 # endif
 
 # ifndef HEIGHT

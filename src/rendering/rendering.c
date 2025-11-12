@@ -6,15 +6,18 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 09:57:43 by egrisel           #+#    #+#             */
-/*   Updated: 2025/11/06 11:00:40 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/11/12 16:06:08 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "math_inc.h"
 #include "rendering.h"
 #include "structs.h"
+#include "helpers.h"
+#include "consts.h"
 #include <float.h>
 #include <math.h>
+#include <stdio.h>
 
 /// @brief loop trough all object to check what object needs to be rendered.
 /// @param scene
@@ -102,28 +105,43 @@ int block_already_rendered(int x, int y, t_window_info *window_info)
 	return (0);
 }
 
+void	print_render_time(long long *start_time)
+{
+	if (*start_time == -1)
+		return ;
+	printf("render time: %lld ms\n", get_timestamp(*start_time));
+	*start_time = -1;
+}
+
 //calculate max depth
 //any key press sets current depth back to max depth
 void render_frame(t_scene *scene)
 {
+	const long long frame_start = get_time_in_ms();
 	int	i_x;
 	int block_size;
 
-	if (scene->window_info.render_depth < 0)
-		return ;
-	block_size = pow(2, scene->window_info.render_depth);
-	i_x = 0;
-	while (i_x < scene->window_info.width)
+	while(get_timestamp(frame_start) < ((1.0 / SCREEN_FPS) * 1000))
 	{
-		if (block_already_rendered(i_x, scene->window_info.render_y, \
-&(scene->window_info)) == 0)
-			render_block(i_x, scene->window_info.render_y, scene);
-		i_x += block_size;
-	}
-	scene->window_info.render_y += block_size;
-	if (scene->window_info.render_y >= scene->window_info.height)
-	{
-		scene->window_info.render_y = 0;
-		(scene->window_info.render_depth)--;
+		if (scene->window_info.render_depth < 0)
+		{
+			print_render_time(&(scene->window_info.start_time));
+			return ;
+		}
+		block_size = pow(2, scene->window_info.render_depth);
+		i_x = 0;
+		while (i_x < scene->window_info.width)
+		{
+			if (block_already_rendered(i_x, scene->window_info.render_y, \
+	&(scene->window_info)) == 0)
+				render_block(i_x, scene->window_info.render_y, scene);
+			i_x += block_size;
+		}
+		scene->window_info.render_y += block_size;
+		if (scene->window_info.render_y >= scene->window_info.height)
+		{
+			scene->window_info.render_y = 0;
+			(scene->window_info.render_depth)--;
+		}
 	}
 }

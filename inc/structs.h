@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:17 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/11/06 09:41:32 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/11/12 13:33:35 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,13 +209,14 @@ struct s_ray
 
 typedef struct s_window_info
 {
-	int		width;
-	int		height;
-	float	aspect_ratio;
-	float	fov_scale;
-	int		render_depth;
-	int		max_render_depth;
-	int		render_y;
+	int			width;
+	int			height;
+	float		aspect_ratio;
+	float		fov_scale;
+	int			render_depth;
+	int			max_render_depth;
+	int			render_y;
+	long long	start_time;
 }	t_window_info;
 
 typedef struct s_render_info

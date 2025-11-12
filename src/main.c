@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 10:04:11 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/11/06 09:57:43 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/11/12 13:40:04 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <stdio.h> //to use printf
 #include <stdlib.h> //to use free
 #include "math_inc.h"
+#include "helpers.h"
 
 // change later for variable window size
 void	set_window_info_struct(t_window_info *window_info)
@@ -68,6 +69,7 @@ void	handle_inputs(mlx_key_data_t keydata, void *param)
 	{
 		scene->window_info.render_depth = scene->window_info.max_render_depth;
 		scene->window_info.render_y = 0;
+		scene->window_info.start_time = get_time_in_ms();
 	}
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_RELEASE)
 		mlx_close_window(scene->mlx);
@@ -151,6 +153,7 @@ void	init_settings(t_scene *scene)
 	scene->window_info.max_render_depth = 7;
 	scene->window_info.render_depth = 7;
 	scene->window_info.render_y = 0;
+	scene->window_info.start_time = get_time_in_ms();
 }
 
 /// @brief general cleanup function that will free all malloced values.
