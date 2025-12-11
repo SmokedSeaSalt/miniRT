@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:17 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/11/12 13:33:35 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/11 15:03:37 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,18 @@ typedef enum e_obj_type
 	ENDCAP,
 }	t_obj_type;
 
+typedef enum e_uv_type
+{
+	CHECKERBOARD,
+	PNG,
+}	t_uv_type;
+
+typedef struct s_uv_map
+{
+	t_uv_type type;
+	mlx_texture_t *png;
+}	t_uv_map;
+
 ////////////////////////////////////////////////////////////////////////////////
 // scene elements															  //
 ////////////////////////////////////////////////////////////////////////////////
@@ -173,6 +185,8 @@ typedef struct s_endcap
 typedef struct s_object
 {
 	t_obj_type		type;
+	t_uv_map		*color; //enum type {checkerd, png}
+	t_uv_map		*bump; //enum type {png}
 	void			*data;
 	struct s_object	*next;
 // Function pointers for object-specific operations
