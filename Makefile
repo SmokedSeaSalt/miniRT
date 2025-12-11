@@ -69,7 +69,9 @@ SRC = 	src/main.c \
 		src/rendering/plane.c \
 		src/rendering/ray.c \
 		src/rendering/rendering.c \
-		src/rendering/sphere.c
+		src/rendering/sphere.c \
+		src/rendering/uv_mapping/sphere_uv.c \
+		src/rendering/uv_mapping/uv_mapping.c
 
 
 # Header files

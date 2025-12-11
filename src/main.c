@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
+/*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 10:04:11 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/11/12 13:40:04 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/11 16:48:19 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,6 +179,8 @@ void cleanup_scene(t_scene *scene)
 	{
 		next = current->next;
 		free(current->data);
+		// free(current->bump); //TODO mlx delete mlx_texture_t
+		// free(current->uv_color); //TODO mlx delete mlx_texture_t
 		free(current);
 		current = next;
 	}

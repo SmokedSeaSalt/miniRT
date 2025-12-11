@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
+/*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:42:05 by egrisel           #+#    #+#             */
-/*   Updated: 2025/11/06 09:53:43 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/11 16:29:38 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 
 void	render_frame(t_scene *scene);
 t_ray	get_ray(int x, int y, t_camera *camera, t_window_info *window_info);
-
 
 ////////////////////////////////////////////////////////////////////////////////
 // light																	  //
@@ -83,5 +82,12 @@ void	display_horizon_blue_sky(t_ray *ray, int x, int y, t_scene *scene);
 ////////////////////////////////////////////////////////////////////////////////
 
 void	update_fpscounter(t_scene *scene);
+
+////////////////////////////////////////////////////////////////////////////////
+// uv_mapping																  //
+////////////////////////////////////////////////////////////////////////////////
+
+t_color	uv_checkerboard(t_uv uv, t_color color);
+t_uv get_sphere_uv(t_ray *ray, t_sphere *sphere);
 
 #endif

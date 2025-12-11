@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   consts.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
+/*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:14:45 by egrisel           #+#    #+#             */
-/*   Updated: 2025/11/12 16:01:10 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/11 16:37:41 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,14 @@
 
 # ifndef STEP_SIZE
 #  define STEP_SIZE 0.1f
+# endif
+
+# ifndef CHECKER_U_NUM
+#  define CHECKER_U_NUM 10
+# endif
+
+# ifndef CHECKER_V_NUM
+#  define CHECKER_V_NUM 10
 # endif
 
 # define N_ARGS_ERR "Incorrect amount or arguments"
