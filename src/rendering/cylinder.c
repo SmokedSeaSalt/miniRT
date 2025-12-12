@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 11:18:10 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/21 16:40:09 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/12 16:42:32 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,7 +181,18 @@ t_vec3	cylinder_normal_at(t_ray *ray, t_cylinder *cylinder)
 /// @param scene
 void	get_hit_data_cylinder(t_ray *ray, t_cylinder *cylinder, t_scene *scene)
 {
+	t_uv	uv;
+
 	ray->results.hit_normal = cylinder_normal_at(ray, cylinder);
-	ray->results.obj_color = cylinder->color;
+	if (cylinder->uv_color != NULL)
+	{
+		uv = get_cylinder_uv(ray, cylinder);
+		if (cylinder->uv_color->type == CHECKERBOARD)
+			ray->results.obj_color = uv_checkerboard(uv, cylinder->color);
+		else if (cylinder->uv_color->type == PNG)
+			ray->results.obj_color = get_uv_value_png(uv, cylinder->uv_color->png);
+	}
+	else
+		ray->results.obj_color = cylinder->color;
 	set_light_hit_angle_and_intensity(scene, ray);
 }

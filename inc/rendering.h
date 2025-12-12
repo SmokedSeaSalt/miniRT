@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:42:05 by egrisel           #+#    #+#             */
-/*   Updated: 2025/12/12 11:53:24 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/12/12 16:37:27 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	get_hit_data_plane(t_ray *ray, t_plane *plane, t_scene *scene);
 ////////////////////////////////////////////////////////////////////////////////
 
 int		is_hit_cylinder(t_ray *ray, t_cylinder *cylinder);
+float	get_hit_height(t_ray *ray, t_cylinder *cylinder, float hit_dist);
 float	get_hit_dist_cylinder(t_ray *ray, t_cylinder *cylinder);
 void	get_hit_data_cylinder(t_ray *ray, t_cylinder *cylinder, t_scene *scene);
 
@@ -90,6 +91,7 @@ void	update_fpscounter(t_scene *scene);
 t_color	uv_checkerboard(t_uv uv, t_color color);
 t_color	get_uv_value_png(t_uv uv, mlx_texture_t *uv_map);
 t_uv	get_sphere_uv(t_ray *ray, t_sphere *sphere);
+t_uv	get_cylinder_uv(t_ray *ray, t_cylinder *cylinder);
 
 
 #endif

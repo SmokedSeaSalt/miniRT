@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:17 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/12 12:10:23 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/12 14:43:50 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,8 @@ typedef enum e_obj_type
 	SPHERE,
 	PLANE,
 	CYLINDER,
-	ENDCAP,
+	ENDCAPTOP,
+	ENDCAPBOT,
 }	t_obj_type;
 
 typedef struct s_uv

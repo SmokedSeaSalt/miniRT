@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 12:00:29 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/12 12:13:52 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/12 14:44:09 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	fill_top_endcap_struct(t_scene *scene, t_cylinder *cylinder)
 	object = ft_calloc(1, sizeof(t_object));
 	if (object == NULL)
 		return (free (endcap_top), printf("Error\nMalloc fail\n"), 2);
-	object->type = ENDCAP;
+	object->type = ENDCAPTOP;
 	object->data = endcap_top;
 	object->is_hit = (int (*)(t_ray *, void *))is_hit_endcap;
 	object->get_hit_dist = (float (*)(t_ray *, void *))get_hit_dist_endcap;
@@ -68,7 +68,7 @@ static int	fill_bottom_endcap_struct(t_scene *scene, t_cylinder *cylinder)
 	object = ft_calloc(1, sizeof(t_object));
 	if (object == NULL)
 		return (free (endcap_bottom), printf("Error\nMalloc fail\n"), 2);
-	object->type = ENDCAP;
+	object->type = ENDCAPBOT;
 	object->data = endcap_bottom;
 	object->is_hit = (int (*)(t_ray *, void *))is_hit_endcap;
 	object->get_hit_dist = (float (*)(t_ray *, void *))get_hit_dist_endcap;
