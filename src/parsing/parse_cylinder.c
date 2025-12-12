@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 12:00:29 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/11/04 13:47:09 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/12 12:13:52 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ static int	fill_top_endcap_struct(t_scene *scene, t_cylinder *cylinder)
 	endcap_top->normal = cylinder->orientation;
 	endcap_top->coords.v = (cylinder->coords.v + \
 (cylinder->orientation.v * cylinder->height * 0.5));
+	endcap_top->uv_color = cylinder->uv_color;
+	endcap_top->bump = cylinder->bump;
 	object = ft_calloc(1, sizeof(t_object));
 	if (object == NULL)
 		return (free (endcap_top), printf("Error\nMalloc fail\n"), 2);
@@ -61,6 +63,8 @@ static int	fill_bottom_endcap_struct(t_scene *scene, t_cylinder *cylinder)
 	endcap_bottom->normal.v = -cylinder->orientation.v;
 	endcap_bottom->coords.v = (cylinder->coords.v + \
 (cylinder->orientation.v * cylinder->height * -0.5f));
+	endcap_bottom->uv_color = cylinder->uv_color;
+	endcap_bottom->bump = cylinder->bump;
 	object = ft_calloc(1, sizeof(t_object));
 	if (object == NULL)
 		return (free (endcap_bottom), printf("Error\nMalloc fail\n"), 2);
@@ -84,7 +88,7 @@ static int	new_endcap_struct(t_scene *scene, t_cylinder *cylinder)
 
 static int	fill_cylinder_struct(t_cylinder *cylinder, char **line)
 {
-	if (count_arguments(line) != 6)
+	if (count_arguments(line) < 6 || count_arguments(line) > 8)
 		return (printf("Error\nCylinder: Incorrect amount of arguments\n"), 1);
 	if (parse_orig(&(cylinder->coords), line[1]) != 0)
 		return (printf("Cylinder: Origin parsing error\n"), 1);
@@ -95,6 +99,10 @@ static int	fill_cylinder_struct(t_cylinder *cylinder, char **line)
 	cylinder->height = fabs(ft_atof(line[4]));
 	if (parse_color(&(cylinder->color), line[5]) != 0)
 		return (printf("Cylinder: Color parsing error\n"), 1);
+	if (count_arguments(line) >= 7)
+		cylinder->uv_color = get_uv_map(line[6]);
+	if (count_arguments(line) >= 8)
+		cylinder->bump = get_bump_map(line[7]);
 	return (0);
 }
 

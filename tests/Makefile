@@ -54,7 +54,7 @@ run_math: test_math
 #                                                                              #
 ################################################################################
 
-PARSING_FUNC = $(wildcard ../src/parsing/*.c) $(wildcard ../src/rendering/*.c) $(HELPER_FUNC) $(MATH_FUNC)
+PARSING_FUNC = $(wildcard ../src/parsing/*.c) $(wildcard ../src/rendering/*.c) $(wildcard ../src/rendering/uv_mapping/*.c) $(HELPER_FUNC) $(MATH_FUNC)
 PARSING_INC = ../inc
 
 test_parsing: test_parsing.c $(PARSING_FUNC) $(PARSING_INC) libft
@@ -84,7 +84,7 @@ run_intersect: test_intersect
 #                                                                              #
 ################################################################################
 
-RENDERING_FUNC = $(wildcard ../src/rendering/*.c) $(HELPER_FUNC) $(MATH_FUNC)
+RENDERING_FUNC = $(wildcard ../src/rendering/*.c) $(wildcard ../src/rendering/uv_mapping/*.c) $(HELPER_FUNC) $(MATH_FUNC)
 RENDERING_INC = ../inc
 
 test_rendering: test_rendering.c $(PARSING_FUNC) $(PARSING_INC) libft mlx42

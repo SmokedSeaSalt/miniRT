@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:17 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/11 16:44:50 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/12/12 12:10:23 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,8 @@ typedef struct s_sphere
 	float		diameter;
 	float		radius;
 	t_color		color;
+	t_uv_map	*uv_color;
+	t_uv_map	*bump;
 }	t_sphere;
 
 typedef struct s_plane
@@ -167,6 +169,8 @@ typedef struct s_plane
 	t_vec3		coords;
 	t_vec3		normal;
 	t_color		color;
+	t_uv_map	*uv_color;
+	t_uv_map	*bump;
 }	t_plane;
 
 typedef struct s_cylinder
@@ -177,6 +181,8 @@ typedef struct s_cylinder
 	float		radius;
 	float		height;
 	t_color		color;
+	t_uv_map	*uv_color;
+	t_uv_map	*bump;
 }	t_cylinder;
 
 typedef struct s_endcap
@@ -186,13 +192,13 @@ typedef struct s_endcap
 	float		diameter;
 	float		radius;
 	t_color		color;
+	t_uv_map	*uv_color;
+	t_uv_map	*bump;
 }	t_endcap;
 
 typedef struct s_object
 {
 	t_obj_type		type;
-	t_uv_map		*uv_color; //enum type {checkerd, png}
-	t_uv_map		*bump; //enum type {png}
 	void			*data;
 	struct s_object	*next;
 // Function pointers for object-specific operations

@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 11:59:33 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/12 11:30:18 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/12 12:11:11 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@ static int	fill_sphere_struct(t_sphere *sphere, char **line)
 	sphere->radius = sphere->diameter * 0.5f;
 	if (parse_color(&(sphere->color), line[3]) != 0)
 		return (printf("Sphere: Color parsing error\n"), 1);
+	if (count_arguments(line) >= 5)
+		sphere->uv_color = get_uv_map(line[4]);
+	if (count_arguments(line) >= 6)
+		sphere->bump = get_bump_map(line[5]);
 	return (0);
 }
 
@@ -47,10 +51,6 @@ int	new_sphere_struct(t_scene *scene, char **line)
 	object = ft_calloc(1, sizeof(t_object));
 	if (object == NULL)
 		return (free (sphere), printf("Error\nMalloc fail\n"), 2);
-	if (line[4] != NULL)
-		object->uv_color = get_uv_map(line[4]);
-	if (line[4] != NULL && line[5] != NULL)
-		object->bump = get_bump_map(line[5]);
 	object->type = SPHERE;
 	object->data = sphere;
 	object->is_hit = (int (*)(t_ray *, void *))is_hit_sphere;

@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 11:59:50 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/11/04 13:47:16 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/12 12:14:05 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 static int	fill_plane_struct(t_plane *plane, char **line)
 {
-	if (count_arguments(line) != 4)
+	if (count_arguments(line) < 4 || count_arguments(line) > 6)
 		return (printf("Error\nPlane: Incorrect amount of arguments\n"), 1);
 	if (parse_orig(&(plane->coords), line[1]) != 0)
 		return (printf("Plane: Origin parsing error\n"), 1);
@@ -30,6 +30,10 @@ static int	fill_plane_struct(t_plane *plane, char **line)
 		return (printf("Plane: Vector parsing error\n"), 1);
 	if (parse_color(&(plane->color), line[3]) != 0)
 		return (printf("Plane: Color parsing error\n"), 1);
+	if (count_arguments(line) >= 5)
+		plane->uv_color = get_uv_map(line[4]);
+	if (count_arguments(line) >= 6)
+		plane->bump = get_bump_map(line[5]);
 	return (0);
 }
 
