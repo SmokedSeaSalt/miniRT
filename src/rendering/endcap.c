@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 14:11:44 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/21 16:42:05 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/12 17:03:26 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,20 @@ float	get_hit_dist_endcap(t_ray *ray, t_endcap *endcap)
 /// @param scene
 void	get_hit_data_endcap(t_ray *ray, t_endcap *endcap, t_scene *scene)
 {
+	t_uv	uv;
+	
 	ray->results.hit_normal = endcap->normal;
 	if (is_vec3_angle_acute(&ray->vec3, &endcap->normal) == 1)
 		ray->results.hit_normal.v = -ray->results.hit_normal.v;
-	ray->results.obj_color = endcap->color;
+	if (endcap->uv_color != NULL)
+	{
+		uv = get_endcap_uv(ray, endcap);
+		if (endcap->uv_color->type == CHECKERBOARD)
+			ray->results.obj_color = uv_checkerboard(uv, endcap->color);
+		else if (endcap->uv_color->type == PNG)
+			ray->results.obj_color = get_uv_value_png(uv, endcap->uv_color->png);
+	}
+	else
+		ray->results.obj_color = endcap->color;
 	set_light_hit_angle_and_intensity(scene, ray);
 }
