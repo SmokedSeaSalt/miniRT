@@ -3,14 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   plane_uv.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
+/*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 12:54:37 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/11 12:54:51 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/12 16:09:17 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-get_plane_uv()
+#include "structs.h"
+#include "consts.h"
+#include "math_inc.h"
+#include <math.h>
+#include "consts.h"
+
+static void	set_u_and_v_vectors(t_vec3 *u_vec, t_vec3 *v_vec, t_plane *plane)
 {
+	const t_vec3 world_up = vec3_new(0, 0, 1);// todo edge case for certain plane orientation?
+	*u_vec = vec3_cross(plane->normal, world_up);
+	*u_vec = vec3_normalize(*u_vec);
+	*v_vec = vec3_cross(plane->normal, *u_vec);
+	*v_vec = vec3_normalize(*v_vec);
+}
+
+// static float	get_u_between_0_and_1(float u)
+// {
+// 	if ()
+// }
+
+t_uv	get_plane_uv(t_ray *ray, t_plane *plane)
+{
+	t_uv	uv;
+	t_vec3	u_vec;
+	t_vec3	v_vec;
+	t_vec3	hit_point;
+	t_vec3	center_to_hit_vec;
+
+	set_u_and_v_vectors(&u_vec, &v_vec, plane);
+	hit_point.v = ray->orig.v + (ray->vec3.v * ray->results.hit_dist);
+	center_to_hit_vec.v = hit_point.v - plane->coords.v;
+
 	
+	uv.u = fmod(vec3_dot(u_vec, center_to_hit_vec), PLANE_UV_WIDTH) / PLANE_UV_WIDTH;
+	uv.v = fmod(vec3_dot(v_vec, center_to_hit_vec), PLANE_UV_HEIGHT) / PLANE_UV_HEIGHT;
+	uv.v = 1 - uv.v;
+	return (uv);
 }

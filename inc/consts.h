@@ -6,7 +6,7 @@
 /*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:14:45 by egrisel           #+#    #+#             */
-/*   Updated: 2025/12/11 16:37:41 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/12/12 15:25:04 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,15 @@
 # ifndef CHECKER_V_NUM
 #  define CHECKER_V_NUM 10
 # endif
+
+# ifndef PLANE_UV_WIDTH
+#  define PLANE_UV_WIDTH 5
+# endif
+
+# ifndef PLANE_UV_HEIGHT
+#  define PLANE_UV_HEIGHT 5
+# endif
+
 
 # define N_ARGS_ERR "Incorrect amount or arguments"
 # define RANGE_ERR "Out of range"

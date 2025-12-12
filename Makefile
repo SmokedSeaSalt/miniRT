@@ -6,7 +6,7 @@
 
 NAME = miniRT
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -MMD
+CFLAGS = -Wall -Werror -Wextra -MMD -g
 CCDEBUG = -g
 
 ################################################################################
@@ -71,8 +71,10 @@ SRC = 	src/main.c \
 		src/rendering/ray.c \
 		src/rendering/rendering.c \
 		src/rendering/sphere.c \
+		src/rendering/uv_mapping/plane_uv.c \
 		src/rendering/uv_mapping/sphere_uv.c \
 		src/rendering/uv_mapping/uv_mapping.c
+
 
 
 # Header files
