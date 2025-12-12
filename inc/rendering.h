@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:42:05 by egrisel           #+#    #+#             */
-/*   Updated: 2025/12/12 16:37:27 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/12 17:03:57 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,6 @@ t_color	uv_checkerboard(t_uv uv, t_color color);
 t_color	get_uv_value_png(t_uv uv, mlx_texture_t *uv_map);
 t_uv	get_sphere_uv(t_ray *ray, t_sphere *sphere);
 t_uv	get_cylinder_uv(t_ray *ray, t_cylinder *cylinder);
-
+t_uv	get_endcap_uv(t_ray *ray, t_endcap *endcap);
 
 #endif

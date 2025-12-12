@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 12:46:26 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/12 16:56:18 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/12 17:05:32 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ t_uv get_endcapbot_uv(t_ray *ray, t_endcap *endcap)
 	hit_point.v = ray->orig.v + (ray->vec3.v * ray->results.hit_dist);
 	center_to_hit_vec.v = hit_point.v - endcap->coords.v;
 
-	uv.u = (vec3_dot(u_vec, center_to_hit_vec) / endcap->radius) * 0.3;
-	uv.v = (vec3_dot(v_vec, center_to_hit_vec) / endcap->radius) * 0.3;
+	uv.u = (vec3_dot(u_vec, center_to_hit_vec) / endcap->diameter) * 0.3;
+	uv.v = (vec3_dot(v_vec, center_to_hit_vec) / endcap->diameter) * 0.3;
 	uv.u += 0.85;
 	uv.v += 0.15;
 	return (uv);
@@ -81,8 +81,8 @@ t_uv get_endcaptop_uv(t_ray *ray, t_endcap *endcap)
 	hit_point.v = ray->orig.v + (ray->vec3.v * ray->results.hit_dist);
 	center_to_hit_vec.v = hit_point.v - endcap->coords.v;
 
-	uv.u = (vec3_dot(u_vec, center_to_hit_vec) / endcap->radius) * 0.3;
-	uv.v = (vec3_dot(v_vec, center_to_hit_vec) / endcap->radius) * 0.3;
+	uv.u = (vec3_dot(u_vec, center_to_hit_vec) / endcap->diameter) * 0.3;
+	uv.v = (vec3_dot(v_vec, center_to_hit_vec) / endcap->diameter) * 0.3;
 	uv.u += 0.85;
 	uv.v += 0.85;
 	return (uv);
