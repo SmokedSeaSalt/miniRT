@@ -6,7 +6,7 @@
 /*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 12:33:13 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/11 16:42:19 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/12/12 13:31:20 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_uv get_sphere_uv(t_ray *ray, t_sphere *sphere)
 	d = vec3_normalize(d);
 	uv.u = 0.5 + (atan2(d.x, d.y) / (2 * PI));
 	uv.v = 0.5 + (asin(d.z) / PI);
-
+	uv.u = fmax(0, fmin(1, uv.u));
+	uv.v = fmax(0, fmin(1, uv.v));
 	return (uv);
 }

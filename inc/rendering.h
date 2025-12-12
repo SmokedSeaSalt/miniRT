@@ -6,7 +6,7 @@
 /*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:42:05 by egrisel           #+#    #+#             */
-/*   Updated: 2025/12/11 16:29:38 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/12/12 11:53:24 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ void	update_fpscounter(t_scene *scene);
 ////////////////////////////////////////////////////////////////////////////////
 
 t_color	uv_checkerboard(t_uv uv, t_color color);
-t_uv get_sphere_uv(t_ray *ray, t_sphere *sphere);
+t_color	get_uv_value_png(t_uv uv, mlx_texture_t *uv_map);
+t_uv	get_sphere_uv(t_ray *ray, t_sphere *sphere);
+
 
 #endif
