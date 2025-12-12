@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:54 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/11/04 14:04:57 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/12 09:47:28 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,6 @@ int	select_element(t_scene *scene, char **line)
 		return (new_plane_struct(scene, line));
 	if (ft_strncmp(line[0], "cy", ft_strlen(line[0])) == 0)
 		return (new_cylinder_struct(scene, line));
-	printf("Error\nParsing: Element %s not found\n", line[1]);
+	printf("Error\nParsing: Element %s not supported\n", line[0]);
 	return (1);
 }

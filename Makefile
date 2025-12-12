@@ -58,6 +58,7 @@ SRC = 	src/main.c \
 		src/parsing/parse_sphere.c \
 		src/parsing/parsing_helpers.c \
 		src/parsing/parsing.c \
+		src/parsing/uv_map_handling.c \
 		src/parsing/file_handling.c \
 		src/rendering/cylinder.c \
 		src/rendering/debug_window.c \

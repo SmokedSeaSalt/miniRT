@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:10 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/11/04 13:28:51 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/12 11:32:10 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ int		parse_normal_vector(t_vec3 *vec, char *str);
 int		parse_ratio(float *ratio, char *str);
 int		parse_fov(float *fov, char *str);
 
-
-
 ////////////////////////////////////////////////////////////////////////////////
 // parse_structs															  //
 ////////////////////////////////////////////////////////////////////////////////
@@ -52,5 +50,12 @@ int		new_cylinder_struct(t_scene *scene, char **line);
 int		new_light_struct(t_scene *scene, char **line);
 int		new_plane_struct(t_scene *scene, char **line);
 int		new_sphere_struct(t_scene *scene, char **line);
+
+////////////////////////////////////////////////////////////////////////////////
+// parse maps																  //
+////////////////////////////////////////////////////////////////////////////////
+
+t_uv_map	*get_uv_map(char *line);
+t_uv_map	*get_bump_map(char *line);
 
 #endif

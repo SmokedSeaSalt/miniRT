@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 11:59:33 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/11/04 13:47:24 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/12 11:30:18 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 static int	fill_sphere_struct(t_sphere *sphere, char **line)
 {
-	if (count_arguments(line) != 4)
+	if (count_arguments(line) < 4 || count_arguments(line) > 6)
 		return (printf("Error\nSphere: Incorrect amount of arguments\n"), 1);
 	if (parse_orig(&(sphere->coords), line[1]) != 0)
 		return (printf("Sphere: Origin parsing error\n"), 1);
@@ -47,6 +47,10 @@ int	new_sphere_struct(t_scene *scene, char **line)
 	object = ft_calloc(1, sizeof(t_object));
 	if (object == NULL)
 		return (free (sphere), printf("Error\nMalloc fail\n"), 2);
+	if (line[4] != NULL)
+		object->uv_color = get_uv_map(line[4]);
+	if (line[4] != NULL && line[5] != NULL)
+		object->bump = get_bump_map(line[5]);
 	object->type = SPHERE;
 	object->data = sphere;
 	object->is_hit = (int (*)(t_ray *, void *))is_hit_sphere;
