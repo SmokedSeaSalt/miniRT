@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   plane.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 16:41:05 by egrisel           #+#    #+#             */
-/*   Updated: 2025/12/12 15:50:04 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/12/15 16:33:20 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,21 @@
 /// @param scene
 void	get_hit_data_plane(t_ray *ray, t_plane *plane, t_scene *scene)
 {
-	t_uv	uv;
-
+	ray->results.uv_color = plane->uv_color;
+	ray->results.bump = plane->bump;
 	ray->results.hit_normal = plane->normal;
+	ray->results.uv_coords = get_plane_uv(ray, plane);
 	if (is_vec3_angle_acute(&ray->vec3, &plane->normal) == 1)
 		ray->results.hit_normal.v = -ray->results.hit_normal.v;
-		
 	if (plane->uv_color != NULL)
 	{
-		uv = get_plane_uv(ray, plane);
 		if (plane->uv_color->type == CHECKERBOARD)
-			ray->results.obj_color = uv_checkerboard(uv, plane->color);
+			ray->results.obj_color = uv_checkerboard(ray->results.uv_coords, plane->color);
 		else if (plane->uv_color->type == PNG)
-			ray->results.obj_color = get_uv_value_png(uv, plane->uv_color->png);
+			ray->results.obj_color = get_uv_value_png(ray->results.uv_coords, plane->uv_color->png);
 	}
 	else
 		ray->results.obj_color = plane->color;
+	check_and_calcute_bumpmap(ray, ray->results.bump);
 	set_light_hit_angle_and_intensity(scene, ray);
 }

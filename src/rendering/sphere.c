@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 13:42:02 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/12 16:41:23 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/15 16:33:08 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,20 @@
 /// @param scene
 void	get_hit_data_sphere(t_ray *ray, t_sphere *sphere, t_scene *scene)
 {
-	t_uv	uv;
-
+	ray->results.uv_color = sphere->uv_color;
+	ray->results.bump = sphere->bump;
 	ray->results.hit_normal = sphere_normal_at(ray, sphere);
+	ray->results.uv_coords = get_sphere_uv(ray, sphere);
+
 	if (sphere->uv_color != NULL)
 	{
-		uv = get_sphere_uv(ray, sphere);
 		if (sphere->uv_color->type == CHECKERBOARD)
-			ray->results.obj_color = uv_checkerboard(uv, sphere->color);
+			ray->results.obj_color = uv_checkerboard(ray->results.uv_coords, sphere->color);
 		else if (sphere->uv_color->type == PNG)
-			ray->results.obj_color = get_uv_value_png(uv, sphere->uv_color->png);
+			ray->results.obj_color = get_uv_value_png(ray->results.uv_coords, sphere->uv_color->png);
 	}
 	else
 		ray->results.obj_color = sphere->color;
+	check_and_calcute_bumpmap(ray, ray->results.bump);
 	set_light_hit_angle_and_intensity(scene, ray);
 }

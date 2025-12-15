@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 14:11:44 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/12 17:03:26 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/15 16:33:26 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,20 +55,21 @@ float	get_hit_dist_endcap(t_ray *ray, t_endcap *endcap)
 /// @param scene
 void	get_hit_data_endcap(t_ray *ray, t_endcap *endcap, t_scene *scene)
 {
-	t_uv	uv;
-	
+	ray->results.uv_color = endcap->uv_color;
+	ray->results.bump = endcap->bump;
 	ray->results.hit_normal = endcap->normal;
+	ray->results.uv_coords = get_endcap_uv(ray, endcap);
 	if (is_vec3_angle_acute(&ray->vec3, &endcap->normal) == 1)
 		ray->results.hit_normal.v = -ray->results.hit_normal.v;
 	if (endcap->uv_color != NULL)
 	{
-		uv = get_endcap_uv(ray, endcap);
 		if (endcap->uv_color->type == CHECKERBOARD)
-			ray->results.obj_color = uv_checkerboard(uv, endcap->color);
+			ray->results.obj_color = uv_checkerboard(ray->results.uv_coords, endcap->color);
 		else if (endcap->uv_color->type == PNG)
-			ray->results.obj_color = get_uv_value_png(uv, endcap->uv_color->png);
+			ray->results.obj_color = get_uv_value_png(ray->results.uv_coords, endcap->uv_color->png);
 	}
 	else
 		ray->results.obj_color = endcap->color;
+	check_and_calcute_bumpmap(ray, ray->results.bump);
 	set_light_hit_angle_and_intensity(scene, ray);
 }

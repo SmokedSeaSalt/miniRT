@@ -71,6 +71,7 @@ SRC = 	src/main.c \
 		src/rendering/ray.c \
 		src/rendering/rendering.c \
 		src/rendering/sphere.c \
+		src/rendering/uv_mapping/bumpmap.c \
 		src/rendering/uv_mapping/cylinder_uv.c \
 		src/rendering/uv_mapping/plane_uv.c \
 		src/rendering/uv_mapping/sphere_uv.c \

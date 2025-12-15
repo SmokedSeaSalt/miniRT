@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:17 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/12 14:43:50 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/15 16:12:44 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,6 +221,9 @@ typedef struct s_pixel_result
 	t_object	*object;
 	t_vec3		hit_normal;
 	t_color		obj_color;
+	t_uv		uv_coords;
+	t_uv_map	*uv_color;
+	t_uv_map	*bump;
 }	t_pixel_result;
 
 struct s_ray

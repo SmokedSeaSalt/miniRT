@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   plane_uv.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 12:54:37 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/12 16:41:39 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/12/15 14:57:43 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static float	get_normalized_v(t_vec3 v_vec, t_vec3 center_to_hit_vec)
 static float	get_normalized_u(t_vec3 u_vec, t_vec3 center_to_hit_vec)
 {
 	float	u;
-	
+
 	u = vec3_dot(u_vec, center_to_hit_vec);
 	u = fmod(u, PLANE_UV_WIDTH);
 	if (u < 0)
