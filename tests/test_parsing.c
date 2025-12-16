@@ -394,7 +394,7 @@ static void test_parse_file_comments(void **state) {
 	assert_int_equal(cylinder->color.b, 255);
 
 	obj = obj->next;
-	assert_int_equal(obj->type, ENDCAP);
+	assert_int_equal(obj->type, ENDCAPTOP);
 	t_endcap *endcap1 = obj->data;
 	assert_float_equal(endcap1->coords.x, 50.0, 1e-6);
 	assert_float_equal(endcap1->coords.y, 0.0, 1e-6);
@@ -408,7 +408,7 @@ static void test_parse_file_comments(void **state) {
 	assert_int_equal(endcap1->color.b, 255);
 
 	obj = obj->next;
-	assert_int_equal(obj->type, ENDCAP);
+	assert_int_equal(obj->type, ENDCAPBOT);
 	t_endcap *endcap2 = obj->data;
 	assert_float_equal(endcap2->coords.x, 50.0, 1e-6);
 	assert_float_equal(endcap2->coords.y, 0.0, 1e-6);
