@@ -1,4 +1,4 @@
-A 0.0     255,255,255
+A 0.6     255,255,255
 
 C -2,0,0 			1,0,0 120
 
@@ -14,6 +14,6 @@ L -2,0,1 		0.2 0,0,255
 L -2,-1,1 		0.2 255,0,0
 L -2,1,1 		0.2 0,255,0
 
-#sp 0,0,0 1.5 255,255,255 assets/map.png
-cy 0,0,0 0,0.1,1     1  0.5   0,255,0 assets/brick_image.png assets/brick_bump.png
-pl 2,0,0 -1,0,0 255,255,255 assets/cat.png
+sp 0,0,0 1.5 255,255,255 assets/cat.png
+#cy 0,0,0 0,0.1,1     1  0.5   0,255,0 assets/brick_image.png assets/brick_bump.png
+pl 2,0,0 -1,0,0 255,255,255 assets/Peter_Griffin.png

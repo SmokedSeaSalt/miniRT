@@ -1,9 +1,9 @@
-A 0.6     255,255,255
+A 0.9     255,255,255
 
 C 0,2,1  0,-1,-.5 90
 
 L 0,2,3 	0.6 255,255,255
 
 #sp 0,0,0 1.5 255,255,255
-sp 0,0,0 1.5 255,255,255 assets/earthmap2k.png assets/earthbump2k.png
-sp 3,0,0 1.5 255,255,255 assets/earthmap2k.png
+sp 0,0,0 1.5 255,255,255 assets/earth_2k_color.png assets/earth_2k_normal.png
+sp 3,0,0 1.5 255,255,255 assets/earth_2k_color.png
