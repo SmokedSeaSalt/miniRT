@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 12:47:08 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/16 10:49:30 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/16 12:25:13 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,6 @@ t_color	get_uv_value_png(t_uv uv, mlx_texture_t *uv_map)
 	color.r = uv_map->pixels[pixels_index++];
 	color.g = uv_map->pixels[pixels_index++];
 	color.b = uv_map->pixels[pixels_index];
-	// color.r = uv.v * 255;
-	// color.g = uv.u * 255;
-	// color.b = 0;
 
 	return (color);
 }
