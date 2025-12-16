@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 11:18:10 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/15 16:33:30 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/16 14:32:53 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "math_inc.h"
 #include "rendering.h"
 #include <math.h>
-#include <stdio.h>															//remove later
 
 /// @brief calculates the discriminant for the quadratic
 /// @brief funtions for a vector and cylinder
@@ -68,7 +67,6 @@ float	get_hit_height(t_ray *ray, t_cylinder *cylinder, float hit_dist)
 	orig_dist.v = cylinder->coords.v - ray->orig.v;
 	tmp1.v = (ray->vec3.v * hit_dist) - orig_dist.v;
 	hit_height = vec3_dot(cylinder->orientation, tmp1);
-
 	return (hit_height);
 }
 
@@ -78,9 +76,9 @@ float	get_hit_height(t_ray *ray, t_cylinder *cylinder, float hit_dist)
 /// @param cylinder
 /// @param hit_dist
 /// @return 1 on height within cylinder limits. 0 outside cylinder limits.
-int is_hit_within_height(t_ray *ray, t_cylinder *cylinder, float hit_dist)
+int	is_hit_within_height(t_ray *ray, t_cylinder *cylinder, float hit_dist)
 {
-	float hit_height;
+	float	hit_height;
 
 	hit_height = get_hit_height(ray, cylinder, hit_dist);
 	if (hit_height < (0.5 * cylinder->height) && \
@@ -127,25 +125,14 @@ int	ray_origin_within_cylinder(t_ray *ray, t_cylinder *cylinder)
 	float	dist2;
 	float	radius2;
 
-	// Vector from cylinder base to ray origin
 	vec_oc.v = ray->orig.v - cylinder->coords.v;
-
-	// Project onto cylinder axis
 	proj = vec3_dot(vec_oc, cylinder->orientation);
-
-	// Check if within height limits
 	if (proj > (0.5 * cylinder->height) || proj < (-0.5 * cylinder->height))
 		return (0);
-
-	// Find closest point on axis to ray origin
 	closest_point.v = cylinder->coords.v + cylinder->orientation.v * proj;
-
-	// Compute squared distance from origin to axis
 	dist2 = vec3_length((t_vec3)(ray->orig.v - closest_point.v));
 	dist2 = dist2 * dist2;
 	radius2 = cylinder->radius * cylinder->radius;
-
-	// Inside if within radius
 	if (dist2 <= radius2)
 		return (1);
 	return (0);
@@ -188,9 +175,11 @@ void	get_hit_data_cylinder(t_ray *ray, t_cylinder *cylinder, t_scene *scene)
 	if (cylinder->uv_color != NULL)
 	{
 		if (cylinder->uv_color->type == CHECKERBOARD)
-			ray->results.obj_color = uv_checkerboard(ray->results.uv_coords, cylinder->color);
+			ray->results.obj_color = uv_checkerboard(ray->results.uv_coords, \
+cylinder->color);
 		else if (cylinder->uv_color->type == PNG)
-			ray->results.obj_color = get_uv_value_png(ray->results.uv_coords, cylinder->uv_color->png);
+			ray->results.obj_color = get_uv_value_png(ray->results.uv_coords, \
+cylinder->uv_color->png);
 	}
 	else
 		ray->results.obj_color = cylinder->color;

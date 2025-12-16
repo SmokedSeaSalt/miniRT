@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere_uv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 12:33:13 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/12 16:45:00 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/12/16 14:15:21 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "math_inc.h"
 #include <math.h>
 
-t_uv get_sphere_uv(t_ray *ray, t_sphere *sphere)
+t_uv	get_sphere_uv(t_ray *ray, t_sphere *sphere)
 {
 	t_vec3	d;
 	t_uv	uv;

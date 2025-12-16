@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 10:42:19 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/12 11:32:50 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/16 14:12:15 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ t_uv_map	*get_uv_map(char *line)
 t_uv_map	*get_bump_map(char *line)
 {
 	t_uv_map	*map;
+
 	if (ft_strncmp(line, "default", ft_strlen(line)) == 0)
 		return (NULL);
 	map = (t_uv_map *)ft_calloc(1, sizeof(t_uv_map));

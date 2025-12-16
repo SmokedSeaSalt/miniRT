@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 14:11:44 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/15 16:33:26 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/16 14:31:14 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	is_hit_endcap(t_ray *ray, t_endcap *endcap)
 	if (vec3_dot(ray->vec3, endcap->normal) == 0)
 		return (0);
 	return (1);
-
 }
 
 /// @brief calculates the distance from ray origin to endcap surface.
@@ -64,9 +63,11 @@ void	get_hit_data_endcap(t_ray *ray, t_endcap *endcap, t_scene *scene)
 	if (endcap->uv_color != NULL)
 	{
 		if (endcap->uv_color->type == CHECKERBOARD)
-			ray->results.obj_color = uv_checkerboard(ray->results.uv_coords, endcap->color);
+			ray->results.obj_color = uv_checkerboard(ray->results.uv_coords, \
+endcap->color);
 		else if (endcap->uv_color->type == PNG)
-			ray->results.obj_color = get_uv_value_png(ray->results.uv_coords, endcap->uv_color->png);
+			ray->results.obj_color = get_uv_value_png(ray->results.uv_coords, \
+endcap->uv_color->png);
 	}
 	else
 		ray->results.obj_color = endcap->color;

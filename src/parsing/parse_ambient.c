@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 11:58:48 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/11/04 14:23:58 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/16 14:09:31 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	fill_ambient_struct(t_ambient *ambient, char **line)
 		return (printf("Ambient: Ratio parsing error\n"), 1);
 	if (parse_color(&(ambient->color), line[2]) != 0)
 		return (printf("Ambient: Color parsing error\n"), 1);
-	ambient->intensity = vec3_new( \
+	ambient->intensity = vec3_new(\
 (ambient->color.r / 255) * ambient->ratio, \
 (ambient->color.g / 255) * ambient->ratio, \
 (ambient->color.b / 255) * ambient->ratio);

@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:15:52 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/11/04 14:01:27 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/16 14:05:56 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	*ft_free_split(char **ret)
 {
-	int i;
+	int	i;
 
 	if (ret == NULL)
 		return (NULL);

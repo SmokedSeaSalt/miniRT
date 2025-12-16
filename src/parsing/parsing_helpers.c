@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:45:52 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/11/04 13:48:46 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/16 14:10:30 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,11 @@ void	add_object_to_back(t_object **list, t_object *new)
 
 int	parse_color(t_color *color, char *str)
 {
-	char **split;
+	char	**split;
 
 	split = ft_split(str, ',');
 	if (split == NULL || count_arguments(split) != 3)
 		return (ft_free_split(split), 1);
-
 	color->r = ft_atoi(split[0]);
 	color->g = ft_atoi(split[1]);
 	color->b = ft_atoi(split[2]);
@@ -96,7 +95,7 @@ int	parse_color(t_color *color, char *str)
 
 int	parse_orig(t_vec3 *orig, char *str)
 {
-	char **split;
+	char	**split;
 
 	split = ft_split(str, ',');
 	if (split == NULL || count_arguments(split) != 3)
@@ -111,7 +110,7 @@ int	parse_orig(t_vec3 *orig, char *str)
 
 int	parse_normal_vector(t_vec3 *vec, char *str)
 {
-	char **split;
+	char	**split;
 
 	split = ft_split(str, ',');
 	if (split == NULL || count_arguments(split) != 3)
@@ -129,7 +128,7 @@ int	parse_normal_vector(t_vec3 *vec, char *str)
 	return (0);
 }
 
-int parse_ratio(float *ratio, char *str)
+int	parse_ratio(float *ratio, char *str)
 {
 	*ratio = ft_atof(str);
 	if (*ratio < 0.0 || *ratio > 1.0)
@@ -137,7 +136,7 @@ int parse_ratio(float *ratio, char *str)
 	return (0);
 }
 
-int parse_fov(float *fov, char *str)
+int	parse_fov(float *fov, char *str)
 {
 	*fov = deg_to_rad(ft_atof(str));
 	if (*fov < 0 || *fov > deg_to_rad(180))

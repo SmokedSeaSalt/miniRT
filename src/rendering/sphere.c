@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 13:42:02 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/15 16:33:08 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/16 14:29:22 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,14 @@ void	get_hit_data_sphere(t_ray *ray, t_sphere *sphere, t_scene *scene)
 	ray->results.bump = sphere->bump;
 	ray->results.hit_normal = sphere_normal_at(ray, sphere);
 	ray->results.uv_coords = get_sphere_uv(ray, sphere);
-
 	if (sphere->uv_color != NULL)
 	{
 		if (sphere->uv_color->type == CHECKERBOARD)
-			ray->results.obj_color = uv_checkerboard(ray->results.uv_coords, sphere->color);
+			ray->results.obj_color = uv_checkerboard(ray->results.uv_coords, \
+sphere->color);
 		else if (sphere->uv_color->type == PNG)
-			ray->results.obj_color = get_uv_value_png(ray->results.uv_coords, sphere->uv_color->png);
+			ray->results.obj_color = get_uv_value_png(ray->results.uv_coords, \
+sphere->uv_color->png);
 	}
 	else
 		ray->results.obj_color = sphere->color;

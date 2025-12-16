@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 10:04:11 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/11 16:48:19 by egrisel          ###   ########.fr       */
+/*   Updated: 2025/12/16 14:57:36 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ int	init_mlx(t_scene *scene)
 		mlx_terminate(scene->mlx);
 		return (-1);
 	}
-	mlx_image_to_window(scene->mlx, scene->g_img, 0, 0); // maybe error handle?
+	mlx_image_to_window(scene->mlx, scene->g_img, 0, 0);
 	mlx_key_hook(scene->mlx, &handle_inputs, scene);
 	mlx_loop_hook(scene->mlx, &hook, scene);
 	return (0);
@@ -158,7 +158,7 @@ void	init_settings(t_scene *scene)
 
 /// @brief general cleanup function that will free all malloced values.
 /// @param scene
-void cleanup_scene(t_scene *scene)
+void	cleanup_scene(t_scene *scene)
 {
 	t_object	*current;
 	t_object	*next;

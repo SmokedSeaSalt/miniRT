@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 11:14:25 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/24 11:23:09 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/16 14:18:46 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 /// @param scene
 void	update_fpscounter(t_scene *scene)
 {
-	static	mlx_image_t *fps_image = NULL;
-	char	*fps_str;
+	static mlx_image_t	*fps_image = NULL;
+	char				*fps_str;
 
 	if (fps_image)
 	{
@@ -38,10 +38,3 @@ void	update_fpscounter(t_scene *scene)
 		free(fps_str);
 	}
 }
-
-//void update_debugwindow(t_scene *scene)
-//{
-//	static	mlx_image_t *fps_image[8] = NULL;
-
-
-//}

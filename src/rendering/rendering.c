@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 09:57:43 by egrisel           #+#    #+#             */
-/*   Updated: 2025/12/15 16:33:03 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/16 14:30:20 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void	loop_though_objects(t_scene *scene, t_ray *ray, t_object *object_list)
 		object_list = object_list->next;
 	}
 	if (ray->results.is_hit == 1)
-		ray->results.object->get_hit_data(ray, ray->results.object->data, scene);
+		ray->results.object->get_hit_data(ray, \
+ray->results.object->data, scene);
 }
 
 /// @brief render single pixel.
@@ -64,17 +65,16 @@ void	render_pixel(int x, int y, t_scene *scene)
 		scene->render_info.render_hit(&ray, x, y, scene);
 }
 
-void render_block(int x, int y, t_scene *scene)
+void	render_block(int x, int y, t_scene *scene)
 {
 	t_ray	ray;
-	int block_size;
-	int	i_x;
-	int	i_y;
+	int		block_size;
+	int		i_x;
+	int		i_y;
 
 	block_size = powf(2, scene->window_info.render_depth);
 	ray = get_ray(x, y, scene->camera, &(scene->window_info));
 	loop_though_objects(scene, &ray, scene->objects);
-
 	i_x = x;
 	while (i_x < (x + block_size) && i_x < scene->window_info.width)
 	{
@@ -91,13 +91,13 @@ void render_block(int x, int y, t_scene *scene)
 	}
 }
 
-int block_already_rendered(int x, int y, t_window_info *window_info)
+int	block_already_rendered(int x, int y, t_window_info *window_info)
 {
-	int higher_block_size;
-	int depth_check;
+	int	higher_block_size;
+	int	depth_check;
 
 	if (window_info->max_render_depth == window_info->render_depth)
-			return (0);
+		return (0);
 	depth_check = window_info->render_depth + 1;
 	higher_block_size = pow(2, depth_check);
 	if (x % higher_block_size == 0 && y % higher_block_size == 0)
@@ -115,13 +115,13 @@ void	print_render_time(long long *start_time)
 
 //calculate max depth
 //any key press sets current depth back to max depth
-void render_frame(t_scene *scene)
+void	render_frame(t_scene *scene)
 {
-	const long long frame_start = get_time_in_ms();
-	int	i_x;
-	int block_size;
+	const long long	frame_start = get_time_in_ms();
+	int				i_x;
+	int				block_size;
 
-	while(get_timestamp(frame_start) < ((1.0 / SCREEN_FPS) * 1000))
+	while (get_timestamp(frame_start) < ((1.0 / SCREEN_FPS) * 1000))
 	{
 		if (scene->window_info.render_depth < 0)
 		{
@@ -133,7 +133,7 @@ void render_frame(t_scene *scene)
 		while (i_x < scene->window_info.width)
 		{
 			if (block_already_rendered(i_x, scene->window_info.render_y, \
-	&(scene->window_info)) == 0)
+&(scene->window_info)) == 0)
 				render_block(i_x, scene->window_info.render_y, scene);
 			i_x += block_size;
 		}

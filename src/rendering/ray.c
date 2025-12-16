@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 12:23:02 by egrisel           #+#    #+#             */
-/*   Updated: 2025/10/22 10:50:42 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/16 14:52:52 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,6 @@ t_vec3	get_pixel_coordinates(int x, int y, t_window_info *window_info)
 	return (local_vec3);
 }
 
-// maybe change vec3 to vec2
-// change pixel coordinate name
-
 /// @brief get a ray orientation value for current x,y pixel on screen.
 /// @param x
 /// @param y
@@ -80,7 +77,6 @@ t_ray	get_ray(int x, int y, t_camera *camera, t_window_info *window_info)
 	ft_bzero(&ray, sizeof (t_ray));
 	pixel_coordinates = get_pixel_coordinates(x, y, window_info);
 	world_vec3 = get_pixel_coordinate_to_world_vec3(pixel_coordinates, camera);
-	// ray.vec3 = local_direction;
 	ray.vec3 = world_vec3;
 	ray.orig = camera->coords;
 	return (ray);

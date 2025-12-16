@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 14:48:40 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/16 14:00:02 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/16 14:28:11 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,20 @@ t_vec3	convert_color_to_vec(t_color rgb)
 	return (vec);
 }
 
-t_vec3	add_normal_offset(t_vec3 hit_normal, t_vec3 normal_offset)
+/// @brief add the bumpmap normal offset to the ray hit normal.
+/// @param hit hit surface normal.
+/// @param normal normal offset according to bumpmap.
+/// @return new hit normal.
+t_vec3	add_normal_offset(t_vec3 hit, t_vec3 normal)
 {
 	t_vec3	tangent;
 	t_vec3	bitangent;
 	t_vec3	ret;
 
-	set_u_and_v_vectors(&tangent, &bitangent, hit_normal);
-    ret.x = tangent.x * normal_offset.x + bitangent.x * normal_offset.y + hit_normal.x * normal_offset.z;
-    ret.y = tangent.y * normal_offset.x + bitangent.y * normal_offset.y + hit_normal.y * normal_offset.z;
-    ret.z = tangent.z * normal_offset.x + bitangent.z * normal_offset.y + hit_normal.z * normal_offset.z;
+	set_u_and_v_vectors(&tangent, &bitangent, hit);
+	ret.x = tangent.x * normal.x + bitangent.x * normal.y + hit.x * normal.z;
+	ret.y = tangent.y * normal.x + bitangent.y * normal.y + hit.y * normal.z;
+	ret.z = tangent.z * normal.x + bitangent.z * normal.y + hit.z * normal.z;
 	ret = vec3_normalize(ret);
 	return (ret);
 }
@@ -47,7 +51,8 @@ void	get_new_bump_normal(t_ray *ray, t_uv_map *bumpmap)
 
 	normal_map_rgb = get_uv_value_png(ray->results.uv_coords, bumpmap->png);
 	normal_vec_offset = convert_color_to_vec(normal_map_rgb);
-	ray->results.hit_normal = add_normal_offset(ray->results.hit_normal, normal_vec_offset);
+	ray->results.hit_normal = add_normal_offset(ray->results.hit_normal,
+			normal_vec_offset);
 }
 
 void	check_and_calcute_bumpmap(t_ray *ray, t_uv_map *bumpmap)

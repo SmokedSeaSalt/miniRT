@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:17 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/15 16:12:44 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/16 16:56:05 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,8 @@ typedef enum e_obj_type
 
 typedef struct s_uv
 {
-	float u;
-	float v;
+	float	u;
+	float	v;
 }	t_uv;
 
 typedef enum e_uv_type
@@ -121,8 +121,8 @@ typedef enum e_uv_type
 
 typedef struct s_uv_map
 {
-	t_uv_type type;
-	mlx_texture_t *png;
+	t_uv_type		type;
+	mlx_texture_t	*png;
 }	t_uv_map;
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -205,8 +205,9 @@ typedef struct s_object
 // Function pointers for object-specific operations
 	int				(*is_hit)(t_ray *ray, void *object_data);
 	float			(*get_hit_dist)(t_ray *ray, void *object_data);
-	void			(*get_hit_data)(t_ray *ray, void *object_data, t_scene *scene);
-} t_object;
+	void			(*get_hit_data)(t_ray *ray, void *object_data,
+			t_scene *scene);
+}	t_object;
 
 ////////////////////////////////////////////////////////////////////////////////
 // rays																		  //
@@ -254,7 +255,7 @@ typedef struct s_render_info
 	void	(*render_hit)(t_ray *ray, int x, int y, t_scene *scene);
 	void	(*render_miss)(t_ray *ray, int x, int y, t_scene *scene);
 	int		fpscounter;
-} t_render_info;
+}	t_render_info;
 
 struct s_scene
 {

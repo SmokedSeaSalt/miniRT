@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 11:59:15 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/11/04 13:47:13 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/16 14:09:42 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	fill_light_struct(t_lights *light, char **line)
 		return (printf("Light: Ratio parsing error\n"), 1);
 	if (parse_color(&(light->color), line[3]) != 0)
 		return (printf("Light: Color parsing error\n"), 1);
-	light->color_brightness = vec3_new( \
+	light->color_brightness = vec3_new(\
 light->brightness * ((float)light->color.r / 255.0f), \
 light->brightness * ((float)light->color.g / 255.0f), \
 light->brightness * ((float)light->color.b / 255.0f));

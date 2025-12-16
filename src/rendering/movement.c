@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 11:26:56 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/21 16:48:03 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/16 14:53:34 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 /// @brief stepsize can be set by changing STEP_SIZE.
 /// @param camera		camera struct to adjust
 /// @param direction	1 for forwards, -1 for backwards
-void move_cam_direction(t_camera *camera, int direction)
+void	move_cam_direction(t_camera *camera, int direction)
 {
 	camera->coords.v = camera->coords.v + \
 (camera->orientation.v * (float)direction * STEP_SIZE);
@@ -29,7 +29,7 @@ void move_cam_direction(t_camera *camera, int direction)
 /// @brief stepsize can be set by changing STEP_SIZE.
 /// @param camera		camera struct to adjust
 /// @param direction	1 for right, -1 for left
-void move_horizontal(t_camera *camera, int direction)
+void	move_horizontal(t_camera *camera, int direction)
 {
 	t_vec3	move_dir;
 	t_vec3	world_up;
@@ -48,7 +48,7 @@ void move_horizontal(t_camera *camera, int direction)
 /// @brief stepsize can be set by changing UPDOWN_ROT.
 /// @param camera
 /// @param direction
-void rotate_camera_up_down(t_camera *camera, int direction)
+void	rotate_camera_up_down(t_camera *camera, int direction)
 {
 	t_vec3	tmp;
 

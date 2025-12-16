@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 12:54:37 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/16 10:48:38 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/16 14:15:03 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static float	get_normalized_v(t_vec3 v_vec, t_vec3 center_to_hit_vec)
 	v = vec3_dot(v_vec, center_to_hit_vec);
 	v = fmod(v, PLANE_UV_HEIGHT);
 	if (v < 0)
-			v += PLANE_UV_HEIGHT;
+		v += PLANE_UV_HEIGHT;
 	return (v / PLANE_UV_HEIGHT);
 }
 
@@ -35,8 +35,8 @@ static float	get_normalized_u(t_vec3 u_vec, t_vec3 center_to_hit_vec)
 	u = vec3_dot(u_vec, center_to_hit_vec);
 	u = fmod(u, PLANE_UV_WIDTH);
 	if (u < 0)
-			u += PLANE_UV_WIDTH;
-	return (u/ PLANE_UV_WIDTH);
+		u += PLANE_UV_WIDTH;
+	return (u / PLANE_UV_WIDTH);
 }
 
 t_uv	get_plane_uv(t_ray *ray, t_plane *plane)
@@ -54,6 +54,5 @@ t_uv	get_plane_uv(t_ray *ray, t_plane *plane)
 	uv.v = get_normalized_v(v_vec, center_to_hit_vec);
 	uv.v = 1 - uv.v;
 	uv.u = 1 - uv.u;
-
 	return (uv);
 }

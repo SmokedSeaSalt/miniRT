@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 16:41:05 by egrisel           #+#    #+#             */
-/*   Updated: 2025/12/15 16:33:20 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/16 14:30:36 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,11 @@ void	get_hit_data_plane(t_ray *ray, t_plane *plane, t_scene *scene)
 	if (plane->uv_color != NULL)
 	{
 		if (plane->uv_color->type == CHECKERBOARD)
-			ray->results.obj_color = uv_checkerboard(ray->results.uv_coords, plane->color);
+			ray->results.obj_color = uv_checkerboard(ray->results.uv_coords, \
+plane->color);
 		else if (plane->uv_color->type == PNG)
-			ray->results.obj_color = get_uv_value_png(ray->results.uv_coords, plane->uv_color->png);
+			ray->results.obj_color = get_uv_value_png(ray->results.uv_coords, \
+plane->uv_color->png);
 	}
 	else
 		ray->results.obj_color = plane->color;

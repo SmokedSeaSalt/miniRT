@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 10:30:44 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/11/06 14:08:51 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/16 14:48:23 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,6 @@ void	display_distance(t_ray *ray, int x, int y, t_scene *scene)
 	int			b;
 	int			colour;
 	float		dist_mult;
-	//to be changed later(calculate right after parsing)
 	const float	max_dist = 2;
 
 	dist_mult = 1.0f - (ray->results.hit_dist / max_dist);
