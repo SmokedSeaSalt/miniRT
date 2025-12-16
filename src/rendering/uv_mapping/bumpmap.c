@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 14:48:40 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/15 17:13:31 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/16 10:53:18 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,13 @@
 #include "rendering.h"
 #include <math.h>
 
-
-
-static void	set_u_and_v_vectors(t_vec3 *u_vec, t_vec3 *v_vec, t_vec3 normal)
-{
-	const t_vec3 world_up = vec3_new(0, 0, 1);// todo edge case for certain plane orientation?
-	*u_vec = vec3_cross(normal, world_up);
-	*u_vec = vec3_normalize(*u_vec);
-	*v_vec = vec3_cross(normal, *u_vec);
-	*v_vec = vec3_normalize(*v_vec);
-}
-
-
 t_vec3	change_u_bump_normal(t_vec3 normal, int x_delta)
 {
 	t_vec3	u_vec;
 	t_vec3	v_vec;
 
 	set_u_and_v_vectors(&u_vec, &v_vec, normal);
-	u_vec.v = u_vec.v + ((float)x_delta * 0.5f * normal.v);
+	u_vec.v = u_vec.v + ((float)x_delta * 0.05f * normal.v);
 	u_vec = vec3_normalize(u_vec);
 	return (vec3_normalize(vec3_cross(v_vec, u_vec)));
 }
@@ -44,7 +32,7 @@ t_vec3	change_v_bump_normal(t_vec3 normal, int y_delta)
 	t_vec3	v_vec;
 
 	set_u_and_v_vectors(&u_vec, &v_vec, normal);
-	v_vec.v = v_vec.v + ((float)y_delta * 0.5f * normal.v);
+	v_vec.v = v_vec.v + ((float)y_delta * 0.05f * normal.v);
 	v_vec = vec3_normalize(v_vec);
 	return (vec3_normalize(vec3_cross(v_vec, u_vec)));
 }

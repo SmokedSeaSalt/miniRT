@@ -6,24 +6,16 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 12:54:37 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/15 14:57:43 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/16 10:48:38 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "structs.h"
 #include "consts.h"
 #include "math_inc.h"
-#include <math.h>
 #include "consts.h"
-
-static void	set_u_and_v_vectors(t_vec3 *u_vec, t_vec3 *v_vec, t_plane *plane)
-{
-	const t_vec3 world_up = vec3_new(0, 0, 1);// todo edge case for certain plane orientation?
-	*u_vec = vec3_cross(plane->normal, world_up);
-	*u_vec = vec3_normalize(*u_vec);
-	*v_vec = vec3_cross(plane->normal, *u_vec);
-	*v_vec = vec3_normalize(*v_vec);
-}
+#include "rendering.h"
+#include <math.h>
 
 static float	get_normalized_v(t_vec3 v_vec, t_vec3 center_to_hit_vec)
 {
@@ -55,7 +47,7 @@ t_uv	get_plane_uv(t_ray *ray, t_plane *plane)
 	t_vec3	hit_point;
 	t_vec3	center_to_hit_vec;
 
-	set_u_and_v_vectors(&u_vec, &v_vec, plane);
+	set_u_and_v_vectors(&u_vec, &v_vec, ray->results.hit_normal);
 	hit_point.v = ray->orig.v + (ray->vec3.v * ray->results.hit_dist);
 	center_to_hit_vec.v = hit_point.v - plane->coords.v;
 	uv.u = get_normalized_u(u_vec, center_to_hit_vec);

@@ -6,13 +6,23 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 12:47:08 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/15 16:11:54 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/16 10:49:30 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "consts.h"
 #include "structs.h"
 #include "MLX42.h"
+#include "math_inc.h"
+
+void	set_u_and_v_vectors(t_vec3 *u_vec, t_vec3 *v_vec, t_vec3 normal)
+{
+	const t_vec3 world_up = vec3_new(0, 0, 1);// todo edge case for certain plane orientation?
+	*u_vec = vec3_cross(normal, world_up);
+	*u_vec = vec3_normalize(*u_vec);
+	*v_vec = vec3_cross(normal, *u_vec);
+	*v_vec = vec3_normalize(*v_vec);
+}
 
 int	get_pixels_index(t_uv uv, mlx_texture_t *uv_map)
 {

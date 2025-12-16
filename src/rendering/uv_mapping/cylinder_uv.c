@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 12:46:26 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/12 17:05:32 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/16 10:49:10 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,6 @@ t_uv get_cylinder_uv(t_ray *ray, t_cylinder *cylinder)
 	return (uv);
 }
 
-static void	set_u_and_v_vectors(t_vec3 *u_vec, t_vec3 *v_vec, t_vec3 normal)
-{
-	const t_vec3 world_up = vec3_new(0, 0, 1);// todo edge case for certain plane orientation?
-	*u_vec = vec3_cross(normal, world_up);
-	*u_vec = vec3_normalize(*u_vec);
-	*v_vec = vec3_cross(normal, *u_vec);
-	*v_vec = vec3_normalize(*v_vec);
-}
-
 t_uv get_endcap_uv(t_ray *ray, t_endcap *endcap)
 {
 	if (ray->results.object->type == ENDCAPBOT)
@@ -58,7 +49,7 @@ t_uv get_endcapbot_uv(t_ray *ray, t_endcap *endcap)
 	t_vec3	center_to_hit_vec;
 	t_vec3	hit_point;
 
-	set_u_and_v_vectors(&u_vec, &v_vec, endcap->normal);
+	set_u_and_v_vectors(&u_vec, &v_vec, ray->results.hit_normal);
 	hit_point.v = ray->orig.v + (ray->vec3.v * ray->results.hit_dist);
 	center_to_hit_vec.v = hit_point.v - endcap->coords.v;
 
@@ -77,7 +68,7 @@ t_uv get_endcaptop_uv(t_ray *ray, t_endcap *endcap)
 	t_vec3	center_to_hit_vec;
 	t_vec3	hit_point;
 
-	set_u_and_v_vectors(&u_vec, &v_vec, endcap->normal);
+	set_u_and_v_vectors(&u_vec, &v_vec, ray->results.hit_normal);
 	hit_point.v = ray->orig.v + (ray->vec3.v * ray->results.hit_dist);
 	center_to_hit_vec.v = hit_point.v - endcap->coords.v;
 

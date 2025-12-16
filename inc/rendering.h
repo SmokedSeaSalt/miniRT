@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:42:05 by egrisel           #+#    #+#             */
-/*   Updated: 2025/12/15 16:12:05 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/16 10:13:55 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	update_fpscounter(t_scene *scene);
 // uv_mapping																  //
 ////////////////////////////////////////////////////////////////////////////////
 
+void	set_u_and_v_vectors(t_vec3 *u_vec, t_vec3 *v_vec, t_vec3 normal);
 t_color	uv_checkerboard(t_uv uv, t_color color);
 t_color	get_uv_value_png(t_uv uv, mlx_texture_t *uv_map);
 int		get_pixels_index(t_uv uv, mlx_texture_t *uv_map);
