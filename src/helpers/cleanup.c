@@ -6,12 +6,13 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 15:13:35 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/23 15:26:36 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/23 15:28:10 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "structs.h"
 #include "rendering.h"
+#include "MLX42.h"
 #include <stdlib.h>
 
 void	free_lights(t_lights *lights)
