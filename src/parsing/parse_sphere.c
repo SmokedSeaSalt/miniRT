@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 11:59:33 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/12 12:11:11 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/23 14:14:00 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ static int	fill_sphere_struct(t_sphere *sphere, char **line)
 	if (parse_color(&(sphere->color), line[3]) != 0)
 		return (printf("Sphere: Color parsing error\n"), 1);
 	if (count_arguments(line) >= 5)
-		sphere->uv_color = get_uv_map(line[4]);
+		get_uv_map(line[4], &sphere->uv_color);
 	if (count_arguments(line) >= 6)
-		sphere->bump = get_bump_map(line[5]);
+		get_bump_map(line[5], &sphere->bump);
 	return (0);
 }
 

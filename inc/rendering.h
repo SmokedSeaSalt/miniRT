@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:42:05 by egrisel           #+#    #+#             */
-/*   Updated: 2025/12/16 10:13:55 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/23 14:02:53 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,6 @@ t_uv	get_cylinder_uv(t_ray *ray, t_cylinder *cylinder);
 t_uv	get_endcap_uv(t_ray *ray, t_endcap *endcap);
 t_uv	get_plane_uv(t_ray *ray, t_plane *plane);
 
-void	check_and_calcute_bumpmap(t_ray *ray, t_uv_map *bumpmap);
+void	check_and_calcute_bumpmap(t_ray *ray, t_uv_map bumpmap);
 
 #endif

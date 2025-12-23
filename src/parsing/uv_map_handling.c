@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 10:42:19 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/16 14:12:15 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/23 14:13:07 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,47 +15,37 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-t_uv_map	*get_uv_map(char *line)
+void	get_uv_map(char *line, t_uv_map *map)
 {
-	t_uv_map	*map;
-
 	if (ft_strncmp(line, "default", ft_strlen(line)) == 0)
-		return (NULL);
-	map = (t_uv_map *)ft_calloc(1, sizeof(t_uv_map));
-	if (map == NULL)
-		return (NULL);
+		return ;
 	if (ft_strncmp(line, "checkered", ft_strlen(line)) == 0)
 	{
 		map->type = CHECKERBOARD;
-		return (map);
+		return ;
 	}
 	map->type = PNG;
 	map->png = mlx_load_png(line);
 	if (map->png == NULL)
 	{
-		free(map);
 		printf("Error\nParsing: Error reading file: %s\n", line);
-		return (NULL);
+		map->type = DEFAULT;
+		return ;
 	}
-	return (map);
+	return ;
 }
 
-t_uv_map	*get_bump_map(char *line)
+void	get_bump_map(char *line, t_uv_map *map)
 {
-	t_uv_map	*map;
-
 	if (ft_strncmp(line, "default", ft_strlen(line)) == 0)
-		return (NULL);
-	map = (t_uv_map *)ft_calloc(1, sizeof(t_uv_map));
-	if (map == NULL)
-		return (NULL);
+		return ;
 	map->type = PNG;
 	map->png = mlx_load_png(line);
 	if (map->png == NULL)
 	{
-		free(map);
 		printf("Error\nParsing: Error reading file: %s\n", line);
-		return (NULL);
+		map->type = DEFAULT;
+		return ;
 	}
-	return (map);
+	return ;
 }

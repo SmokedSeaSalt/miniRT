@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 12:00:29 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/12 14:44:09 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/23 14:13:30 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,9 @@ static int	fill_cylinder_struct(t_cylinder *cylinder, char **line)
 	if (parse_color(&(cylinder->color), line[5]) != 0)
 		return (printf("Cylinder: Color parsing error\n"), 1);
 	if (count_arguments(line) >= 7)
-		cylinder->uv_color = get_uv_map(line[6]);
+		get_uv_map(line[6], &cylinder->uv_color);
 	if (count_arguments(line) >= 8)
-		cylinder->bump = get_bump_map(line[7]);
+		get_bump_map(line[7], &cylinder->bump);
 	return (0);
 }
 

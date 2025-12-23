@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:10 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/16 16:54:01 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/23 14:13:18 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int			new_sphere_struct(t_scene *scene, char **line);
 // parse maps																  //
 ////////////////////////////////////////////////////////////////////////////////
 
-t_uv_map	*get_uv_map(char *line);
-t_uv_map	*get_bump_map(char *line);
+void		get_uv_map(char *line, t_uv_map *map);
+void		get_bump_map(char *line, t_uv_map *map);
 
 #endif

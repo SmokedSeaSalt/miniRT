@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 14:48:40 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/16 14:28:11 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/23 14:04:24 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,20 +44,20 @@ t_vec3	add_normal_offset(t_vec3 hit, t_vec3 normal)
 	return (ret);
 }
 
-void	get_new_bump_normal(t_ray *ray, t_uv_map *bumpmap)
+void	get_new_bump_normal(t_ray *ray, t_uv_map bumpmap)
 {
 	t_color	normal_map_rgb;
 	t_vec3	normal_vec_offset;
 
-	normal_map_rgb = get_uv_value_png(ray->results.uv_coords, bumpmap->png);
+	normal_map_rgb = get_uv_value_png(ray->results.uv_coords, bumpmap.png);
 	normal_vec_offset = convert_color_to_vec(normal_map_rgb);
 	ray->results.hit_normal = add_normal_offset(ray->results.hit_normal,
 			normal_vec_offset);
 }
 
-void	check_and_calcute_bumpmap(t_ray *ray, t_uv_map *bumpmap)
+void	check_and_calcute_bumpmap(t_ray *ray, t_uv_map bumpmap)
 {
-	if (bumpmap == NULL)
+	if (bumpmap.type == DEFAULT)
 		return ;
 	get_new_bump_normal(ray, bumpmap);
 }

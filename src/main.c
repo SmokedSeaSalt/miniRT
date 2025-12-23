@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 10:04:11 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/16 14:57:36 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/23 13:55:43 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	handle_inputs(mlx_key_data_t keydata, void *param)
 	if (keydata.key == MLX_KEY_0 && keydata.action == MLX_RELEASE)
 		scene->render_info.render_miss = &display_white;
 	if (keydata.key == MLX_KEY_F && keydata.action == MLX_RELEASE)
-		scene->render_info.fpscounter = !scene->render_info.fpscounter;
+		scene->window_info.fpscounter = !scene->window_info.fpscounter;
 	handle_arrows(keydata, scene);
 }
 
@@ -149,11 +149,20 @@ void	init_settings(t_scene *scene)
 {
 	scene->render_info.render_hit = &display_default;
 	scene->render_info.render_miss = &display_black;
-	scene->render_info.fpscounter = 1;
+	scene->window_info.fpscounter = 1;
 	scene->window_info.max_render_depth = 7;
 	scene->window_info.render_depth = 7;
 	scene->window_info.render_y = 0;
 	scene->window_info.start_time = get_time_in_ms();
+}
+
+void	cleanup_object(t_object *node)
+{
+		free(node->data);
+		// free(current->bump); //TODO mlx delete mlx_texture_t
+		// free(current->uv_color); //TODO mlx delete mlx_texture_t
+		free(node);
+		//free up last fps string.
 }
 
 /// @brief general cleanup function that will free all malloced values.
@@ -178,10 +187,7 @@ void	cleanup_scene(t_scene *scene)
 	while (current != NULL)
 	{
 		next = current->next;
-		free(current->data);
-		// free(current->bump); //TODO mlx delete mlx_texture_t
-		// free(current->uv_color); //TODO mlx delete mlx_texture_t
-		free(current);
+		cleanup_object(current);
 		current = next;
 	}
 	mlx_delete_image(scene->mlx, scene->g_img);

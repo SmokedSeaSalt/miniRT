@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:17 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/16 16:56:05 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/23 13:56:48 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ typedef struct s_uv
 
 typedef enum e_uv_type
 {
+	DEFAULT,
 	CHECKERBOARD,
 	PNG,
 }	t_uv_type;
@@ -161,8 +162,8 @@ typedef struct s_sphere
 	float		diameter;
 	float		radius;
 	t_color		color;
-	t_uv_map	*uv_color;
-	t_uv_map	*bump;
+	t_uv_map	uv_color;
+	t_uv_map	bump;
 }	t_sphere;
 
 typedef struct s_plane
@@ -170,8 +171,8 @@ typedef struct s_plane
 	t_vec3		coords;
 	t_vec3		normal;
 	t_color		color;
-	t_uv_map	*uv_color;
-	t_uv_map	*bump;
+	t_uv_map	uv_color;
+	t_uv_map	bump;
 }	t_plane;
 
 typedef struct s_cylinder
@@ -182,8 +183,8 @@ typedef struct s_cylinder
 	float		radius;
 	float		height;
 	t_color		color;
-	t_uv_map	*uv_color;
-	t_uv_map	*bump;
+	t_uv_map	uv_color;
+	t_uv_map	bump;
 }	t_cylinder;
 
 typedef struct s_endcap
@@ -193,8 +194,8 @@ typedef struct s_endcap
 	float		diameter;
 	float		radius;
 	t_color		color;
-	t_uv_map	*uv_color;
-	t_uv_map	*bump;
+	t_uv_map	uv_color;
+	t_uv_map	bump;
 }	t_endcap;
 
 typedef struct s_object
@@ -223,8 +224,8 @@ typedef struct s_pixel_result
 	t_vec3		hit_normal;
 	t_color		obj_color;
 	t_uv		uv_coords;
-	t_uv_map	*uv_color;
-	t_uv_map	*bump;
+	t_uv_map	uv_color;
+	t_uv_map	bump;
 }	t_pixel_result;
 
 struct s_ray
@@ -248,14 +249,20 @@ typedef struct s_window_info
 	int			max_render_depth;
 	int			render_y;
 	long long	start_time;
+	int			fpscounter;
 }	t_window_info;
 
 typedef struct s_render_info
 {
 	void	(*render_hit)(t_ray *ray, int x, int y, t_scene *scene);
 	void	(*render_miss)(t_ray *ray, int x, int y, t_scene *scene);
-	int		fpscounter;
 }	t_render_info;
+
+typedef struct s_texture_list
+{
+	mlx_texture_t	*png;
+	struct s_texture_list *next;
+}	t_texture_list;
 
 struct s_scene
 {
@@ -265,6 +272,7 @@ struct s_scene
 	t_object		*objects;
 	mlx_t			*mlx;
 	mlx_image_t		*g_img;
+	t_texture_list	*textures;
 	t_render_info	render_info;
 	t_window_info	window_info;
 };

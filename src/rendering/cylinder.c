@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 11:18:10 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/16 14:32:53 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/23 14:03:26 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,17 +172,14 @@ void	get_hit_data_cylinder(t_ray *ray, t_cylinder *cylinder, t_scene *scene)
 	ray->results.bump = cylinder->bump;
 	ray->results.hit_normal = cylinder_normal_at(ray, cylinder);
 	ray->results.uv_coords = get_cylinder_uv(ray, cylinder);
-	if (cylinder->uv_color != NULL)
-	{
-		if (cylinder->uv_color->type == CHECKERBOARD)
-			ray->results.obj_color = uv_checkerboard(ray->results.uv_coords, \
-cylinder->color);
-		else if (cylinder->uv_color->type == PNG)
-			ray->results.obj_color = get_uv_value_png(ray->results.uv_coords, \
-cylinder->uv_color->png);
-	}
-	else
+	if (cylinder->uv_color.type == DEFAULT)
 		ray->results.obj_color = cylinder->color;
+	else if (cylinder->uv_color.type == CHECKERBOARD)
+		ray->results.obj_color = uv_checkerboard(ray->results.uv_coords, \
+cylinder->color);
+	else if (cylinder->uv_color.type == PNG)
+		ray->results.obj_color = get_uv_value_png(ray->results.uv_coords, \
+cylinder->uv_color.png);
 	check_and_calcute_bumpmap(ray, ray->results.bump);
 	set_light_hit_angle_and_intensity(scene, ray);
 }

@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 11:14:25 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/16 14:18:46 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/23 13:16:27 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	update_fpscounter(t_scene *scene)
 		mlx_delete_image(scene->mlx, fps_image);
 		fps_image = NULL;
 	}
-	if (scene->render_info.fpscounter == 1)
+	if (scene->window_info.fpscounter == 1)
 	{
 		fps_str = ft_ftoa(1 / scene->mlx->delta_time);
 		if (fps_str == NULL)

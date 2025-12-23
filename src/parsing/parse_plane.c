@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 11:59:50 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/12 12:14:05 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/23 14:13:45 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ static int	fill_plane_struct(t_plane *plane, char **line)
 	if (parse_color(&(plane->color), line[3]) != 0)
 		return (printf("Plane: Color parsing error\n"), 1);
 	if (count_arguments(line) >= 5)
-		plane->uv_color = get_uv_map(line[4]);
+		get_uv_map(line[4], &plane->uv_color);
 	if (count_arguments(line) >= 6)
-		plane->bump = get_bump_map(line[5]);
+		get_bump_map(line[5], &plane->bump);
 	return (0);
 }
 
