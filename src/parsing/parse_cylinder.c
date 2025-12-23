@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 12:00:29 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/23 14:13:30 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/23 15:03:48 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,8 @@ static int	new_endcap_struct(t_scene *scene, t_cylinder *cylinder)
 	return (0);
 }
 
-static int	fill_cylinder_struct(t_cylinder *cylinder, char **line)
+static int	fill_cylinder_struct(t_cylinder *cylinder, char **line,
+		t_texture_list *list)
 {
 	if (count_arguments(line) < 6 || count_arguments(line) > 8)
 		return (printf("Error\nCylinder: Incorrect amount of arguments\n"), 1);
@@ -100,9 +101,9 @@ static int	fill_cylinder_struct(t_cylinder *cylinder, char **line)
 	if (parse_color(&(cylinder->color), line[5]) != 0)
 		return (printf("Cylinder: Color parsing error\n"), 1);
 	if (count_arguments(line) >= 7)
-		get_uv_map(line[6], &cylinder->uv_color);
+		get_uv_map(line[6], &cylinder->uv_color, list);
 	if (count_arguments(line) >= 8)
-		get_bump_map(line[7], &cylinder->bump);
+		get_bump_map(line[7], &cylinder->bump, list);
 	return (0);
 }
 
@@ -114,7 +115,7 @@ int	new_cylinder_struct(t_scene *scene, char **line)
 	cylinder = ft_calloc(1, sizeof(t_cylinder));
 	if (cylinder == NULL)
 		return (printf("Error\nMalloc fail\n"), 2);
-	if (fill_cylinder_struct(cylinder, line) != 0)
+	if (fill_cylinder_struct(cylinder, line, scene->textures) != 0)
 		return (free(cylinder), 1);
 	object = ft_calloc(1, sizeof(t_object));
 	if (object == NULL)

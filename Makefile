@@ -36,6 +36,7 @@ SRC_DIR = src
 
 # C files
 SRC = 	src/main.c \
+		src/helpers/cleanup.c \
 		src/helpers/ft_atof.c \
 		src/helpers/ft_ftoa.c \
 		src/helpers/ft_split_set.c \

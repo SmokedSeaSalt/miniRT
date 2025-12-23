@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 10:04:11 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/23 13:55:43 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/23 15:21:00 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,49 +149,11 @@ void	init_settings(t_scene *scene)
 {
 	scene->render_info.render_hit = &display_default;
 	scene->render_info.render_miss = &display_black;
-	scene->window_info.fpscounter = 1;
+	scene->window_info.fpscounter = 0;
 	scene->window_info.max_render_depth = 7;
 	scene->window_info.render_depth = 7;
 	scene->window_info.render_y = 0;
 	scene->window_info.start_time = get_time_in_ms();
-}
-
-void	cleanup_object(t_object *node)
-{
-		free(node->data);
-		// free(current->bump); //TODO mlx delete mlx_texture_t
-		// free(current->uv_color); //TODO mlx delete mlx_texture_t
-		free(node);
-		//free up last fps string.
-}
-
-/// @brief general cleanup function that will free all malloced values.
-/// @param scene
-void	cleanup_scene(t_scene *scene)
-{
-	t_object	*current;
-	t_object	*next;
-	t_lights	*current_light;
-	t_lights	*next_light;
-
-	free(scene->ambient);
-	free(scene->camera);
-	current_light = scene->lights;
-	while (current_light != NULL)
-	{
-		next_light = current_light->next;
-		free(current_light);
-		current_light = next_light;
-	}
-	current = scene->objects;
-	while (current != NULL)
-	{
-		next = current->next;
-		cleanup_object(current);
-		current = next;
-	}
-	mlx_delete_image(scene->mlx, scene->g_img);
-	mlx_terminate(scene->mlx);
 }
 
 int	main(int argc, char *argv[])

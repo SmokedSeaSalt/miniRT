@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 11:59:33 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/23 14:14:00 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/23 15:03:30 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@
 #include "consts.h"
 #include <math.h>
 
-static int	fill_sphere_struct(t_sphere *sphere, char **line)
+static int	fill_sphere_struct(t_sphere *sphere, char **line,
+		t_texture_list *list)
 {
 	if (count_arguments(line) < 4 || count_arguments(line) > 6)
 		return (printf("Error\nSphere: Incorrect amount of arguments\n"), 1);
@@ -32,9 +33,9 @@ static int	fill_sphere_struct(t_sphere *sphere, char **line)
 	if (parse_color(&(sphere->color), line[3]) != 0)
 		return (printf("Sphere: Color parsing error\n"), 1);
 	if (count_arguments(line) >= 5)
-		get_uv_map(line[4], &sphere->uv_color);
+		get_uv_map(line[4], &sphere->uv_color, list);
 	if (count_arguments(line) >= 6)
-		get_bump_map(line[5], &sphere->bump);
+		get_bump_map(line[5], &sphere->bump, list);
 	return (0);
 }
 
@@ -46,7 +47,7 @@ int	new_sphere_struct(t_scene *scene, char **line)
 	sphere = ft_calloc(1, sizeof(t_sphere));
 	if (sphere == NULL)
 		return (printf("Error\nMalloc fail\n"), 2);
-	if (fill_sphere_struct(sphere, line) != 0)
+	if (fill_sphere_struct(sphere, line, scene->textures) != 0)
 		return (free(sphere), 1);
 	object = ft_calloc(1, sizeof(t_object));
 	if (object == NULL)

@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 11:59:50 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/23 14:13:45 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/23 15:03:43 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 #include "rendering.h"
 #include "consts.h"
 
-static int	fill_plane_struct(t_plane *plane, char **line)
+static int	fill_plane_struct(t_plane *plane, char **line,
+		t_texture_list *list)
 {
 	if (count_arguments(line) < 4 || count_arguments(line) > 6)
 		return (printf("Error\nPlane: Incorrect amount of arguments\n"), 1);
@@ -31,9 +32,9 @@ static int	fill_plane_struct(t_plane *plane, char **line)
 	if (parse_color(&(plane->color), line[3]) != 0)
 		return (printf("Plane: Color parsing error\n"), 1);
 	if (count_arguments(line) >= 5)
-		get_uv_map(line[4], &plane->uv_color);
+		get_uv_map(line[4], &plane->uv_color, list);
 	if (count_arguments(line) >= 6)
-		get_bump_map(line[5], &plane->bump);
+		get_bump_map(line[5], &plane->bump, list);
 	return (0);
 }
 
@@ -45,7 +46,7 @@ int	new_plane_struct(t_scene *scene, char **line)
 	plane = ft_calloc(1, sizeof(t_plane));
 	if (plane == NULL)
 		return (printf("Error\nMalloc fail\n"), 2);
-	if (fill_plane_struct(plane, line) != 0)
+	if (fill_plane_struct(plane, line, scene->textures) != 0)
 		return (free(plane), 1);
 	object = ft_calloc(1, sizeof(t_object));
 	if (object == NULL)
