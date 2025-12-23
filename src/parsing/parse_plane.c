@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 11:59:50 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/23 15:03:43 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/23 16:22:34 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ int	new_plane_struct(t_scene *scene, char **line)
 	object->data = plane;
 	object->is_hit = (int (*)(t_ray *, void *))is_hit_plane;
 	object->get_hit_dist = (float (*)(t_ray *, void *))git_hit_dist_plane;
-	object->get_hit_data = (void (*)(t_ray *, void *, t_scene *))get_hit_data_plane;
+	object->get_hit_data = (void (*)(t_ray *, void *, t_scene *))
+		get_hit_data_plane;
 	add_object_to_back(&(scene->objects), object);
 	return (0);
 }

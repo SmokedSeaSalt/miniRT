@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 12:00:29 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/23 15:03:48 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/23 16:22:59 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ static int	fill_top_endcap_struct(t_scene *scene, t_cylinder *cylinder)
 	object->data = endcap_top;
 	object->is_hit = (int (*)(t_ray *, void *))is_hit_endcap;
 	object->get_hit_dist = (float (*)(t_ray *, void *))get_hit_dist_endcap;
-	object->get_hit_data = (void (*)(t_ray *, void *, t_scene *))get_hit_data_endcap;
+	object->get_hit_data = (void (*)(t_ray *, void *, t_scene *))
+		get_hit_data_endcap;
 	add_object_to_back(&(scene->objects), object);
 	return (0);
 }
@@ -72,7 +73,8 @@ static int	fill_bottom_endcap_struct(t_scene *scene, t_cylinder *cylinder)
 	object->data = endcap_bottom;
 	object->is_hit = (int (*)(t_ray *, void *))is_hit_endcap;
 	object->get_hit_dist = (float (*)(t_ray *, void *))get_hit_dist_endcap;
-	object->get_hit_data = (void (*)(t_ray *, void *, t_scene *))get_hit_data_endcap;
+	object->get_hit_data = (void (*)(t_ray *, void *, t_scene *))
+		get_hit_data_endcap;
 	add_object_to_back(&(scene->objects), object);
 	return (0);
 }
@@ -124,7 +126,8 @@ int	new_cylinder_struct(t_scene *scene, char **line)
 	object->data = cylinder;
 	object->is_hit = (int (*)(t_ray *, void *))is_hit_cylinder;
 	object->get_hit_dist = (float (*)(t_ray *, void *))get_hit_dist_cylinder;
-	object->get_hit_data = (void (*)(t_ray *, void *, t_scene *))get_hit_data_cylinder;
+	object->get_hit_data = (void (*)(t_ray *, void *, t_scene *))
+		get_hit_data_cylinder;
 	add_object_to_back(&(scene->objects), object);
 	if (new_endcap_struct(scene, cylinder) != 0)
 		return (1);

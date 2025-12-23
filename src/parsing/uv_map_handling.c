@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 10:42:19 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/23 15:12:05 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/23 16:12:42 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 
 void	add_texture_delete_list(t_texture_list **list, mlx_texture_t *png)
 {
-	t_texture_list *new;
-	t_texture_list *tmp;
+	t_texture_list	*new;
+	t_texture_list	*tmp;
 
 	new = ft_calloc(1, sizeof(t_texture_list));
 	if (new == NULL)

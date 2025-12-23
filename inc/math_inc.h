@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 15:53:33 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/22 10:19:43 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/23 16:24:09 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ t_vec3	vec3_new(float x, float y, float z);
 t_vec3	vec3_normalize(t_vec3 vec3);
 float	vec3_dot(t_vec3 a, t_vec3 b);
 t_vec3	vec3_cross(t_vec3 a, t_vec3 b);
-float	vec3_length(t_vec3 vec3);
 float	vec3_sum_components(t_vec3 vec3);
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -37,6 +36,7 @@ t_vec3	vec3_rotate_around_z(t_vec3 *vec3, float z_rad);
 
 float	get_angle_between_vec3(t_vec3 *vec3_a, t_vec3 *vec3_b);
 int		is_vec3_angle_acute(t_vec3 *a, t_vec3 *b);
+float	vec3_length(t_vec3 vec3);
 
 ////////////////////////////////////////////////////////////////////////////////
 // vec4																		  //

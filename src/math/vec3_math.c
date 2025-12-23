@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 12:21:50 by egrisel           #+#    #+#             */
-/*   Updated: 2025/12/16 14:08:56 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/23 16:23:48 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,12 @@ float	get_angle_between_vec3(t_vec3 *vec3_a, t_vec3 *vec3_b)
 int	is_vec3_angle_acute(t_vec3 *a, t_vec3 *b)
 {
 	return (vec3_dot(*a, *b) > 0.0f);
+}
+
+/// @brief calculates the length of the given t_vec3.
+/// @param vec3
+/// @return length as a float.
+float	vec3_length(t_vec3 vec3)
+{
+	return (sqrtf(vec3.x * vec3.x + vec3.y * vec3.y + vec3.z * vec3.z));
 }

@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 11:59:33 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/23 15:03:30 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/23 16:22:18 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ int	new_sphere_struct(t_scene *scene, char **line)
 	object->data = sphere;
 	object->is_hit = (int (*)(t_ray *, void *))is_hit_sphere;
 	object->get_hit_dist = (float (*)(t_ray *, void *))get_hit_dist_sphere;
-	object->get_hit_data = (void (*)(t_ray *, void *, t_scene *))get_hit_data_sphere;
+	object->get_hit_data = (void (*)(t_ray *, void *, t_scene *))
+		get_hit_data_sphere;
 	add_object_to_back(&(scene->objects), object);
 	return (0);
 }

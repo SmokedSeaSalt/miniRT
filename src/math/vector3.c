@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:16:16 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/10/21 16:24:43 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/23 16:23:44 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,6 @@ inline t_vec3	vec3_new(float x, float y, float z)
 	result.z = z;
 	result.w = 0.0f;
 	return (result);
-}
-
-/// @brief calculates the length of the given t_vec3.
-/// @param vec3
-/// @return length as a float.
-float	vec3_length(t_vec3 vec3)
-{
-	return (sqrtf(vec3.x * vec3.x + vec3.y * vec3.y + vec3.z * vec3.z));
 }
 
 /// @brief normalizes the t_vec3.
