@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 12:00:29 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/23 16:22:59 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/28 16:56:32 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static int	new_endcap_struct(t_scene *scene, t_cylinder *cylinder)
 }
 
 static int	fill_cylinder_struct(t_cylinder *cylinder, char **line,
-		t_texture_list *list)
+		t_texture_list **list)
 {
 	if (count_arguments(line) < 6 || count_arguments(line) > 8)
 		return (printf("Error\nCylinder: Incorrect amount of arguments\n"), 1);
@@ -117,7 +117,7 @@ int	new_cylinder_struct(t_scene *scene, char **line)
 	cylinder = ft_calloc(1, sizeof(t_cylinder));
 	if (cylinder == NULL)
 		return (printf("Error\nMalloc fail\n"), 2);
-	if (fill_cylinder_struct(cylinder, line, scene->textures) != 0)
+	if (fill_cylinder_struct(cylinder, line, &scene->textures) != 0)
 		return (free(cylinder), 1);
 	object = ft_calloc(1, sizeof(t_object));
 	if (object == NULL)

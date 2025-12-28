@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 10:42:19 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/23 16:12:42 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/28 16:55:53 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	add_texture_delete_list(t_texture_list **list, mlx_texture_t *png)
 	return ;
 }
 
-void	get_uv_map(char *line, t_uv_map *map, t_texture_list *list)
+void	get_uv_map(char *line, t_uv_map *map, t_texture_list **list)
 {
 	if (ft_strncmp(line, "default", ft_strlen(line)) == 0)
 		return ;
@@ -53,11 +53,11 @@ void	get_uv_map(char *line, t_uv_map *map, t_texture_list *list)
 		map->type = DEFAULT;
 		return ;
 	}
-	add_texture_delete_list(&list, map->png);
+	add_texture_delete_list(list, map->png);
 	return ;
 }
 
-void	get_bump_map(char *line, t_uv_map *map, t_texture_list *list)
+void	get_bump_map(char *line, t_uv_map *map, t_texture_list **list)
 {
 	if (ft_strncmp(line, "default", ft_strlen(line)) == 0)
 		return ;
@@ -69,6 +69,6 @@ void	get_bump_map(char *line, t_uv_map *map, t_texture_list *list)
 		map->type = DEFAULT;
 		return ;
 	}
-	add_texture_delete_list(&list, map->png);
+	add_texture_delete_list(list, map->png);
 	return ;
 }

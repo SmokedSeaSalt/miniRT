@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:54 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/12 09:47:28 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/27 17:17:58 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	parse_file(t_scene *scene, char *filename)
 		return (-1);
 	while (1)
 	{
-		line = get_next_line(fd);
+		line = get_next_line(fd); //creates leakes when multiple elements are found where only one is allowed.
 		if (line == NULL)
 			break ;
 		if (line[0] != '\0' && line[0] != '#')

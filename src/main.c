@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 10:04:11 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/23 15:51:20 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/27 13:46:53 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(int argc, char *argv[])
 	if (argc != 2)
 		return (printf("Error\nIncorrect amount of arguments"), 1);
 	if (parse_file(&scene, argv[1]) == -1)
-		return (1);
+		return (cleanup_scene(&scene), 1);
 	if (init_mlx(&scene))
 		return (cleanup_scene(&scene), 1);
 	init_settings(&scene);

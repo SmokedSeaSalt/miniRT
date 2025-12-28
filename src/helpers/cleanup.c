@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 15:13:35 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/23 15:28:10 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/28 16:52:38 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void	cleanup_textures(t_texture_list *node)
 		mlx_delete_texture(current->png);
 		free(current);
 		current = next;
+		#include <stdio.h>
+		printf("test");
 	}
 	return ;
 }
@@ -55,6 +57,7 @@ void	cleanup_scene(t_scene *scene)
 
 	free(scene->ambient);
 	free(scene->camera);
+	free_lights(scene->lights);
 	current = scene->objects;
 	while (current != NULL)
 	{
@@ -67,5 +70,6 @@ void	cleanup_scene(t_scene *scene)
 	scene->window_info.fpscounter = 0;
 	update_fpscounter(scene);
 	mlx_delete_image(scene->mlx, scene->g_img);
-	mlx_terminate(scene->mlx);
+	if (scene->mlx != NULL)
+		mlx_terminate(scene->mlx);
 }

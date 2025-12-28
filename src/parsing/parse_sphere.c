@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 11:59:33 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/23 16:22:18 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/12/28 16:56:55 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 #include <math.h>
 
 static int	fill_sphere_struct(t_sphere *sphere, char **line,
-		t_texture_list *list)
+		t_texture_list **list)
 {
 	if (count_arguments(line) < 4 || count_arguments(line) > 6)
 		return (printf("Error\nSphere: Incorrect amount of arguments\n"), 1);
@@ -47,7 +47,7 @@ int	new_sphere_struct(t_scene *scene, char **line)
 	sphere = ft_calloc(1, sizeof(t_sphere));
 	if (sphere == NULL)
 		return (printf("Error\nMalloc fail\n"), 2);
-	if (fill_sphere_struct(sphere, line, scene->textures) != 0)
+	if (fill_sphere_struct(sphere, line, &scene->textures) != 0)
 		return (free(sphere), 1);
 	object = ft_calloc(1, sizeof(t_object));
 	if (object == NULL)
