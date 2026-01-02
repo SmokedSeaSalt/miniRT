@@ -13,7 +13,7 @@
 #ifndef HELPERS_H
 # define HELPERS_H
 
-#include "structs.h"
+# include "structs.h"
 
 char		**ft_split_set(char const *s, char const *set);
 void		*ft_free_split(char **ret);

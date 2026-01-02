@@ -260,8 +260,8 @@ typedef struct s_render_info
 
 typedef struct s_texture_list
 {
-	mlx_texture_t	*png;
-	struct s_texture_list *next;
+	mlx_texture_t			*png;
+	struct s_texture_list	*next;
 }	t_texture_list;
 
 struct s_scene
