@@ -42,8 +42,6 @@ void	cleanup_textures(t_texture_list *node)
 		mlx_delete_texture(current->png);
 		free(current);
 		current = next;
-		#include <stdio.h>
-		printf("test");
 	}
 	return ;
 }
