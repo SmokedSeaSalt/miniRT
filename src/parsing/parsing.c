@@ -34,8 +34,10 @@ int	is_scene_valid(t_scene *scene)
 int	parse_file(t_scene *scene, char *filename)
 {
 	int		fd;
+	int		error;
 	char	*line;
 
+	error = 0;
 	fd = open_file(filename);
 	if (fd < 0)
 		return (-1);
@@ -44,13 +46,13 @@ int	parse_file(t_scene *scene, char *filename)
 		line = get_next_line(fd); //creates leakes when multiple elements are found where only one is allowed.
 		if (line == NULL)
 			break ;
-		if (line[0] != '\0' && line[0] != '#')
+		if (line[0] != '\0' && line[0] != '#' && error == 0)
 			if (process_line(scene, line) != 0)
-				return (free(line), -1);
+				error = -1;
 		free(line);
 	}
 	close(fd);
-	if (is_scene_valid(scene) != 1)
+	if (error == -1 || is_scene_valid(scene) != 1)
 		return (-1);
 	return (0);
 }
