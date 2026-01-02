@@ -39,7 +39,7 @@ run_helpers: test_helpers
 #                                                                              #
 ################################################################################
 
-MATH_FUNC = $(wildcard ../src/math/*.c)
+MATH_FUNC = $(wildcard ../src/math/*.c) $(wildcard ../src/rendering/*.c) $(wildcard ../src/rendering/uv_mapping/*.c) $(wildcard ../src/helpers/*.c)
 MATH_INC = ../inc
 
 test_math: test_math.c $(MATH_FUNC) $(MATH_INC) libft
@@ -54,7 +54,7 @@ run_math: test_math
 #                                                                              #
 ################################################################################
 
-PARSING_FUNC = $(wildcard ../src/parsing/*.c) $(wildcard ../src/rendering/*.c) $(wildcard ../src/rendering/uv_mapping/*.c) $(wildcard ../src/helpers/*.c) $(MATH_FUNC)
+PARSING_FUNC = $(wildcard ../src/parsing/*.c) $(wildcard ../src/rendering/*.c) $(wildcard ../src/rendering/uv_mapping/*.c) $(wildcard ../src/helpers/*.c) $(wildcard ../src/math/*.c)
 PARSING_INC = ../inc
 
 test_parsing: test_parsing.c $(PARSING_FUNC) $(PARSING_INC) libft
@@ -69,11 +69,11 @@ run_parsing: test_parsing
 #                                                                              #
 ################################################################################
 
-INTERSECT_FUNC = $(wildcard ../src/math/*.c)
+INTERSECT_FUNC = $(wildcard ../src/rendering/*.c) $(wildcard ../src/rendering/uv_mapping/*.c) $(wildcard ../src/helpers/*.c) $(wildcard ../src/math/*.c)
 INTERSECT_INC = ../inc
 
 test_intersect: test_intersect.c $(INTERSECT_FUNC) $(INTERSECT_INC) libft
-	@$(CC) $(CFLAGS) $< $(INTERSECT_FUNC) -I$(INTERSECT_INC) -lm -o $@ $(ARGS_MOCKA)
+	@$(CC) $(CFLAGS) $< $(INTERSECT_FUNC) -I$(INTERSECT_INC) $(LIBFT) $(LIBFT_INC) $(LIBMLX) $(LIBMLX_INC) -lm -o $@ $(ARGS_MOCKA)
 
 run_intersect: test_intersect
 	./test_intersect
@@ -84,7 +84,7 @@ run_intersect: test_intersect
 #                                                                              #
 ################################################################################
 
-RENDERING_FUNC = $(wildcard ../src/rendering/*.c) $(wildcard ../src/rendering/uv_mapping/*.c) $(wildcard ../src/helpers/*.c) $(MATH_FUNC)
+RENDERING_FUNC = $(wildcard ../src/rendering/*.c) $(wildcard ../src/rendering/uv_mapping/*.c) $(wildcard ../src/helpers/*.c) $(wildcard ../src/math/*.c)
 RENDERING_INC = ../inc
 
 test_rendering: test_rendering.c $(PARSING_FUNC) $(PARSING_INC) libft mlx42
