@@ -67,7 +67,8 @@ void	cleanup_scene(t_scene *scene)
 	cleanup_textures(scene->textures);
 	scene->window_info.fpscounter = 0;
 	update_fpscounter(scene);
-	mlx_delete_image(scene->mlx, scene->g_img);
+	if (scene->g_img != NULL)
+		mlx_delete_image(scene->mlx, scene->g_img);
 	if (scene->mlx != NULL)
 		mlx_terminate(scene->mlx);
 }
