@@ -4,5 +4,5 @@ C -2,0,0 			1,0,0 90
 
 L -2,0,-1 		0.6 255,255,255
 
-cy 0,0,0 0,0.1,1     1  0.5   0,255,0
-#cy 0,0,0 0,0.1,1     1  0.5   0,255,0 assets/brick_image.png assets/brick_bump.png
+#cy 0,0,0 0,0.1,1     1  0.5   0,255,0
+cy 0,0,0 0,0,1     1  0.5   0,255,0 assets/brick_1k_color.png assets/brick_1k_normal.png
