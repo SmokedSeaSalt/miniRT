@@ -43,7 +43,7 @@ int	parse_file(t_scene *scene, char *filename)
 		return (-1);
 	while (1)
 	{
-		line = get_next_line(fd); //creates leakes when multiple elements are found where only one is allowed.
+		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
 		if (line[0] != '\0' && line[0] != '#' && error == 0)
