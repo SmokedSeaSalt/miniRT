@@ -14,10 +14,15 @@
 #include "structs.h"
 #include "MLX42.h"
 #include "math_inc.h"
+#include <math.h>
 
 void	set_u_and_v_vectors(t_vec3 *u_vec, t_vec3 *v_vec, t_vec3 normal)
 {
-	const t_vec3	world_up = vec3_new(0, 0, 1);// todo edge case for certain plane orientation?
+	t_vec3	world_up;
+
+	world_up = vec3_new(0, 0, 1);
+	if (fabs(world_up.z) > 0.99f)
+		world_up = vec3_new(0, 1, 0);
 	*u_vec = vec3_cross(normal, world_up);
 	*u_vec = vec3_normalize(*u_vec);
 	*v_vec = vec3_cross(normal, *u_vec);
