@@ -113,13 +113,33 @@ void	print_render_time(long long *start_time)
 	*start_time = -1;
 }
 
+void	render_single_frame(t_scene *scene)
+{
+	int	i_x;
+	int	block_size;
+
+	block_size = pow(2, scene->window_info.render_depth);
+	i_x = 0;
+	while (i_x < scene->window_info.width)
+	{
+		if (block_already_rendered(i_x, scene->window_info.render_y, \
+&(scene->window_info)) == 0)
+			render_block(i_x, scene->window_info.render_y, scene);
+		i_x += block_size;
+	}
+	scene->window_info.render_y += block_size;
+	if (scene->window_info.render_y >= scene->window_info.height)
+	{
+		scene->window_info.render_y = 0;
+		(scene->window_info.render_depth)--;
+	}
+}
+
 //calculate max depth
 //any key press sets current depth back to max depth
 void	render_frame(t_scene *scene)
 {
 	const long long	frame_start = get_time_in_ms();
-	int				i_x;
-	int				block_size;
 
 	while (get_timestamp(frame_start) < ((1.0 / SCREEN_FPS) * 1000))
 	{
@@ -128,20 +148,6 @@ void	render_frame(t_scene *scene)
 			print_render_time(&(scene->window_info.start_time));
 			return ;
 		}
-		block_size = pow(2, scene->window_info.render_depth);
-		i_x = 0;
-		while (i_x < scene->window_info.width)
-		{
-			if (block_already_rendered(i_x, scene->window_info.render_y, \
-&(scene->window_info)) == 0)
-				render_block(i_x, scene->window_info.render_y, scene);
-			i_x += block_size;
-		}
-		scene->window_info.render_y += block_size;
-		if (scene->window_info.render_y >= scene->window_info.height)
-		{
-			scene->window_info.render_y = 0;
-			(scene->window_info.render_depth)--;
-		}
+		render_single_frame(scene);
 	}
 }
