@@ -79,4 +79,12 @@ t_vec3	sphere_normal_at(t_ray *ray, t_sphere *sphere);
 int		is_hit_plane(t_ray *ray, t_plane *plane);
 float	git_hit_dist_plane(t_ray *ray, t_plane *plane);
 
+////////////////////////////////////////////////////////////////////////////////
+// cylinder																	  //
+////////////////////////////////////////////////////////////////////////////////
+
+int		is_hit_cylinder(t_ray *ray, t_cylinder *cylinder);
+float	get_hit_height(t_ray *ray, t_cylinder *cylinder, float hit_dist);
+int		is_hit_within_height(t_ray *ray, t_cylinder *cylinder, float hit_dist);
+
 #endif

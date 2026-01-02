@@ -44,6 +44,7 @@ SRC = 	src/main.c \
 		src/helpers/main_init.c \
 		src/helpers/time.c \
 		src/helpers/window_name.c \
+		src/math/intersect_cylinder.c \
 		src/math/intersect_helpers.c \
 		src/math/intersect_plane.c \
 		src/math/intersect_sphere.c \
@@ -73,6 +74,7 @@ SRC = 	src/main.c \
 		src/rendering/movement.c \
 		src/rendering/plane.c \
 		src/rendering/ray.c \
+		src/rendering/render_pixel.c \
 		src/rendering/rendering.c \
 		src/rendering/sphere.c \
 		src/rendering/uv_mapping/bumpmap.c \

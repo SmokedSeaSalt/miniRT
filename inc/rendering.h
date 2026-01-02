@@ -16,6 +16,7 @@
 
 void	render_frame(t_scene *scene);
 t_ray	get_ray(int x, int y, t_camera *camera, t_window_info *window_info);
+void	loop_though_objects(t_scene *scene, t_ray *ray, t_object *object_list);
 
 ////////////////////////////////////////////////////////////////////////////////
 // light																	  //
@@ -39,8 +40,8 @@ void	get_hit_data_plane(t_ray *ray, t_plane *plane, t_scene *scene);
 // cylinder																	  //
 ////////////////////////////////////////////////////////////////////////////////
 
-int		is_hit_cylinder(t_ray *ray, t_cylinder *cylinder);
-float	get_hit_height(t_ray *ray, t_cylinder *cylinder, float hit_dist);
+float	cylinder_intersects(t_ray *ray, t_cylinder *cylinder);
+float	get_hit_dist_cylinder(t_ray *ray, t_cylinder *cylinder);
 float	get_hit_dist_cylinder(t_ray *ray, t_cylinder *cylinder);
 void	get_hit_data_cylinder(t_ray *ray, t_cylinder *cylinder, t_scene *scene);
 
