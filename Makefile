@@ -61,6 +61,8 @@ SRC = 	src/main.c \
 		src/parsing/parse_light.c \
 		src/parsing/parse_plane.c \
 		src/parsing/parse_sphere.c \
+		src/parsing/parsing_checks.c \
+		src/parsing/parsing_fillers.c \
 		src/parsing/parsing_helpers.c \
 		src/parsing/parsing.c \
 		src/parsing/uv_map_handling.c \
