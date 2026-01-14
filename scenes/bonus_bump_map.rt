@@ -1,0 +1,10 @@
+A 0.3     255,255,255
+
+C -2,0,0 			1,0,0 90
+
+L -3,0,2 		0.6 255,255,255
+
+
+sp 0,2,0 1.5 255,255,255 assets/brick_1k_color.png
+sp 0,0,0 1.5 255,255,255 default assets/brick_1k_normal.png
+sp 0,-2,0 1.5 255,255,255 assets/brick_1k_color.png assets/brick_1k_normal.png
