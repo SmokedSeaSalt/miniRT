@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder_uv.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
+/*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 12:46:26 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/16 14:25:29 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2026/01/14 14:20:10 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,16 @@ t_uv	get_cylinder_uv(t_ray *ray, t_cylinder *cylinder)
 	t_vec3		d;
 	t_uv		uv;
 	t_vec3		hit_point;
-	const float	hit_height = get_hit_height(ray, cylinder,
-			ray->results.hit_dist) + (0.5 * cylinder->height);
+	t_vec3		u_vec;
+	t_vec3		v_vec;
 
 	hit_point.v = ray->orig.v + (ray->vec3.v * ray->results.hit_dist);
 	d.v = hit_point.v - cylinder->coords.v;
-	uv.u = 0.5 + (atan2(d.x, d.y) / (2 * PI));
+	set_u_and_v_vectors(&u_vec, &v_vec, cylinder->orientation);
+	uv.u = 0.5 + (atan2(vec3_dot(d, v_vec), vec3_dot(d, u_vec)) / (2 * PI));
 	uv.u = fmax(0, fmin(1, uv.u));
-	uv.v = (hit_height / cylinder->height) * 0.7;
+	uv.v = (vec3_dot(d, cylinder->orientation) / cylinder->height) + 0.5;
+	uv.v = fmax(0, fmin(1, uv.v));
 	return (uv);
 }
 
