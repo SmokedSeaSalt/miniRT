@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 15:39:45 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/23 16:10:37 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2026/01/14 09:48:02 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	hook(void *param)
 
 int	init_mlx(t_scene *scene)
 {
-	scene->mlx = mlx_init(WIDTH, HEIGHT, "miniRT", false);
+	scene->mlx = mlx_init(WIDTH, HEIGHT, "miniRT", true);
 	if (scene->mlx == NULL)
 		return (-1);
 	scene->g_img = mlx_new_image(scene->mlx, WIDTH, HEIGHT);
