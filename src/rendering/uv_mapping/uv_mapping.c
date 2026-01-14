@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   uv_mapping.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
+/*   By: egrisel <egrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 12:47:08 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/16 14:20:41 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2026/01/14 13:59:01 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	set_u_and_v_vectors(t_vec3 *u_vec, t_vec3 *v_vec, t_vec3 normal)
 	t_vec3	world_up;
 
 	world_up = vec3_new(0, 0, 1);
-	if (fabs(world_up.z) > 0.99f)
+	if (fabs(normal.z) > 0.99f)
 		world_up = vec3_new(0, 1, 0);
 	*u_vec = vec3_cross(normal, world_up);
 	*u_vec = vec3_normalize(*u_vec);
