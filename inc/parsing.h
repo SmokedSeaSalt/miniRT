@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:10 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/12/28 16:57:11 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2026/01/15 14:35:35 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int			parse_orig(t_vec3 *orig, char *str);
 int			parse_normal_vector(t_vec3 *vec, char *str);
 int			parse_ratio(float *ratio, char *str);
 int			parse_fov(float *fov, char *str);
+int			has_incorrect_commas(char *str);
+int			parse_color_val(char *str);
 
 ////////////////////////////////////////////////////////////////////////////////
 // parse_structs															  //

@@ -6,7 +6,7 @@
 /*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 14:58:50 by mvan-rij          #+#    #+#             */
-/*   Updated: 2026/01/02 14:07:45 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2026/01/15 14:29:52 by mvan-rij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,14 @@ int	parse_color(t_color *color, char *str)
 {
 	char	**split;
 
+	if (has_incorrect_commas(str) == 1)
+		return (printf("Error\nColor: " N_ARGS_ERR "\n"), 1);
 	split = ft_split(str, ',');
 	if (split == NULL || count_arguments(split) != 3)
 		return (ft_free_split(split), 1);
-	color->r = ft_atoi(split[0]);
-	color->g = ft_atoi(split[1]);
-	color->b = ft_atoi(split[2]);
+	color->r = parse_color_val(split[0]);
+	color->g = parse_color_val(split[1]);
+	color->b = parse_color_val(split[2]);
 	ft_free_split(split);
 	if (color_out_of_range(*color) == 1)
 		return (printf("Error\nColor: " RANGE_ERR "\n"), 1);
@@ -38,6 +40,8 @@ int	parse_orig(t_vec3 *orig, char *str)
 {
 	char	**split;
 
+	if (has_incorrect_commas(str) == 1)
+		return (printf("Error\nOrigin: " N_ARGS_ERR "\n"), 1);
 	split = ft_split(str, ',');
 	if (split == NULL || count_arguments(split) != 3)
 	{
@@ -53,6 +57,8 @@ int	parse_normal_vector(t_vec3 *vec, char *str)
 {
 	char	**split;
 
+	if (has_incorrect_commas(str) == 1)
+		return (printf("Error\nOrientation: " N_ARGS_ERR "\n"), 1);
 	split = ft_split(str, ',');
 	if (split == NULL || count_arguments(split) != 3)
 	{
