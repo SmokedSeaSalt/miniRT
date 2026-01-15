@@ -7,7 +7,6 @@
 NAME = miniRT
 CC = cc
 CFLAGS = -Wall -Werror -Wextra -MMD -g
-CCDEBUG = -g
 
 ################################################################################
 #                                                                              #
@@ -140,69 +139,10 @@ libft:
 	@printf "$(COLOUR_BLUE)Compiling libft\n$(COLOUR_END)"
 	@make --no-print-directory -C $(LIBFT_PATH)
 
-# Extra's
-debug: fclean
-
 rmmlx42:
 	rm -rf $(LIBMLX_PATH)
 
-.PHONY: all clean fclean re mlx42 libft debug rmmlx42 test run_test setup_test \
-analyze clean_analisys fast small small_fast
-
-
-################################################################################
-#                                                                              #
-# Testing                                                                      #
-#                                                                              #
-################################################################################
-
-FAST_FLAGS = -ffast-math -Ofast
-SMALL_FLAGS = -DWIDTH=300 -DHEIGHT=300
-#enable speedup compile flags
-fast: fclean mlx42 libft
-	@$(MAKE) CFLAGS="$(CFLAGS) $(FAST_FLAGS)" --no-print-directory all
-
-#smaller window
-small: fclean mlx42 libft
-	@$(MAKE) CFLAGS="$(CFLAGS) $(SMALL_FLAGS)" --no-print-directory all
-
-#smaller window, enable speedup compile flags
-small_fast: fclean mlx42 libft
-	@$(MAKE) CFLAGS="$(CFLAGS) $(SMALL_FLAGS) $(FAST_FLAGS)" --no-print-directory all
-
-
-#unit testing
-test:
-
-run_test:
-	@printf "$(COLOUR_BLUE)Compiling and running tests\n$(COLOUR_END)"
-	@make --no-print-directory run_test -C tests
-	@printf "$(COLOUR_BLUE)Cleaning up tests\n$(COLOUR_END)"
-	@make --no-print-directory clean -C tests
-
-clean_test:
-	@printf "$(COLOUR_BLUE)Cleaning up tests\n$(COLOUR_END)"
-	@make --no-print-directory clean -C tests
-
-setup_test:
-	./tests/setup_tests.sh
-#	setup precommit hook
-	git config core.hooksPath tests/hooks
-
-#clang testing
-analyze:
-	@echo "Running static analysis with scan-build..."
-	@for srcfile in $(SRC); do \
-		objfile=$(BUILD_DIR)/$${srcfile#$(SRC_DIR)/}; \
-		objfile=$${objfile%.c}.o; \
-		mkdir -p $$(dirname $$objfile); \
-		scan-build-14 -o ./reports clang $(CFLAGS) $(INC) $(LIBFT_INC) $(LIBMLX_INC) -c $$srcfile -o $$objfile; \
-	done
-	@printf "$(COLOUR_BLUE)If bugs were found, reports can be found in /reports\n$(COLOUR_END)"
-#	scan-build-14 -o ./reports make all clean
-
-clean_analisys:
-	rm -rf reports
+.PHONY: all clean fclean re mlx42 libft debug rmmlx42
 
 ################################################################################
 #                                                                              #
