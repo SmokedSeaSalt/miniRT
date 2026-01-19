@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
+/*   By: egrisel <egrisel@student.codam.nl>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:15:34 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/23 11:14:21 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/11/25 13:45:56 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # endif
 
 # include <stdlib.h> //to use size_t
+#include <sys/types.h>
 
 typedef struct s_gnl_list
 {

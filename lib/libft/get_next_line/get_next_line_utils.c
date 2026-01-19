@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
+/*   By: egrisel <egrisel@student.codam.nl>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:15:46 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/23 11:11:51 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/11/25 13:45:48 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #include <stdlib.h> //to use malloc()
 #include <stdint.h> //to use SIZE_MAX
 #include "get_next_line.h"
+#include <sys/types.h>
+
 
 void	*gnl_calloc(size_t nmemb, size_t size)
 {

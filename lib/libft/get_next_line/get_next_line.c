@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvan-rij <mvan-rij@student.42.fr>          +#+  +:+       +#+        */
+/*   By: egrisel <egrisel@student.codam.nl>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:15:43 by mvan-rij          #+#    #+#             */
-/*   Updated: 2025/09/23 11:12:41 by mvan-rij         ###   ########.fr       */
+/*   Updated: 2025/11/25 13:45:20 by egrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <unistd.h> //to use read
 #include <stdlib.h> //to use free
 #include <stdlib.h> //to use (s)size_t
+#include <sys/types.h>
 
 char	*free_all(t_gnl_list **head)
 {

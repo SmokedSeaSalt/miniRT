@@ -75,7 +75,7 @@ INCLALL= $(patsubst %, $(INCLPATH)%, $(INCLSRCS))
 all: $(NAME)
 
 $(NAME): $(ALLOBJS) $(INCLALL)
-	ar rcsUu $(NAME) $(ALLOBJS)
+	ar rcs $(NAME) $(ALLOBJS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $< -I $(INCLPATH)
