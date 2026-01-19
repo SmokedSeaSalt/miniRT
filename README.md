@@ -48,7 +48,7 @@ make
 ```
 
 # Running
-- Scenes can be found in /scenes folder
+- Scenes can be found in the scenes folder
 ```bash
 ./miniRT [Filename].rt
 ```
