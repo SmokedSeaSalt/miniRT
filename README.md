@@ -1,20 +1,22 @@
 # miniRT 🌟
 
-A ray tracer written in C using MiniLibX
+A ray tracer written in C using MLX42 - exploring the fundamentals of computer graphics and 3D rendering.
+
+**Authors:** Mathijs Van Rijn & Edsard Grisel
 
 ## Showcase
 
 ![Spheres](screenshots/spheres.png)
 *Basic spheres with lighting and shadows*
 
-![Checkerboard Pattern](screenshots/checkerboard.png)
-*Checkerboard texture mapping*
-
 ![Bump Mapping](screenshots/bump_map_texture.png)
 *Bump mapping for surface detail*
 
 ![Multi-colored Lighting](screenshots/multi_colored_light.png)
 *Multiple colored light sources*
+
+![Checkerboard Pattern](screenshots/checkerboard.png)
+*Checkerboard texture mapping*
 
 ## Features
 
@@ -28,15 +30,32 @@ A ray tracer written in C using MiniLibX
 
 # Setup
 
-clone this repository\
-cd into repository\
+## Ubuntu/Linux
+
+```bash
+git clone <repository-url>
+cd miniRT
 make
+```
+
+## macOS (Apple Silicon)
+
+```bash
+git clone <repository-url>
+cd miniRT
+git checkout macos_demo
+make
+```
 
 # Running
-
+- Scenes can be found in /scenes folder
+```bash
 ./miniRT [Filename].rt
+```
 
-# Setup unit testing
+# Key bindings
+-	Arrow keys: Camera rotation
+-	WASD: Camera translation
 
-cd into root of repository
-make setup_test
+---
+*Part of the 42 School curriculum*
